@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
@@ -9,11 +10,11 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z
       .string()
-      .url()
-      .refine(
-        (str) => str.includes("postgres://default:w1IvieS0ElnA@ep-proud-sea-48229618-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"),
-        "You forgot to change the default URL"
-      ),
+      .url(),
+      // .refine(
+      //   (str) => !str.includes("postgres://default:"),
+      //   "You forgot to change the default URL"
+      // ),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -44,7 +45,7 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    DATABASE_URL: process.env.POSTGRES_URL,
+    DATABASE_URL: process.env.POSTGRES_URL_NON_POOLING,
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL

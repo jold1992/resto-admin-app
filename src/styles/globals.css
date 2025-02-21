@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* haz la paleta de colores segun el contexto del proyecto */
+
+@layer base {
+  :root {
+    --color-primary: #1a73e8; /* Azul accesible */
+    --color-primary-dark: #1558b0; /* Azul oscuro para hover/focus */
+    --color-primary-light: #4a90e2; /* Azul claro para estados activos */
+    --color-background: #f5f5f5; /* Fondo claro */
+    --color-text: #333333; /* Texto oscuro */
+    --color-text-light: #ffffff; /* Texto claro */
+  }
+}
+
+@layer components {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-primary-dark {
+    background-color: var(--color-primary-dark);
+  }
+  .bg-primary-light {
+    background-color: var(--color-primary-light);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .text-primary-dark {
+    color: var(--color-primary-dark);
+  }
+  .text-primary-light {
+    color: var(--color-primary-light);
+  }
+  .text-background {
+    color: var(--color-background);
+  }
+  .text-text {
+    color: var(--color-text);
+  }
+  .text-text-light {
+    color: var(--color-text-light);
+  }
+}
+
