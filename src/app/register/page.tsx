@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import Swal from "sweetalert2"
 
 export default function Login() {
 
@@ -12,20 +13,52 @@ export default function Login() {
     const [confirmPassword, setConfirmPassword] = useState('')
 
 
+
     const handleRegister = (e: any) => {
         e.preventDefault()
         console.log('Register')
 
-        console.log(nombres)
-        console.log(username)
-        console.log(email)
-        console.log(password)
-        console.log(confirmPassword)
+        //validación de que las contraseñas sean iguales
+        if (password !== confirmPassword
+            || nombres === ''
+            || username === ''
+            || email === ''
+            || password === ''
+            || confirmPassword === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Las contraseñas no coinciden o hay campos vacíos',
+            })
+            return
+        }
+
+        //crea el usuario en la base de datos
+        fetch('/api/auth/user/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nombres,
+                name: username,
+                email,
+                password,
+                confirmPassword
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            }
+            )
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+
 
     }
-
-
-
 
     return (
         <main className="h-full flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
