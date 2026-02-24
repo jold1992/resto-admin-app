@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── CATÁLOGO ──────────────────────────────────────────
+
+model Categoria {
+  id        String   @id @default(cuid())
+  nombre    String
+  createdAt DateTime @default(now())
+  platos    Plato[]
+}
+
+model Plato {
+  id          String         @id @default(cuid())
+  nombre      String
+  descripcion String?
+  precio      Decimal        @db.Decimal(10, 2)
+  activo      Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  categoriaId String
+  categoria   Categoria      @relation(fields: [categoriaId], references: [id])
+  receta      RecetaItem[]
+  ventas      VentaDetalle[]
+}
+
+// ─── INGREDIENTES E INVENTARIO ─────────────────────────
+
+enum UnidadMedida {
+  GRAMO
+  KILOGRAMO
+  MILILITRO
+  LITRO
+  UNIDAD
+  PORCION
+}
+
+model Ingrediente {
+  id            String                 @id @default(cuid())
+  nombre        String
+  unidad        UnidadMedida
+  costoUnitario Decimal                @db.Decimal(10, 4)
+  stockActual   Decimal                @default(0) @db.Decimal(10, 3)
+  stockMinimo   Decimal                @default(0) @db.Decimal(10, 3)
+  createdAt     DateTime               @default(now())
+  recetas       RecetaItem[]
+  movimientos   MovimientoInventario[]
+  ordenItems    OrdenCompraDetalle[]
+}
+
+model RecetaItem {
+  id            String      @id @default(cuid())
+  platoId       String
+  ingredienteId String
+  cantidad      Decimal     @db.Decimal(10, 4)
+  plato         Plato       @relation(fields: [platoId], references: [id])
+  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
+
+  @@unique([platoId, ingredienteId])
+}
+
+model MovimientoInventario {
+  id            String      @id @default(cuid())
+  ingredienteId String
+  tipo          String // "ENTRADA" | "SALIDA" | "AJUSTE"
+  cantidad      Decimal     @db.Decimal(10, 3)
+  motivo        String?
+  createdAt     DateTime    @default(now())
+  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
+}
+
+// ─── VENTAS ────────────────────────────────────────────
+
+model Venta {
+  id       String         @id @default(cuid())
+  total    Decimal        @db.Decimal(10, 2)
+  fecha    DateTime       @default(now())
+  notas    String?
+  detalles VentaDetalle[]
+}
+
+model VentaDetalle {
+  id       String  @id @default(cuid())
+  ventaId  String
+  platoId  String
+  cantidad Int
+  precio   Decimal @db.Decimal(10, 2)
+  venta    Venta   @relation(fields: [ventaId], references: [id])
+  plato    Plato   @relation(fields: [platoId], references: [id])
+}
+
+// ─── ÓRDENES DE COMPRA ─────────────────────────────────
+
+model OrdenCompra {
+  id        String               @id @default(cuid())
+  estado    String               @default("BORRADOR") // BORRADOR | ENVIADA | RECIBIDA
+  createdAt DateTime             @default(now())
+  detalles  OrdenCompraDetalle[]
+}
+
+model OrdenCompraDetalle {
+  id               String      @id @default(cuid())
+  ordenId          String
+  ingredienteId    String
+  cantidadSugerida Decimal     @db.Decimal(10, 3)
+  cantidadFinal    Decimal?    @db.Decimal(10, 3)
+  orden            OrdenCompra @relation(fields: [ordenId], references: [id])
+  ingrediente      Ingrediente @relation(fields: [ingredienteId], references: [id])
+}
