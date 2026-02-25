@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Sun, Moon, Monitor } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,13 +11,19 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+function useIsMounted() {
+    return useSyncExternalStore(
+        () => () => { },
+        () => true,
+        () => false
+    );
+}
+
 export function ThemeToggle() {
     const { theme, setTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
+    const isMounted = useIsMounted();
 
-    // Evita hydration mismatch — solo renderiza en el cliente
-    useEffect(() => setMounted(true), []);
-    if (!mounted) return null;
+    if (!isMounted) return null;
 
     const icon =
         theme === "light" ? <Sun size={18} /> :
