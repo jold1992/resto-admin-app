@@ -36,6 +36,7 @@ export function useCrearPlato() {
       }).then(r => r.json()),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["platos"] });
+      qc.invalidateQueries({ queryKey: ["categorias"] });
       toast.success("Plato creado");
     },
     onError: () => toast.error("Error al crear plato"),
@@ -53,6 +54,7 @@ export function useEditarPlato() {
       }).then(r => r.json()),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["platos"] });
+      qc.invalidateQueries({ queryKey: ["categorias"] });
       toast.success("Plato actualizado");
     },
     onError: () => toast.error("Error al actualizar plato"),
@@ -60,14 +62,15 @@ export function useEditarPlato() {
 }
 
 export function useEliminarPlato() {
-  const qc = useQueryClient();
-  return useMutation({
-    mutationFn: (id: string) =>
-      fetch(`/api/platos/${id}`, { method: "DELETE" }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["platos"] });
-      toast.success("Plato eliminado");
-    },
-    onError: () => toast.error("Error al eliminar plato"),
-  });
-}
+    const qc = useQueryClient();
+    return useMutation({
+      mutationFn: (id: string) =>
+        fetch(`/api/platos/${id}`, { method: "DELETE" }),
+      onSuccess: () => {
+        qc.invalidateQueries({ queryKey: ["platos"] });
+        qc.invalidateQueries({ queryKey: ["categorias"] }); 
+        toast.success("Plato eliminado");
+      },
+      onError: () => toast.error("Error al eliminar plato"),
+    });
+  }
