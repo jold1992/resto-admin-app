@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Image from "next/image";
@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useCrearPlato, useEditarPlato, type Plato } from "@/hooks/usePlatos";
+import { useCrearPlato, useEditarPlato, type Plato, type PlatoInput } from "@/hooks/usePlatos";
 import { useCategorias } from "@/hooks/useCategorias";
 import { uploadPlatoImage } from "@/lib/storage";
 import { cuid } from "@/lib/utils";
@@ -27,15 +27,6 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
-
-// Input type for API (converts undefined to null)
-type PlatoFormInput = {
-  nombre: string;
-  descripcion: string | null;
-  precio: number;
-  categoriaId: string;
-  activo: boolean;
-};
 
 type Props = {
   open: boolean;
@@ -55,7 +46,7 @@ export function PlatoDialog({ open, onClose, plato }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<FormData>({
-    resolver: zodResolver(schema) as any,
+    resolver: zodResolver(schema) as unknown as import('react-hook-form').Resolver<FormData>,
   });
 
   useEffect(() => {
@@ -83,7 +74,7 @@ export function PlatoDialog({ open, onClose, plato }: Props) {
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
-  async function onSubmit(data: FormData) {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     let imagenUrl: string | null = plato?.imagen ?? null;
 
     if (imageFile) {
@@ -102,14 +93,14 @@ export function PlatoDialog({ open, onClose, plato }: Props) {
       imagenUrl = null;
     }
 
-    const payload = {
+    const payload: PlatoInput = {
       nombre: data.nombre,
       descripcion: data.descripcion ?? null,
       precio: data.precio,
       categoriaId: data.categoriaId,
       activo: data.activo,
       imagen: imagenUrl
-    } as any;
+    };
 
     if (isEditing) {
       await editar.mutateAsync({ id: plato.id, ...payload });

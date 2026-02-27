@@ -13,6 +13,7 @@ export type Plato = {
 };
 
 type PlatoInput = Omit<Plato, "id" | "categoria">;
+export type { PlatoInput };
 
 async function fetchPlatos(): Promise<Plato[]> {
   const res = await fetch("/api/platos");
