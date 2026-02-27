@@ -132,6 +132,7 @@ exports.Prisma.PlatoScalarFieldEnum = {
   descripcion: 'descripcion',
   precio: 'precio',
   activo: 'activo',
+  imagen: 'imagen',
   createdAt: 'createdAt',
   categoriaId: 'categoriaId'
 };

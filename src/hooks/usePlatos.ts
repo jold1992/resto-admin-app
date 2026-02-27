@@ -7,6 +7,7 @@ export type Plato = {
   descripcion: string | null;
   precio: number;
   activo: boolean;
+  imagen: string | null;
   categoriaId: string;
   categoria: { id: string; nombre: string };
 };

@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,7 +21,7 @@ type Props = {
   categoria?: { id: string; nombre: string } | null;
 };
 
-export function CategoriaSheet({ open, onClose, categoria }: Props) {
+export function CategoriaDialog({ open, onClose, categoria }: Props) {
   const crear = useCrearCategoria();
   const editar = useEditarCategoria();
   const isEditing = !!categoria;
@@ -44,22 +46,25 @@ export function CategoriaSheet({ open, onClose, categoria }: Props) {
   const isPending = crear.isPending || editar.isPending;
 
   return (
-    <Sheet open={open} onOpenChange={onClose}>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>{isEditing ? "Editar categoría" : "Nueva categoría"}</SheetTitle>
-        </SheetHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mt-6">
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>{isEditing ? "Editar categoría" : "Nueva categoría"}</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mt-2">
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="nombre">Nombre</Label>
             <Input id="nombre" {...register("nombre")} placeholder="Ej: Entradas" />
             {errors.nombre && <p className="text-xs text-destructive">{errors.nombre.message}</p>}
           </div>
-          <Button type="submit" disabled={isPending}>
-            {isPending ? "Guardando..." : isEditing ? "Guardar cambios" : "Crear categoría"}
-          </Button>
+          <div className="flex justify-end gap-2">
+            <Button type="button" variant="outline" onClick={onClose}>Cancelar</Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? "Guardando..." : isEditing ? "Guardar cambios" : "Crear"}
+            </Button>
+          </div>
         </form>
-      </SheetContent>
-    </Sheet>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -2862,6 +2862,7 @@ export namespace Prisma {
     descripcion: string | null
     precio: Decimal | null
     activo: boolean | null
+    imagen: string | null
     createdAt: Date | null
     categoriaId: string | null
   }
@@ -2872,6 +2873,7 @@ export namespace Prisma {
     descripcion: string | null
     precio: Decimal | null
     activo: boolean | null
+    imagen: string | null
     createdAt: Date | null
     categoriaId: string | null
   }
@@ -2882,6 +2884,7 @@ export namespace Prisma {
     descripcion: number
     precio: number
     activo: number
+    imagen: number
     createdAt: number
     categoriaId: number
     _all: number
@@ -2902,6 +2905,7 @@ export namespace Prisma {
     descripcion?: true
     precio?: true
     activo?: true
+    imagen?: true
     createdAt?: true
     categoriaId?: true
   }
@@ -2912,6 +2916,7 @@ export namespace Prisma {
     descripcion?: true
     precio?: true
     activo?: true
+    imagen?: true
     createdAt?: true
     categoriaId?: true
   }
@@ -2922,6 +2927,7 @@ export namespace Prisma {
     descripcion?: true
     precio?: true
     activo?: true
+    imagen?: true
     createdAt?: true
     categoriaId?: true
     _all?: true
@@ -3019,6 +3025,7 @@ export namespace Prisma {
     descripcion: string | null
     precio: Decimal
     activo: boolean
+    imagen: string | null
     createdAt: Date
     categoriaId: string
     _count: PlatoCountAggregateOutputType | null
@@ -3048,6 +3055,7 @@ export namespace Prisma {
     descripcion?: boolean
     precio?: boolean
     activo?: boolean
+    imagen?: boolean
     createdAt?: boolean
     categoriaId?: boolean
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
@@ -3062,6 +3070,7 @@ export namespace Prisma {
     descripcion?: boolean
     precio?: boolean
     activo?: boolean
+    imagen?: boolean
     createdAt?: boolean
     categoriaId?: boolean
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
@@ -3073,6 +3082,7 @@ export namespace Prisma {
     descripcion?: boolean
     precio?: boolean
     activo?: boolean
+    imagen?: boolean
     createdAt?: boolean
     categoriaId?: boolean
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
@@ -3084,11 +3094,12 @@ export namespace Prisma {
     descripcion?: boolean
     precio?: boolean
     activo?: boolean
+    imagen?: boolean
     createdAt?: boolean
     categoriaId?: boolean
   }
 
-  export type PlatoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "descripcion" | "precio" | "activo" | "createdAt" | "categoriaId", ExtArgs["result"]["plato"]>
+  export type PlatoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "descripcion" | "precio" | "activo" | "imagen" | "createdAt" | "categoriaId", ExtArgs["result"]["plato"]>
   export type PlatoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
     receta?: boolean | Plato$recetaArgs<ExtArgs>
@@ -3115,6 +3126,7 @@ export namespace Prisma {
       descripcion: string | null
       precio: Prisma.Decimal
       activo: boolean
+      imagen: string | null
       createdAt: Date
       categoriaId: string
     }, ExtArgs["result"]["plato"]>
@@ -3548,6 +3560,7 @@ export namespace Prisma {
     readonly descripcion: FieldRef<"Plato", 'String'>
     readonly precio: FieldRef<"Plato", 'Decimal'>
     readonly activo: FieldRef<"Plato", 'Boolean'>
+    readonly imagen: FieldRef<"Plato", 'String'>
     readonly createdAt: FieldRef<"Plato", 'DateTime'>
     readonly categoriaId: FieldRef<"Plato", 'String'>
   }
@@ -11770,6 +11783,7 @@ export namespace Prisma {
     descripcion: 'descripcion',
     precio: 'precio',
     activo: 'activo',
+    imagen: 'imagen',
     createdAt: 'createdAt',
     categoriaId: 'categoriaId'
   };
@@ -12030,6 +12044,7 @@ export namespace Prisma {
     descripcion?: StringNullableFilter<"Plato"> | string | null
     precio?: DecimalFilter<"Plato"> | Decimal | DecimalJsLike | number | string
     activo?: BoolFilter<"Plato"> | boolean
+    imagen?: StringNullableFilter<"Plato"> | string | null
     createdAt?: DateTimeFilter<"Plato"> | Date | string
     categoriaId?: StringFilter<"Plato"> | string
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
@@ -12043,6 +12058,7 @@ export namespace Prisma {
     descripcion?: SortOrderInput | SortOrder
     precio?: SortOrder
     activo?: SortOrder
+    imagen?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     categoriaId?: SortOrder
     categoria?: CategoriaOrderByWithRelationInput
@@ -12059,6 +12075,7 @@ export namespace Prisma {
     descripcion?: StringNullableFilter<"Plato"> | string | null
     precio?: DecimalFilter<"Plato"> | Decimal | DecimalJsLike | number | string
     activo?: BoolFilter<"Plato"> | boolean
+    imagen?: StringNullableFilter<"Plato"> | string | null
     createdAt?: DateTimeFilter<"Plato"> | Date | string
     categoriaId?: StringFilter<"Plato"> | string
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
@@ -12072,6 +12089,7 @@ export namespace Prisma {
     descripcion?: SortOrderInput | SortOrder
     precio?: SortOrder
     activo?: SortOrder
+    imagen?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     categoriaId?: SortOrder
     _count?: PlatoCountOrderByAggregateInput
@@ -12090,6 +12108,7 @@ export namespace Prisma {
     descripcion?: StringNullableWithAggregatesFilter<"Plato"> | string | null
     precio?: DecimalWithAggregatesFilter<"Plato"> | Decimal | DecimalJsLike | number | string
     activo?: BoolWithAggregatesFilter<"Plato"> | boolean
+    imagen?: StringNullableWithAggregatesFilter<"Plato"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Plato"> | Date | string
     categoriaId?: StringWithAggregatesFilter<"Plato"> | string
   }
@@ -12554,6 +12573,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
     categoria: CategoriaCreateNestedOneWithoutPlatosInput
     receta?: RecetaItemCreateNestedManyWithoutPlatoInput
@@ -12566,6 +12586,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
     categoriaId: string
     receta?: RecetaItemUncheckedCreateNestedManyWithoutPlatoInput
@@ -12578,6 +12599,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoria?: CategoriaUpdateOneRequiredWithoutPlatosNestedInput
     receta?: RecetaItemUpdateManyWithoutPlatoNestedInput
@@ -12590,6 +12612,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoriaId?: StringFieldUpdateOperationsInput | string
     receta?: RecetaItemUncheckedUpdateManyWithoutPlatoNestedInput
@@ -12602,6 +12625,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
     categoriaId: string
   }
@@ -12612,6 +12636,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12621,6 +12646,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoriaId?: StringFieldUpdateOperationsInput | string
   }
@@ -13176,6 +13202,7 @@ export namespace Prisma {
     descripcion?: SortOrder
     precio?: SortOrder
     activo?: SortOrder
+    imagen?: SortOrder
     createdAt?: SortOrder
     categoriaId?: SortOrder
   }
@@ -13190,6 +13217,7 @@ export namespace Prisma {
     descripcion?: SortOrder
     precio?: SortOrder
     activo?: SortOrder
+    imagen?: SortOrder
     createdAt?: SortOrder
     categoriaId?: SortOrder
   }
@@ -13200,6 +13228,7 @@ export namespace Prisma {
     descripcion?: SortOrder
     precio?: SortOrder
     activo?: SortOrder
+    imagen?: SortOrder
     createdAt?: SortOrder
     categoriaId?: SortOrder
   }
@@ -14305,6 +14334,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
     receta?: RecetaItemCreateNestedManyWithoutPlatoInput
     ventas?: VentaDetalleCreateNestedManyWithoutPlatoInput
@@ -14316,6 +14346,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
     receta?: RecetaItemUncheckedCreateNestedManyWithoutPlatoInput
     ventas?: VentaDetalleUncheckedCreateNestedManyWithoutPlatoInput
@@ -14356,6 +14387,7 @@ export namespace Prisma {
     descripcion?: StringNullableFilter<"Plato"> | string | null
     precio?: DecimalFilter<"Plato"> | Decimal | DecimalJsLike | number | string
     activo?: BoolFilter<"Plato"> | boolean
+    imagen?: StringNullableFilter<"Plato"> | string | null
     createdAt?: DateTimeFilter<"Plato"> | Date | string
     categoriaId?: StringFilter<"Plato"> | string
   }
@@ -14648,6 +14680,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
     categoria: CategoriaCreateNestedOneWithoutPlatosInput
     ventas?: VentaDetalleCreateNestedManyWithoutPlatoInput
@@ -14659,6 +14692,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
     categoriaId: string
     ventas?: VentaDetalleUncheckedCreateNestedManyWithoutPlatoInput
@@ -14715,6 +14749,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoria?: CategoriaUpdateOneRequiredWithoutPlatosNestedInput
     ventas?: VentaDetalleUpdateManyWithoutPlatoNestedInput
@@ -14726,6 +14761,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoriaId?: StringFieldUpdateOperationsInput | string
     ventas?: VentaDetalleUncheckedUpdateManyWithoutPlatoNestedInput
@@ -14895,6 +14931,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
     categoria: CategoriaCreateNestedOneWithoutPlatosInput
     receta?: RecetaItemCreateNestedManyWithoutPlatoInput
@@ -14906,6 +14943,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
     categoriaId: string
     receta?: RecetaItemUncheckedCreateNestedManyWithoutPlatoInput
@@ -14958,6 +14996,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoria?: CategoriaUpdateOneRequiredWithoutPlatosNestedInput
     receta?: RecetaItemUpdateManyWithoutPlatoNestedInput
@@ -14969,6 +15008,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoriaId?: StringFieldUpdateOperationsInput | string
     receta?: RecetaItemUncheckedUpdateManyWithoutPlatoNestedInput
@@ -15124,6 +15164,7 @@ export namespace Prisma {
     descripcion?: string | null
     precio: Decimal | DecimalJsLike | number | string
     activo?: boolean
+    imagen?: string | null
     createdAt?: Date | string
   }
 
@@ -15133,6 +15174,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     receta?: RecetaItemUpdateManyWithoutPlatoNestedInput
     ventas?: VentaDetalleUpdateManyWithoutPlatoNestedInput
@@ -15144,6 +15186,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     receta?: RecetaItemUncheckedUpdateManyWithoutPlatoNestedInput
     ventas?: VentaDetalleUncheckedUpdateManyWithoutPlatoNestedInput
@@ -15155,6 +15198,7 @@ export namespace Prisma {
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     precio?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     activo?: BoolFieldUpdateOperationsInput | boolean
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

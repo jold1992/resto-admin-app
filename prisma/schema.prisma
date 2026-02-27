@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider        = "prisma-client-js"
+  output          = "../src/generated/prisma"  
 }
 
 datasource db {
@@ -22,6 +22,7 @@ model Plato {
   descripcion String?
   precio      Decimal        @db.Decimal(10, 2)
   activo      Boolean        @default(true)
+  imagen      String?
   createdAt   DateTime       @default(now())
   categoriaId String
   categoria   Categoria      @relation(fields: [categoriaId], references: [id])
