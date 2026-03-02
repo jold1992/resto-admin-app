@@ -14,6 +14,9 @@ import { usePlatos, useEliminarPlato, type Plato } from "@/hooks/usePlatos";
 import { useCategorias, useEliminarCategoria } from "@/hooks/useCategorias";
 import { PlatoDialog } from "@/components/forms/PlatoDialog";
 import { CategoriaDialog } from "@/components/forms/CategoriaDialog";
+import { RecetaDialog } from "@/components/forms/RecetaDialog";
+import { BookOpen } from "lucide-react";
+
 
 export default function MenuPage() {
   const { data: platos = [], isLoading } = usePlatos();
@@ -25,6 +28,7 @@ export default function MenuPage() {
   const [categoriaDialog, setCategoriaDialog] = useState<{ open: boolean; categoria?: { id: string; nombre: string } | null }>({ open: false });
   const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; type: "plato" | "categoria"; id: string; nombre: string } | null>(null);
   const [filtroCategoria, setFiltroCategoria] = useState<string>("todas");
+  const [recetaDialog, setRecetaDialog] = useState<{ open: boolean; plato?: Plato | null }>({ open: false });
 
   const platosFiltrados = filtroCategoria === "todas"
     ? platos
@@ -113,6 +117,14 @@ export default function MenuPage() {
                 <div className="flex items-start justify-between gap-2">
                   <CardTitle className="text-base">{plato.nombre}</CardTitle>
                   <div className="flex gap-1 shrink-0">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="size-7"
+                      onClick={() => setRecetaDialog({ open: true, plato })}
+                    >
+                      <BookOpen size={13} />
+                    </Button>
                     <Button variant="ghost" size="icon" className="size-7"
                       onClick={() => setPlatoDialog({ open: true, plato })}>
                       <Pencil size={13} />
@@ -148,6 +160,12 @@ export default function MenuPage() {
         open={categoriaDialog.open}
         categoria={categoriaDialog.categoria}
         onClose={() => setCategoriaDialog({ open: false })}
+      />
+
+      <RecetaDialog
+        open={recetaDialog.open}
+        plato={recetaDialog.plato ?? null}
+        onClose={() => setRecetaDialog({ open: false })}
       />
 
       <AlertDialog open={!!deleteDialog?.open} onOpenChange={() => setDeleteDialog(null)}>

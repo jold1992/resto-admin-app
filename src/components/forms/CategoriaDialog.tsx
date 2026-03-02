@@ -51,7 +51,7 @@ export function CategoriaDialog({ open, onClose, categoria }: Props) {
         <DialogHeader>
           <DialogTitle>{isEditing ? "Editar categoría" : "Nueva categoría"}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mt-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mt-2" autoComplete="off">
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="nombre">Nombre</Label>
             <Input id="nombre" {...register("nombre")} placeholder="Ej: Entradas" />

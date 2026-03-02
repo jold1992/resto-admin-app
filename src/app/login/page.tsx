@@ -40,7 +40,7 @@ export default function LoginPage() {
           <CardDescription>Ingresa con tu cuenta para continuar</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4" autoComplete="off">
             <div className="flex flex-col gap-1.5">
               <Label htmlFor="email">Correo electrónico</Label>
               <Input

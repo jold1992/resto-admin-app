@@ -41,6 +41,12 @@ enum UnidadMedida {
   PORCION
 }
 
+enum TipoMovimiento {
+  ENTRADA
+  SALIDA
+  AJUSTE
+}
+
 model Ingrediente {
   id            String               @id @default(cuid())
   nombre        String

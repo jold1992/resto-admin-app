@@ -118,7 +118,7 @@ export function PlatoDialog({ open, onClose, plato }: Props) {
         <DialogHeader>
           <DialogTitle>{isEditing ? "Editar plato" : "Nuevo plato"}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mt-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mt-2" autoComplete="off">
 
           {/* Upload de imagen */}
           <div className="flex flex-col gap-1.5">
