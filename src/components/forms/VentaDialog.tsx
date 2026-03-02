@@ -41,8 +41,11 @@ export function VentaDialog({ open, onClose }: Props) {
     setItems(prev => prev.map((item, i) => {
       if (i !== index) return item;
       if (field === "platoId") {
-        const plato = platos.find(p => p.id === value);
-        return { ...item, platoId: String(value), precio: plato ? Number(plato.precio) : 0 };
+        return {
+          ...item,
+          platoId: String(value),
+          precio: Number(platos.find(p => p.id === value)?.precio ?? 0),
+        };
       }
       return { ...item, [field]: value };
     }));

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
@@ -38,8 +38,8 @@ export function IngredienteDialog({ open, onClose, ingrediente }: Props) {
   const isEditing = !!ingrediente;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<any>({
-    resolver: zodResolver(schema) as any,
+  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema) as Resolver<FormData>,
   });
 
   useEffect(() => {

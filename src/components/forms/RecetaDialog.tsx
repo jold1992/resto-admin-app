@@ -33,20 +33,19 @@ export function RecetaDialog({ open, onClose, plato }: Props) {
 
     useEffect(() => {
         if (!open) {
-            recetaInicializada.current = false;
-            return;
+          recetaInicializada.current = false;
+          return;
         }
-
-        if (recetaInicializada.current) return;
-
-        if (!isLoading) {
-            setItems(recetaActual.map(i => ({
-                ingredienteId: i.ingredienteId,
-                cantidad: Number(i.cantidad),
-            })));
-            recetaInicializada.current = true;
-        }
-    }, [open, isLoading, recetaActual]);
+        if (recetaInicializada.current || isLoading) return;
+      
+        recetaInicializada.current = true;
+        const nuevosItems = recetaActual.map(i => ({
+          ingredienteId: i.ingredienteId,
+          cantidad: Number(i.cantidad),
+        }));
+        // Usar setTimeout para sacar el setState fuera del cuerpo del effect
+        setTimeout(() => setItems(nuevosItems), 0);
+      }, [open, isLoading, recetaActual]);
 
     function agregarItem() {
         setItems(prev => [...prev, { ingredienteId: "", cantidad: 0 }]);
