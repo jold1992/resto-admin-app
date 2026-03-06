@@ -255,12 +255,12 @@ export default function ProyeccionesPage() {
                         </CardHeader>
                         <CardContent>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                {materiaPrima.map(m => {
+                                {materiaPrima.map((m, index) => {
                                     const abrev = getUnidadAbrev(m.unidad as UnidadMedida);
                                     const porcentaje = Math.min((m.stockActual / (m.cantidadNecesaria || 1)) * 100, 100);
                                     const suficiente = m.deficit === 0;
                                     return (
-                                        <div key={m.nombre} className={`rounded-lg border px-4 py-3 ${!suficiente ? "border-red-200 bg-red-50 dark:bg-red-950/20 dark:border-red-900" : ""
+                                        <div key={`${m.nombre}-${index}`} className={`rounded-lg border px-4 py-3 ${!suficiente ? "border-red-200 bg-red-50 dark:bg-red-950/20 dark:border-red-900" : ""
                                             }`}>
                                             <div className="flex items-center justify-between mb-2">
                                                 <span className="text-sm font-medium">{m.nombre}</span>
