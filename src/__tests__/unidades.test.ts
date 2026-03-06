@@ -1,4 +1,4 @@
-import { UNIDAD_OPTIONS, getUnidadAbrev, type UnidadMedida } from './unidades';
+import { UNIDAD_OPTIONS, getUnidadAbrev, type UnidadMedida } from '@/lib/unidades';
 
 describe('unidades', () => {
   describe('UNIDAD_OPTIONS', () => {

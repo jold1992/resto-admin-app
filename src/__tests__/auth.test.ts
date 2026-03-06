@@ -1,4 +1,4 @@
-import { signIn, signOut, getUserRole, type UserRole } from './auth';
+import { signIn, signOut, getUserRole, type UserRole } from '@/lib/auth';
 
 // Mock supabase client
 jest.mock('@/lib/supabase/client', () => ({

@@ -1,4 +1,4 @@
-import { promedioMovilPonderado, detectarTendencia, generarProyeccion, type PuntoVenta, type ProyeccionPlato } from './proyecciones';
+import { promedioMovilPonderado, detectarTendencia, generarProyeccion, type PuntoVenta, type ProyeccionPlato } from '@/lib/proyecciones';
 
 describe('proyecciones', () => {
   describe('promedioMovilPonderado', () => {

@@ -1,4 +1,4 @@
-import { cn, cuid } from './utils';
+import { cn, cuid } from '@/lib/utils';
 
 describe('utils', () => {
   describe('cn', () => {
