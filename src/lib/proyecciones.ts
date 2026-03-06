@@ -1,3 +1,15 @@
+const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+const MAX_CANTIDAD = 100_000;
+const MAX_HISTORIAL = 1_000;
+
+export function validarPuntoVenta(p: { fecha: string; cantidad: number }): boolean {
+  if (!DATE_REGEX.test(p.fecha)) return false;
+  const d = new Date(p.fecha);
+  if (isNaN(d.getTime())) return false;
+  if (p.cantidad < 0 || p.cantidad > MAX_CANTIDAD) return false;
+  return true;
+}
+
 export type PuntoVenta = { fecha: string; cantidad: number };
 export type ProyeccionPlato = {
   platoId: string;
@@ -47,15 +59,20 @@ export function generarProyeccion(
   diasFuturos: number = 7,
   ventanaHistorial: number = 30
 ): PuntoVenta[] {
+  // Sanitize inputs
+  const safeDias = Math.min(Math.max(0, Math.floor(diasFuturos)), 365);
+  const safeVentana = Math.min(Math.max(1, Math.floor(ventanaHistorial)), MAX_HISTORIAL);
+  const safeHistorial = historial.slice(0, MAX_HISTORIAL).filter(validarPuntoVenta);
+
   // Tomar los últimos N días del historial
-  const reciente = historial.slice(-ventanaHistorial);
+  const reciente = safeHistorial.slice(-safeVentana);
   const valores = reciente.map(p => p.cantidad);
   const base = promedioMovilPonderado(valores);
 
   const proyeccion: PuntoVenta[] = [];
   const hoy = new Date();
 
-  for (let i = 1; i <= diasFuturos; i++) {
+  for (let i = 1; i <= safeDias; i++) {
     const fecha = new Date(hoy);
     fecha.setDate(hoy.getDate() + i);
 
