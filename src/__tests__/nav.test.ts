@@ -1,4 +1,4 @@
-import { NAV_ITEMS, type NavItem } from './nav';
+import { NAV_ITEMS, type NavItem } from '@/lib/nav';
 
 describe('nav', () => {
   describe('NAV_ITEMS', () => {

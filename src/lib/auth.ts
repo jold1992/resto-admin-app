@@ -15,5 +15,7 @@ export async function signOut() {
 export async function getUserRole(): Promise<UserRole | null> {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  return (user?.user_metadata?.role as UserRole) ?? null;
+  const validRoles: UserRole[] = ['admin', 'cajero', 'cocina'];
+  const role = user?.user_metadata?.role as UserRole;
+  return validRoles.includes(role) ? role : null;
 }
