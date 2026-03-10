@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
@@ -22,24 +22,23 @@ type Props = {
 };
 
 export function UsuarioDialog({ open, onClose, usuario }: Props) {
+  return (
+    <Dialog open={open} onOpenChange={onClose}>
+      <UsuarioDialogContent key={usuario?.id ?? "new"} onClose={onClose} usuario={usuario} />
+    </Dialog>
+  );
+}
+
+function UsuarioDialogContent({ onClose, usuario }: Omit<Props, "open">) {
   const crear = useCrearUsuario();
   const editar = useEditarUsuario();
   const isEditing = !!usuario;
 
-  const [nombre, setNombre] = useState("");
-  const [email, setEmail] = useState("");
+  const [nombre, setNombre] = useState(usuario?.nombre ?? "");
+  const [email, setEmail] = useState(usuario?.email ?? "");
   const [password, setPassword] = useState("");
-  const [rol, setRol] = useState<"admin" | "cajero" | "cocina">("cajero");
+  const [rol, setRol] = useState<"admin" | "cajero" | "cocina">(usuario?.rol ?? "cajero");
   const [showPassword, setShowPassword] = useState(false);
-
-  useEffect(() => {
-    if (open) {
-      setNombre(usuario?.nombre ?? "");
-      setEmail(usuario?.email ?? "");
-      setPassword("");
-      setRol(usuario?.rol ?? "cajero");
-    }
-  }, [open, usuario]);
 
   const isPending = crear.isPending || editar.isPending;
 
@@ -59,11 +58,10 @@ export function UsuarioDialog({ open, onClose, usuario }: Props) {
   }
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>{isEditing ? "Editar usuario" : "Nuevo usuario"}</DialogTitle>
-        </DialogHeader>
+    <DialogContent className="sm:max-w-md">
+      <DialogHeader>
+        <DialogTitle>{isEditing ? "Editar usuario" : "Nuevo usuario"}</DialogTitle>
+      </DialogHeader>
 
         <div className="flex flex-col gap-4 mt-2">
           <div className="flex flex-col gap-1.5">
@@ -131,7 +129,6 @@ export function UsuarioDialog({ open, onClose, usuario }: Props) {
             </Button>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+    </DialogContent>
   );
 }
