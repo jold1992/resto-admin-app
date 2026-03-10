@@ -10,12 +10,13 @@ async function requireAdmin() {
   return user;
 }
 
-// Cliente admin con service role key
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  { auth: { autoRefreshToken: false, persistSession: false } }
-);
+function getSupabaseAdmin() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } }
+  );
+}
 
 const ROLES = ["admin", "cajero", "cocina"] as const;
 
@@ -28,6 +29,7 @@ const crearSchema = z.object({
 
 export async function GET() {
   if (!await requireAdmin()) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const supabaseAdmin = getSupabaseAdmin();
   const { data, error } = await supabaseAdmin.auth.admin.listUsers();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
@@ -46,6 +48,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   if (!await requireAdmin()) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const supabaseAdmin = getSupabaseAdmin();
   const body = await req.json();
   const parsed = crearSchema.safeParse(body);
   if (!parsed.success)
