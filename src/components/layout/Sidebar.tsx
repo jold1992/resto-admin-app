@@ -14,9 +14,17 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-export function Sidebar() {
+type Props = {
+  rol?: string;
+};
+
+export function Sidebar({ rol }: Props) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+
+  const itemsVisibles = NAV_ITEMS.filter(item =>
+    !item.roles || item.roles.includes(rol ?? "")
+  );
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -39,7 +47,7 @@ export function Sidebar() {
 
         {/* Nav items */}
         <nav className="flex-1 flex flex-col gap-1 p-2 pt-4">
-          {NAV_ITEMS.map((item) => {
+          {itemsVisibles.map((item) => {
             const isActive = pathname.startsWith(item.href);
             const Icon = item.icon;
 

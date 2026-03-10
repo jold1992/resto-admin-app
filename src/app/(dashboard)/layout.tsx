@@ -13,9 +13,11 @@ export default async function DashboardLayout({
 
   if (!user) redirect("/login");
 
+  const rol = user?.user_metadata?.role ?? "cajero";
+
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      <Sidebar />
+      <Sidebar rol={rol} />
       <div className="flex flex-1 flex-col overflow-hidden">
         <Topbar />
         <main className="flex-1 overflow-y-auto p-6">
