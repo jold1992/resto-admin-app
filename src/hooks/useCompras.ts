@@ -1,3 +1,4 @@
+import { getSucursalActivaClient } from "@/lib/getSucursalActivaClient";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
@@ -40,8 +41,9 @@ export function useSugerenciasCompra() {
 }
 
 export function useOrdenesCompra() {
+    const sucursalId = getSucursalActivaClient();
     return useQuery({
-        queryKey: ["compras", "ordenes"],
+        queryKey: ["compras", "ordenes", sucursalId],
         queryFn: async (): Promise<OrdenCompra[]> => {
             const res = await fetch("/api/compras");
             if (!res.ok) throw new Error("Error al cargar órdenes");

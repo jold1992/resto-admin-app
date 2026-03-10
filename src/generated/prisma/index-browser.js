@@ -160,6 +160,7 @@ exports.Prisma.MovimientoInventarioScalarFieldEnum = {
   tipo: 'tipo',
   cantidad: 'cantidad',
   motivo: 'motivo',
+  sucursalId: 'sucursalId',
   createdAt: 'createdAt'
 };
 
@@ -167,7 +168,8 @@ exports.Prisma.VentaScalarFieldEnum = {
   id: 'id',
   total: 'total',
   fecha: 'fecha',
-  notas: 'notas'
+  notas: 'notas',
+  sucursalId: 'sucursalId'
 };
 
 exports.Prisma.VentaDetalleScalarFieldEnum = {
@@ -181,6 +183,7 @@ exports.Prisma.VentaDetalleScalarFieldEnum = {
 exports.Prisma.OrdenCompraScalarFieldEnum = {
   id: 'id',
   estado: 'estado',
+  sucursalId: 'sucursalId',
   createdAt: 'createdAt'
 };
 
@@ -190,6 +193,22 @@ exports.Prisma.OrdenCompraDetalleScalarFieldEnum = {
   ingredienteId: 'ingredienteId',
   cantidadSugerida: 'cantidadSugerida',
   cantidadFinal: 'cantidadFinal'
+};
+
+exports.Prisma.SucursalScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre',
+  direccion: 'direccion',
+  activa: 'activa',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.IngredienteSucursalScalarFieldEnum = {
+  id: 'id',
+  ingredienteId: 'ingredienteId',
+  sucursalId: 'sucursalId',
+  stockActual: 'stockActual',
+  stockMinimo: 'stockMinimo'
 };
 
 exports.Prisma.SortOrder = {
@@ -224,7 +243,9 @@ exports.Prisma.ModelName = {
   Venta: 'Venta',
   VentaDetalle: 'VentaDetalle',
   OrdenCompra: 'OrdenCompra',
-  OrdenCompraDetalle: 'OrdenCompraDetalle'
+  OrdenCompraDetalle: 'OrdenCompraDetalle',
+  Sucursal: 'Sucursal',
+  IngredienteSucursal: 'IngredienteSucursal'
 };
 
 /**

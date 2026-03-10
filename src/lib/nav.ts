@@ -9,6 +9,7 @@ import {
     LineChart,
     Users,
   } from "lucide-react";
+  import { Building2 } from "lucide-react";
   
   export type NavItem = {
     label: string;
@@ -26,4 +27,5 @@ import {
     { label: "Compras",     href: "/compras",     icon: TrendingUp       },
     { label: "Proyecciones",  href: "/proyecciones",   icon: LineChart       },
     { label: "Usuarios",  href: "/usuarios",   icon: Users, roles: ["admin"] },
+    { label: "Sucursales",  href: "/sucursales",   icon: Building2, roles: ["admin"] },    
   ];

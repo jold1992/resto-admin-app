@@ -1,3 +1,4 @@
+import { getSucursalActivaClient } from "@/lib/getSucursalActivaClient";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
@@ -19,8 +20,9 @@ export type MovimientoInput = {
 };
 
 export function useMovimientos(ingredienteId?: string) {
+  const sucursalId = getSucursalActivaClient();
   return useQuery({
-    queryKey: ["movimientos", ingredienteId],
+    queryKey: ["movimientos", ingredienteId, sucursalId],
     queryFn: async (): Promise<Movimiento[]> => {
       const params = ingredienteId ? `?ingredienteId=${ingredienteId}` : "";
       const res = await fetch(`/api/movimientos${params}`);

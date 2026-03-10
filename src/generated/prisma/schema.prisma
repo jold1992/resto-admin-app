@@ -41,17 +41,24 @@ enum UnidadMedida {
   PORCION
 }
 
+enum TipoMovimiento {
+  ENTRADA
+  SALIDA
+  AJUSTE
+}
+
 model Ingrediente {
-  id            String                 @id @default(cuid())
-  nombre        String
-  unidad        UnidadMedida
-  costoUnitario Decimal                @db.Decimal(10, 4)
-  stockActual   Decimal                @default(0) @db.Decimal(10, 3)
-  stockMinimo   Decimal                @default(0) @db.Decimal(10, 3)
-  createdAt     DateTime               @default(now())
-  recetas       RecetaItem[]
-  movimientos   MovimientoInventario[]
-  ordenItems    OrdenCompraDetalle[]
+  id              String                 @id @default(cuid())
+  nombre          String
+  unidad          UnidadMedida
+  costoUnitario   Decimal                @db.Decimal(10, 4)
+  stockActual     Decimal                @default(0) @db.Decimal(10, 3)
+  stockMinimo     Decimal                @default(0) @db.Decimal(10, 3)
+  createdAt       DateTime               @default(now())
+  recetas         RecetaItem[]
+  movimientos     MovimientoInventario[]
+  ordenItems      OrdenCompraDetalle[]
+  stockSucursales IngredienteSucursal[]
 }
 
 model RecetaItem {
@@ -68,21 +75,25 @@ model RecetaItem {
 model MovimientoInventario {
   id            String      @id @default(cuid())
   ingredienteId String
-  tipo          String // "ENTRADA" | "SALIDA" | "AJUSTE"
+  tipo          String
   cantidad      Decimal     @db.Decimal(10, 3)
   motivo        String?
+  sucursalId    String?
   createdAt     DateTime    @default(now())
   ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
+  sucursal      Sucursal?   @relation(fields: [sucursalId], references: [id])
 }
 
 // ─── VENTAS ────────────────────────────────────────────
 
 model Venta {
-  id       String         @id @default(cuid())
-  total    Decimal        @db.Decimal(10, 2)
-  fecha    DateTime       @default(now())
-  notas    String?
-  detalles VentaDetalle[]
+  id         String         @id @default(cuid())
+  total      Decimal        @db.Decimal(10, 2)
+  fecha      DateTime       @default(now())
+  notas      String?
+  sucursalId String?
+  sucursal   Sucursal?      @relation(fields: [sucursalId], references: [id])
+  detalles   VentaDetalle[]
 }
 
 model VentaDetalle {
@@ -98,10 +109,12 @@ model VentaDetalle {
 // ─── ÓRDENES DE COMPRA ─────────────────────────────────
 
 model OrdenCompra {
-  id        String               @id @default(cuid())
-  estado    String               @default("BORRADOR") // BORRADOR | ENVIADA | RECIBIDA
-  createdAt DateTime             @default(now())
-  detalles  OrdenCompraDetalle[]
+  id         String               @id @default(cuid())
+  estado     String               @default("BORRADOR")
+  sucursalId String?
+  createdAt  DateTime             @default(now())
+  sucursal   Sucursal?            @relation(fields: [sucursalId], references: [id])
+  detalles   OrdenCompraDetalle[]
 }
 
 model OrdenCompraDetalle {
@@ -112,4 +125,31 @@ model OrdenCompraDetalle {
   cantidadFinal    Decimal?    @db.Decimal(10, 3)
   orden            OrdenCompra @relation(fields: [ordenId], references: [id])
   ingrediente      Ingrediente @relation(fields: [ingredienteId], references: [id])
+}
+
+// ─── SUCURSALES ────────────────────────────────────────
+
+model Sucursal {
+  id        String   @id @default(cuid())
+  nombre    String
+  direccion String?
+  activa    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  ventas            Venta[]
+  movimientos       MovimientoInventario[]
+  ordenesCompra     OrdenCompra[]
+  stockIngredientes IngredienteSucursal[]
+}
+
+model IngredienteSucursal {
+  id            String      @id @default(cuid())
+  ingredienteId String
+  sucursalId    String
+  stockActual   Decimal     @default(0) @db.Decimal(10, 3)
+  stockMinimo   Decimal     @default(0) @db.Decimal(10, 3)
+  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
+  sucursal      Sucursal    @relation(fields: [sucursalId], references: [id])
+
+  @@unique([ingredienteId, sucursalId])
 }

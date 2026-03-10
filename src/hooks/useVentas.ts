@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getSucursalActivaClient } from "@/lib/getSucursalActivaClient";
 import { toast } from "sonner";
 
 export type VentaDetalle = {
@@ -23,12 +24,14 @@ export type VentaInput = {
 };
 
 export function useVentas(desde?: string, hasta?: string) {
+  const sucursalId = getSucursalActivaClient();
   return useQuery({
-    queryKey: ["ventas", desde, hasta],
+    queryKey: ["ventas", desde, hasta, sucursalId],
     queryFn: async (): Promise<Venta[]> => {
       const params = new URLSearchParams();
       if (desde) params.set("desde", desde);
       if (hasta) params.set("hasta", hasta);
+      if (sucursalId) params.set("sucursalId", sucursalId);
       const res = await fetch(`/api/ventas?${params}`);
       if (!res.ok) throw new Error("Error al cargar ventas");
       return res.json();

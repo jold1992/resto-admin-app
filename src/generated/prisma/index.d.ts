@@ -58,6 +58,16 @@ export type OrdenCompra = $Result.DefaultSelection<Prisma.$OrdenCompraPayload>
  * 
  */
 export type OrdenCompraDetalle = $Result.DefaultSelection<Prisma.$OrdenCompraDetallePayload>
+/**
+ * Model Sucursal
+ * 
+ */
+export type Sucursal = $Result.DefaultSelection<Prisma.$SucursalPayload>
+/**
+ * Model IngredienteSucursal
+ * 
+ */
+export type IngredienteSucursal = $Result.DefaultSelection<Prisma.$IngredienteSucursalPayload>
 
 /**
  * Enums
@@ -74,11 +84,24 @@ export namespace $Enums {
 
 export type UnidadMedida = (typeof UnidadMedida)[keyof typeof UnidadMedida]
 
+
+export const TipoMovimiento: {
+  ENTRADA: 'ENTRADA',
+  SALIDA: 'SALIDA',
+  AJUSTE: 'AJUSTE'
+};
+
+export type TipoMovimiento = (typeof TipoMovimiento)[keyof typeof TipoMovimiento]
+
 }
 
 export type UnidadMedida = $Enums.UnidadMedida
 
 export const UnidadMedida: typeof $Enums.UnidadMedida
+
+export type TipoMovimiento = $Enums.TipoMovimiento
+
+export const TipoMovimiento: typeof $Enums.TipoMovimiento
 
 /**
  * ##  Prisma Client ʲˢ
@@ -286,6 +309,26 @@ export class PrismaClient<
     * ```
     */
   get ordenCompraDetalle(): Prisma.OrdenCompraDetalleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sucursal`: Exposes CRUD operations for the **Sucursal** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sucursals
+    * const sucursals = await prisma.sucursal.findMany()
+    * ```
+    */
+  get sucursal(): Prisma.SucursalDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.ingredienteSucursal`: Exposes CRUD operations for the **IngredienteSucursal** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IngredienteSucursals
+    * const ingredienteSucursals = await prisma.ingredienteSucursal.findMany()
+    * ```
+    */
+  get ingredienteSucursal(): Prisma.IngredienteSucursalDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -728,7 +771,9 @@ export namespace Prisma {
     Venta: 'Venta',
     VentaDetalle: 'VentaDetalle',
     OrdenCompra: 'OrdenCompra',
-    OrdenCompraDetalle: 'OrdenCompraDetalle'
+    OrdenCompraDetalle: 'OrdenCompraDetalle',
+    Sucursal: 'Sucursal',
+    IngredienteSucursal: 'IngredienteSucursal'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -744,7 +789,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "categoria" | "plato" | "ingrediente" | "recetaItem" | "movimientoInventario" | "venta" | "ventaDetalle" | "ordenCompra" | "ordenCompraDetalle"
+      modelProps: "categoria" | "plato" | "ingrediente" | "recetaItem" | "movimientoInventario" | "venta" | "ventaDetalle" | "ordenCompra" | "ordenCompraDetalle" | "sucursal" | "ingredienteSucursal"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1414,6 +1459,154 @@ export namespace Prisma {
           }
         }
       }
+      Sucursal: {
+        payload: Prisma.$SucursalPayload<ExtArgs>
+        fields: Prisma.SucursalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SucursalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SucursalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload>
+          }
+          findFirst: {
+            args: Prisma.SucursalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SucursalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload>
+          }
+          findMany: {
+            args: Prisma.SucursalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload>[]
+          }
+          create: {
+            args: Prisma.SucursalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload>
+          }
+          createMany: {
+            args: Prisma.SucursalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SucursalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload>[]
+          }
+          delete: {
+            args: Prisma.SucursalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload>
+          }
+          update: {
+            args: Prisma.SucursalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload>
+          }
+          deleteMany: {
+            args: Prisma.SucursalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SucursalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SucursalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload>[]
+          }
+          upsert: {
+            args: Prisma.SucursalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SucursalPayload>
+          }
+          aggregate: {
+            args: Prisma.SucursalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSucursal>
+          }
+          groupBy: {
+            args: Prisma.SucursalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SucursalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SucursalCountArgs<ExtArgs>
+            result: $Utils.Optional<SucursalCountAggregateOutputType> | number
+          }
+        }
+      }
+      IngredienteSucursal: {
+        payload: Prisma.$IngredienteSucursalPayload<ExtArgs>
+        fields: Prisma.IngredienteSucursalFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IngredienteSucursalFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IngredienteSucursalFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload>
+          }
+          findFirst: {
+            args: Prisma.IngredienteSucursalFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IngredienteSucursalFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload>
+          }
+          findMany: {
+            args: Prisma.IngredienteSucursalFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload>[]
+          }
+          create: {
+            args: Prisma.IngredienteSucursalCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload>
+          }
+          createMany: {
+            args: Prisma.IngredienteSucursalCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IngredienteSucursalCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload>[]
+          }
+          delete: {
+            args: Prisma.IngredienteSucursalDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload>
+          }
+          update: {
+            args: Prisma.IngredienteSucursalUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload>
+          }
+          deleteMany: {
+            args: Prisma.IngredienteSucursalDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IngredienteSucursalUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IngredienteSucursalUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload>[]
+          }
+          upsert: {
+            args: Prisma.IngredienteSucursalUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IngredienteSucursalPayload>
+          }
+          aggregate: {
+            args: Prisma.IngredienteSucursalAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIngredienteSucursal>
+          }
+          groupBy: {
+            args: Prisma.IngredienteSucursalGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IngredienteSucursalGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IngredienteSucursalCountArgs<ExtArgs>
+            result: $Utils.Optional<IngredienteSucursalCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1531,6 +1724,8 @@ export namespace Prisma {
     ventaDetalle?: VentaDetalleOmit
     ordenCompra?: OrdenCompraOmit
     ordenCompraDetalle?: OrdenCompraDetalleOmit
+    sucursal?: SucursalOmit
+    ingredienteSucursal?: IngredienteSucursalOmit
   }
 
   /* Types for Logging */
@@ -1685,12 +1880,14 @@ export namespace Prisma {
     recetas: number
     movimientos: number
     ordenItems: number
+    stockSucursales: number
   }
 
   export type IngredienteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recetas?: boolean | IngredienteCountOutputTypeCountRecetasArgs
     movimientos?: boolean | IngredienteCountOutputTypeCountMovimientosArgs
     ordenItems?: boolean | IngredienteCountOutputTypeCountOrdenItemsArgs
+    stockSucursales?: boolean | IngredienteCountOutputTypeCountStockSucursalesArgs
   }
 
   // Custom InputTypes
@@ -1723,6 +1920,13 @@ export namespace Prisma {
    */
   export type IngredienteCountOutputTypeCountOrdenItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrdenCompraDetalleWhereInput
+  }
+
+  /**
+   * IngredienteCountOutputType without action
+   */
+  export type IngredienteCountOutputTypeCountStockSucursalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IngredienteSucursalWhereInput
   }
 
 
@@ -1785,6 +1989,64 @@ export namespace Prisma {
    */
   export type OrdenCompraCountOutputTypeCountDetallesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrdenCompraDetalleWhereInput
+  }
+
+
+  /**
+   * Count Type SucursalCountOutputType
+   */
+
+  export type SucursalCountOutputType = {
+    ventas: number
+    movimientos: number
+    ordenesCompra: number
+    stockIngredientes: number
+  }
+
+  export type SucursalCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ventas?: boolean | SucursalCountOutputTypeCountVentasArgs
+    movimientos?: boolean | SucursalCountOutputTypeCountMovimientosArgs
+    ordenesCompra?: boolean | SucursalCountOutputTypeCountOrdenesCompraArgs
+    stockIngredientes?: boolean | SucursalCountOutputTypeCountStockIngredientesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SucursalCountOutputType without action
+   */
+  export type SucursalCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SucursalCountOutputType
+     */
+    select?: SucursalCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SucursalCountOutputType without action
+   */
+  export type SucursalCountOutputTypeCountVentasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VentaWhereInput
+  }
+
+  /**
+   * SucursalCountOutputType without action
+   */
+  export type SucursalCountOutputTypeCountMovimientosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MovimientoInventarioWhereInput
+  }
+
+  /**
+   * SucursalCountOutputType without action
+   */
+  export type SucursalCountOutputTypeCountOrdenesCompraArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrdenCompraWhereInput
+  }
+
+  /**
+   * SucursalCountOutputType without action
+   */
+  export type SucursalCountOutputTypeCountStockIngredientesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IngredienteSucursalWhereInput
   }
 
 
@@ -4250,6 +4512,7 @@ export namespace Prisma {
     recetas?: boolean | Ingrediente$recetasArgs<ExtArgs>
     movimientos?: boolean | Ingrediente$movimientosArgs<ExtArgs>
     ordenItems?: boolean | Ingrediente$ordenItemsArgs<ExtArgs>
+    stockSucursales?: boolean | Ingrediente$stockSucursalesArgs<ExtArgs>
     _count?: boolean | IngredienteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ingrediente"]>
 
@@ -4288,6 +4551,7 @@ export namespace Prisma {
     recetas?: boolean | Ingrediente$recetasArgs<ExtArgs>
     movimientos?: boolean | Ingrediente$movimientosArgs<ExtArgs>
     ordenItems?: boolean | Ingrediente$ordenItemsArgs<ExtArgs>
+    stockSucursales?: boolean | Ingrediente$stockSucursalesArgs<ExtArgs>
     _count?: boolean | IngredienteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type IngredienteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4299,6 +4563,7 @@ export namespace Prisma {
       recetas: Prisma.$RecetaItemPayload<ExtArgs>[]
       movimientos: Prisma.$MovimientoInventarioPayload<ExtArgs>[]
       ordenItems: Prisma.$OrdenCompraDetallePayload<ExtArgs>[]
+      stockSucursales: Prisma.$IngredienteSucursalPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4705,6 +4970,7 @@ export namespace Prisma {
     recetas<T extends Ingrediente$recetasArgs<ExtArgs> = {}>(args?: Subset<T, Ingrediente$recetasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecetaItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     movimientos<T extends Ingrediente$movimientosArgs<ExtArgs> = {}>(args?: Subset<T, Ingrediente$movimientosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MovimientoInventarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ordenItems<T extends Ingrediente$ordenItemsArgs<ExtArgs> = {}>(args?: Subset<T, Ingrediente$ordenItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrdenCompraDetallePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    stockSucursales<T extends Ingrediente$stockSucursalesArgs<ExtArgs> = {}>(args?: Subset<T, Ingrediente$stockSucursalesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5198,6 +5464,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrdenCompraDetalleScalarFieldEnum | OrdenCompraDetalleScalarFieldEnum[]
+  }
+
+  /**
+   * Ingrediente.stockSucursales
+   */
+  export type Ingrediente$stockSucursalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    where?: IngredienteSucursalWhereInput
+    orderBy?: IngredienteSucursalOrderByWithRelationInput | IngredienteSucursalOrderByWithRelationInput[]
+    cursor?: IngredienteSucursalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IngredienteSucursalScalarFieldEnum | IngredienteSucursalScalarFieldEnum[]
   }
 
   /**
@@ -6332,6 +6622,7 @@ export namespace Prisma {
     tipo: string | null
     cantidad: Decimal | null
     motivo: string | null
+    sucursalId: string | null
     createdAt: Date | null
   }
 
@@ -6341,6 +6632,7 @@ export namespace Prisma {
     tipo: string | null
     cantidad: Decimal | null
     motivo: string | null
+    sucursalId: string | null
     createdAt: Date | null
   }
 
@@ -6350,6 +6642,7 @@ export namespace Prisma {
     tipo: number
     cantidad: number
     motivo: number
+    sucursalId: number
     createdAt: number
     _all: number
   }
@@ -6369,6 +6662,7 @@ export namespace Prisma {
     tipo?: true
     cantidad?: true
     motivo?: true
+    sucursalId?: true
     createdAt?: true
   }
 
@@ -6378,6 +6672,7 @@ export namespace Prisma {
     tipo?: true
     cantidad?: true
     motivo?: true
+    sucursalId?: true
     createdAt?: true
   }
 
@@ -6387,6 +6682,7 @@ export namespace Prisma {
     tipo?: true
     cantidad?: true
     motivo?: true
+    sucursalId?: true
     createdAt?: true
     _all?: true
   }
@@ -6483,6 +6779,7 @@ export namespace Prisma {
     tipo: string
     cantidad: Decimal
     motivo: string | null
+    sucursalId: string | null
     createdAt: Date
     _count: MovimientoInventarioCountAggregateOutputType | null
     _avg: MovimientoInventarioAvgAggregateOutputType | null
@@ -6511,8 +6808,10 @@ export namespace Prisma {
     tipo?: boolean
     cantidad?: boolean
     motivo?: boolean
+    sucursalId?: boolean
     createdAt?: boolean
     ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | MovimientoInventario$sucursalArgs<ExtArgs>
   }, ExtArgs["result"]["movimientoInventario"]>
 
   export type MovimientoInventarioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6521,8 +6820,10 @@ export namespace Prisma {
     tipo?: boolean
     cantidad?: boolean
     motivo?: boolean
+    sucursalId?: boolean
     createdAt?: boolean
     ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | MovimientoInventario$sucursalArgs<ExtArgs>
   }, ExtArgs["result"]["movimientoInventario"]>
 
   export type MovimientoInventarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6531,8 +6832,10 @@ export namespace Prisma {
     tipo?: boolean
     cantidad?: boolean
     motivo?: boolean
+    sucursalId?: boolean
     createdAt?: boolean
     ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | MovimientoInventario$sucursalArgs<ExtArgs>
   }, ExtArgs["result"]["movimientoInventario"]>
 
   export type MovimientoInventarioSelectScalar = {
@@ -6541,24 +6844,29 @@ export namespace Prisma {
     tipo?: boolean
     cantidad?: boolean
     motivo?: boolean
+    sucursalId?: boolean
     createdAt?: boolean
   }
 
-  export type MovimientoInventarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ingredienteId" | "tipo" | "cantidad" | "motivo" | "createdAt", ExtArgs["result"]["movimientoInventario"]>
+  export type MovimientoInventarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ingredienteId" | "tipo" | "cantidad" | "motivo" | "sucursalId" | "createdAt", ExtArgs["result"]["movimientoInventario"]>
   export type MovimientoInventarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | MovimientoInventario$sucursalArgs<ExtArgs>
   }
   export type MovimientoInventarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | MovimientoInventario$sucursalArgs<ExtArgs>
   }
   export type MovimientoInventarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | MovimientoInventario$sucursalArgs<ExtArgs>
   }
 
   export type $MovimientoInventarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MovimientoInventario"
     objects: {
       ingrediente: Prisma.$IngredientePayload<ExtArgs>
+      sucursal: Prisma.$SucursalPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6566,6 +6874,7 @@ export namespace Prisma {
       tipo: string
       cantidad: Prisma.Decimal
       motivo: string | null
+      sucursalId: string | null
       createdAt: Date
     }, ExtArgs["result"]["movimientoInventario"]>
     composites: {}
@@ -6962,6 +7271,7 @@ export namespace Prisma {
   export interface Prisma__MovimientoInventarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     ingrediente<T extends IngredienteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, IngredienteDefaultArgs<ExtArgs>>): Prisma__IngredienteClient<$Result.GetResult<Prisma.$IngredientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sucursal<T extends MovimientoInventario$sucursalArgs<ExtArgs> = {}>(args?: Subset<T, MovimientoInventario$sucursalArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6996,6 +7306,7 @@ export namespace Prisma {
     readonly tipo: FieldRef<"MovimientoInventario", 'String'>
     readonly cantidad: FieldRef<"MovimientoInventario", 'Decimal'>
     readonly motivo: FieldRef<"MovimientoInventario", 'String'>
+    readonly sucursalId: FieldRef<"MovimientoInventario", 'String'>
     readonly createdAt: FieldRef<"MovimientoInventario", 'DateTime'>
   }
     
@@ -7393,6 +7704,25 @@ export namespace Prisma {
   }
 
   /**
+   * MovimientoInventario.sucursal
+   */
+  export type MovimientoInventario$sucursalArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    where?: SucursalWhereInput
+  }
+
+  /**
    * MovimientoInventario without action
    */
   export type MovimientoInventarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7436,6 +7766,7 @@ export namespace Prisma {
     total: Decimal | null
     fecha: Date | null
     notas: string | null
+    sucursalId: string | null
   }
 
   export type VentaMaxAggregateOutputType = {
@@ -7443,6 +7774,7 @@ export namespace Prisma {
     total: Decimal | null
     fecha: Date | null
     notas: string | null
+    sucursalId: string | null
   }
 
   export type VentaCountAggregateOutputType = {
@@ -7450,6 +7782,7 @@ export namespace Prisma {
     total: number
     fecha: number
     notas: number
+    sucursalId: number
     _all: number
   }
 
@@ -7467,6 +7800,7 @@ export namespace Prisma {
     total?: true
     fecha?: true
     notas?: true
+    sucursalId?: true
   }
 
   export type VentaMaxAggregateInputType = {
@@ -7474,6 +7808,7 @@ export namespace Prisma {
     total?: true
     fecha?: true
     notas?: true
+    sucursalId?: true
   }
 
   export type VentaCountAggregateInputType = {
@@ -7481,6 +7816,7 @@ export namespace Prisma {
     total?: true
     fecha?: true
     notas?: true
+    sucursalId?: true
     _all?: true
   }
 
@@ -7575,6 +7911,7 @@ export namespace Prisma {
     total: Decimal
     fecha: Date
     notas: string | null
+    sucursalId: string | null
     _count: VentaCountAggregateOutputType | null
     _avg: VentaAvgAggregateOutputType | null
     _sum: VentaSumAggregateOutputType | null
@@ -7601,6 +7938,8 @@ export namespace Prisma {
     total?: boolean
     fecha?: boolean
     notas?: boolean
+    sucursalId?: boolean
+    sucursal?: boolean | Venta$sucursalArgs<ExtArgs>
     detalles?: boolean | Venta$detallesArgs<ExtArgs>
     _count?: boolean | VentaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["venta"]>
@@ -7610,6 +7949,8 @@ export namespace Prisma {
     total?: boolean
     fecha?: boolean
     notas?: boolean
+    sucursalId?: boolean
+    sucursal?: boolean | Venta$sucursalArgs<ExtArgs>
   }, ExtArgs["result"]["venta"]>
 
   export type VentaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7617,6 +7958,8 @@ export namespace Prisma {
     total?: boolean
     fecha?: boolean
     notas?: boolean
+    sucursalId?: boolean
+    sucursal?: boolean | Venta$sucursalArgs<ExtArgs>
   }, ExtArgs["result"]["venta"]>
 
   export type VentaSelectScalar = {
@@ -7624,19 +7967,26 @@ export namespace Prisma {
     total?: boolean
     fecha?: boolean
     notas?: boolean
+    sucursalId?: boolean
   }
 
-  export type VentaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "total" | "fecha" | "notas", ExtArgs["result"]["venta"]>
+  export type VentaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "total" | "fecha" | "notas" | "sucursalId", ExtArgs["result"]["venta"]>
   export type VentaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sucursal?: boolean | Venta$sucursalArgs<ExtArgs>
     detalles?: boolean | Venta$detallesArgs<ExtArgs>
     _count?: boolean | VentaCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type VentaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type VentaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type VentaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sucursal?: boolean | Venta$sucursalArgs<ExtArgs>
+  }
+  export type VentaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sucursal?: boolean | Venta$sucursalArgs<ExtArgs>
+  }
 
   export type $VentaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Venta"
     objects: {
+      sucursal: Prisma.$SucursalPayload<ExtArgs> | null
       detalles: Prisma.$VentaDetallePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -7644,6 +7994,7 @@ export namespace Prisma {
       total: Prisma.Decimal
       fecha: Date
       notas: string | null
+      sucursalId: string | null
     }, ExtArgs["result"]["venta"]>
     composites: {}
   }
@@ -8038,6 +8389,7 @@ export namespace Prisma {
    */
   export interface Prisma__VentaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    sucursal<T extends Venta$sucursalArgs<ExtArgs> = {}>(args?: Subset<T, Venta$sucursalArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     detalles<T extends Venta$detallesArgs<ExtArgs> = {}>(args?: Subset<T, Venta$detallesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentaDetallePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8072,6 +8424,7 @@ export namespace Prisma {
     readonly total: FieldRef<"Venta", 'Decimal'>
     readonly fecha: FieldRef<"Venta", 'DateTime'>
     readonly notas: FieldRef<"Venta", 'String'>
+    readonly sucursalId: FieldRef<"Venta", 'String'>
   }
     
 
@@ -8321,6 +8674,10 @@ export namespace Prisma {
      */
     data: VentaCreateManyInput | VentaCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VentaIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8391,6 +8748,10 @@ export namespace Prisma {
      * Limit how many Ventas to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VentaIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8457,6 +8818,25 @@ export namespace Prisma {
      * Limit how many Ventas to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Venta.sucursal
+   */
+  export type Venta$sucursalArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    where?: SucursalWhereInput
   }
 
   /**
@@ -9619,18 +9999,21 @@ export namespace Prisma {
   export type OrdenCompraMinAggregateOutputType = {
     id: string | null
     estado: string | null
+    sucursalId: string | null
     createdAt: Date | null
   }
 
   export type OrdenCompraMaxAggregateOutputType = {
     id: string | null
     estado: string | null
+    sucursalId: string | null
     createdAt: Date | null
   }
 
   export type OrdenCompraCountAggregateOutputType = {
     id: number
     estado: number
+    sucursalId: number
     createdAt: number
     _all: number
   }
@@ -9639,18 +10022,21 @@ export namespace Prisma {
   export type OrdenCompraMinAggregateInputType = {
     id?: true
     estado?: true
+    sucursalId?: true
     createdAt?: true
   }
 
   export type OrdenCompraMaxAggregateInputType = {
     id?: true
     estado?: true
+    sucursalId?: true
     createdAt?: true
   }
 
   export type OrdenCompraCountAggregateInputType = {
     id?: true
     estado?: true
+    sucursalId?: true
     createdAt?: true
     _all?: true
   }
@@ -9730,6 +10116,7 @@ export namespace Prisma {
   export type OrdenCompraGroupByOutputType = {
     id: string
     estado: string
+    sucursalId: string | null
     createdAt: Date
     _count: OrdenCompraCountAggregateOutputType | null
     _min: OrdenCompraMinAggregateOutputType | null
@@ -9753,7 +10140,9 @@ export namespace Prisma {
   export type OrdenCompraSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     estado?: boolean
+    sucursalId?: boolean
     createdAt?: boolean
+    sucursal?: boolean | OrdenCompra$sucursalArgs<ExtArgs>
     detalles?: boolean | OrdenCompra$detallesArgs<ExtArgs>
     _count?: boolean | OrdenCompraCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ordenCompra"]>
@@ -9761,37 +10150,49 @@ export namespace Prisma {
   export type OrdenCompraSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     estado?: boolean
+    sucursalId?: boolean
     createdAt?: boolean
+    sucursal?: boolean | OrdenCompra$sucursalArgs<ExtArgs>
   }, ExtArgs["result"]["ordenCompra"]>
 
   export type OrdenCompraSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     estado?: boolean
+    sucursalId?: boolean
     createdAt?: boolean
+    sucursal?: boolean | OrdenCompra$sucursalArgs<ExtArgs>
   }, ExtArgs["result"]["ordenCompra"]>
 
   export type OrdenCompraSelectScalar = {
     id?: boolean
     estado?: boolean
+    sucursalId?: boolean
     createdAt?: boolean
   }
 
-  export type OrdenCompraOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "estado" | "createdAt", ExtArgs["result"]["ordenCompra"]>
+  export type OrdenCompraOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "estado" | "sucursalId" | "createdAt", ExtArgs["result"]["ordenCompra"]>
   export type OrdenCompraInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sucursal?: boolean | OrdenCompra$sucursalArgs<ExtArgs>
     detalles?: boolean | OrdenCompra$detallesArgs<ExtArgs>
     _count?: boolean | OrdenCompraCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type OrdenCompraIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type OrdenCompraIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type OrdenCompraIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sucursal?: boolean | OrdenCompra$sucursalArgs<ExtArgs>
+  }
+  export type OrdenCompraIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sucursal?: boolean | OrdenCompra$sucursalArgs<ExtArgs>
+  }
 
   export type $OrdenCompraPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OrdenCompra"
     objects: {
+      sucursal: Prisma.$SucursalPayload<ExtArgs> | null
       detalles: Prisma.$OrdenCompraDetallePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       estado: string
+      sucursalId: string | null
       createdAt: Date
     }, ExtArgs["result"]["ordenCompra"]>
     composites: {}
@@ -10187,6 +10588,7 @@ export namespace Prisma {
    */
   export interface Prisma__OrdenCompraClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    sucursal<T extends OrdenCompra$sucursalArgs<ExtArgs> = {}>(args?: Subset<T, OrdenCompra$sucursalArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     detalles<T extends OrdenCompra$detallesArgs<ExtArgs> = {}>(args?: Subset<T, OrdenCompra$detallesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrdenCompraDetallePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -10219,6 +10621,7 @@ export namespace Prisma {
   interface OrdenCompraFieldRefs {
     readonly id: FieldRef<"OrdenCompra", 'String'>
     readonly estado: FieldRef<"OrdenCompra", 'String'>
+    readonly sucursalId: FieldRef<"OrdenCompra", 'String'>
     readonly createdAt: FieldRef<"OrdenCompra", 'DateTime'>
   }
     
@@ -10469,6 +10872,10 @@ export namespace Prisma {
      */
     data: OrdenCompraCreateManyInput | OrdenCompraCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrdenCompraIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -10539,6 +10946,10 @@ export namespace Prisma {
      * Limit how many OrdenCompras to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrdenCompraIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -10605,6 +11016,25 @@ export namespace Prisma {
      * Limit how many OrdenCompras to delete.
      */
     limit?: number
+  }
+
+  /**
+   * OrdenCompra.sucursal
+   */
+  export type OrdenCompra$sucursalArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    where?: SucursalWhereInput
   }
 
   /**
@@ -11755,6 +12185,2264 @@ export namespace Prisma {
 
 
   /**
+   * Model Sucursal
+   */
+
+  export type AggregateSucursal = {
+    _count: SucursalCountAggregateOutputType | null
+    _min: SucursalMinAggregateOutputType | null
+    _max: SucursalMaxAggregateOutputType | null
+  }
+
+  export type SucursalMinAggregateOutputType = {
+    id: string | null
+    nombre: string | null
+    direccion: string | null
+    activa: boolean | null
+    createdAt: Date | null
+  }
+
+  export type SucursalMaxAggregateOutputType = {
+    id: string | null
+    nombre: string | null
+    direccion: string | null
+    activa: boolean | null
+    createdAt: Date | null
+  }
+
+  export type SucursalCountAggregateOutputType = {
+    id: number
+    nombre: number
+    direccion: number
+    activa: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type SucursalMinAggregateInputType = {
+    id?: true
+    nombre?: true
+    direccion?: true
+    activa?: true
+    createdAt?: true
+  }
+
+  export type SucursalMaxAggregateInputType = {
+    id?: true
+    nombre?: true
+    direccion?: true
+    activa?: true
+    createdAt?: true
+  }
+
+  export type SucursalCountAggregateInputType = {
+    id?: true
+    nombre?: true
+    direccion?: true
+    activa?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type SucursalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sucursal to aggregate.
+     */
+    where?: SucursalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sucursals to fetch.
+     */
+    orderBy?: SucursalOrderByWithRelationInput | SucursalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SucursalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sucursals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sucursals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Sucursals
+    **/
+    _count?: true | SucursalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SucursalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SucursalMaxAggregateInputType
+  }
+
+  export type GetSucursalAggregateType<T extends SucursalAggregateArgs> = {
+        [P in keyof T & keyof AggregateSucursal]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSucursal[P]>
+      : GetScalarType<T[P], AggregateSucursal[P]>
+  }
+
+
+
+
+  export type SucursalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SucursalWhereInput
+    orderBy?: SucursalOrderByWithAggregationInput | SucursalOrderByWithAggregationInput[]
+    by: SucursalScalarFieldEnum[] | SucursalScalarFieldEnum
+    having?: SucursalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SucursalCountAggregateInputType | true
+    _min?: SucursalMinAggregateInputType
+    _max?: SucursalMaxAggregateInputType
+  }
+
+  export type SucursalGroupByOutputType = {
+    id: string
+    nombre: string
+    direccion: string | null
+    activa: boolean
+    createdAt: Date
+    _count: SucursalCountAggregateOutputType | null
+    _min: SucursalMinAggregateOutputType | null
+    _max: SucursalMaxAggregateOutputType | null
+  }
+
+  type GetSucursalGroupByPayload<T extends SucursalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SucursalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SucursalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SucursalGroupByOutputType[P]>
+            : GetScalarType<T[P], SucursalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SucursalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nombre?: boolean
+    direccion?: boolean
+    activa?: boolean
+    createdAt?: boolean
+    ventas?: boolean | Sucursal$ventasArgs<ExtArgs>
+    movimientos?: boolean | Sucursal$movimientosArgs<ExtArgs>
+    ordenesCompra?: boolean | Sucursal$ordenesCompraArgs<ExtArgs>
+    stockIngredientes?: boolean | Sucursal$stockIngredientesArgs<ExtArgs>
+    _count?: boolean | SucursalCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sucursal"]>
+
+  export type SucursalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nombre?: boolean
+    direccion?: boolean
+    activa?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["sucursal"]>
+
+  export type SucursalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nombre?: boolean
+    direccion?: boolean
+    activa?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["sucursal"]>
+
+  export type SucursalSelectScalar = {
+    id?: boolean
+    nombre?: boolean
+    direccion?: boolean
+    activa?: boolean
+    createdAt?: boolean
+  }
+
+  export type SucursalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "direccion" | "activa" | "createdAt", ExtArgs["result"]["sucursal"]>
+  export type SucursalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ventas?: boolean | Sucursal$ventasArgs<ExtArgs>
+    movimientos?: boolean | Sucursal$movimientosArgs<ExtArgs>
+    ordenesCompra?: boolean | Sucursal$ordenesCompraArgs<ExtArgs>
+    stockIngredientes?: boolean | Sucursal$stockIngredientesArgs<ExtArgs>
+    _count?: boolean | SucursalCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SucursalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type SucursalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $SucursalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Sucursal"
+    objects: {
+      ventas: Prisma.$VentaPayload<ExtArgs>[]
+      movimientos: Prisma.$MovimientoInventarioPayload<ExtArgs>[]
+      ordenesCompra: Prisma.$OrdenCompraPayload<ExtArgs>[]
+      stockIngredientes: Prisma.$IngredienteSucursalPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nombre: string
+      direccion: string | null
+      activa: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["sucursal"]>
+    composites: {}
+  }
+
+  type SucursalGetPayload<S extends boolean | null | undefined | SucursalDefaultArgs> = $Result.GetResult<Prisma.$SucursalPayload, S>
+
+  type SucursalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SucursalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SucursalCountAggregateInputType | true
+    }
+
+  export interface SucursalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Sucursal'], meta: { name: 'Sucursal' } }
+    /**
+     * Find zero or one Sucursal that matches the filter.
+     * @param {SucursalFindUniqueArgs} args - Arguments to find a Sucursal
+     * @example
+     * // Get one Sucursal
+     * const sucursal = await prisma.sucursal.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SucursalFindUniqueArgs>(args: SelectSubset<T, SucursalFindUniqueArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Sucursal that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SucursalFindUniqueOrThrowArgs} args - Arguments to find a Sucursal
+     * @example
+     * // Get one Sucursal
+     * const sucursal = await prisma.sucursal.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SucursalFindUniqueOrThrowArgs>(args: SelectSubset<T, SucursalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Sucursal that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SucursalFindFirstArgs} args - Arguments to find a Sucursal
+     * @example
+     * // Get one Sucursal
+     * const sucursal = await prisma.sucursal.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SucursalFindFirstArgs>(args?: SelectSubset<T, SucursalFindFirstArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Sucursal that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SucursalFindFirstOrThrowArgs} args - Arguments to find a Sucursal
+     * @example
+     * // Get one Sucursal
+     * const sucursal = await prisma.sucursal.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SucursalFindFirstOrThrowArgs>(args?: SelectSubset<T, SucursalFindFirstOrThrowArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Sucursals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SucursalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sucursals
+     * const sucursals = await prisma.sucursal.findMany()
+     * 
+     * // Get first 10 Sucursals
+     * const sucursals = await prisma.sucursal.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sucursalWithIdOnly = await prisma.sucursal.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SucursalFindManyArgs>(args?: SelectSubset<T, SucursalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Sucursal.
+     * @param {SucursalCreateArgs} args - Arguments to create a Sucursal.
+     * @example
+     * // Create one Sucursal
+     * const Sucursal = await prisma.sucursal.create({
+     *   data: {
+     *     // ... data to create a Sucursal
+     *   }
+     * })
+     * 
+     */
+    create<T extends SucursalCreateArgs>(args: SelectSubset<T, SucursalCreateArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Sucursals.
+     * @param {SucursalCreateManyArgs} args - Arguments to create many Sucursals.
+     * @example
+     * // Create many Sucursals
+     * const sucursal = await prisma.sucursal.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SucursalCreateManyArgs>(args?: SelectSubset<T, SucursalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Sucursals and returns the data saved in the database.
+     * @param {SucursalCreateManyAndReturnArgs} args - Arguments to create many Sucursals.
+     * @example
+     * // Create many Sucursals
+     * const sucursal = await prisma.sucursal.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Sucursals and only return the `id`
+     * const sucursalWithIdOnly = await prisma.sucursal.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SucursalCreateManyAndReturnArgs>(args?: SelectSubset<T, SucursalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Sucursal.
+     * @param {SucursalDeleteArgs} args - Arguments to delete one Sucursal.
+     * @example
+     * // Delete one Sucursal
+     * const Sucursal = await prisma.sucursal.delete({
+     *   where: {
+     *     // ... filter to delete one Sucursal
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SucursalDeleteArgs>(args: SelectSubset<T, SucursalDeleteArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Sucursal.
+     * @param {SucursalUpdateArgs} args - Arguments to update one Sucursal.
+     * @example
+     * // Update one Sucursal
+     * const sucursal = await prisma.sucursal.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SucursalUpdateArgs>(args: SelectSubset<T, SucursalUpdateArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Sucursals.
+     * @param {SucursalDeleteManyArgs} args - Arguments to filter Sucursals to delete.
+     * @example
+     * // Delete a few Sucursals
+     * const { count } = await prisma.sucursal.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SucursalDeleteManyArgs>(args?: SelectSubset<T, SucursalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sucursals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SucursalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sucursals
+     * const sucursal = await prisma.sucursal.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SucursalUpdateManyArgs>(args: SelectSubset<T, SucursalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sucursals and returns the data updated in the database.
+     * @param {SucursalUpdateManyAndReturnArgs} args - Arguments to update many Sucursals.
+     * @example
+     * // Update many Sucursals
+     * const sucursal = await prisma.sucursal.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Sucursals and only return the `id`
+     * const sucursalWithIdOnly = await prisma.sucursal.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SucursalUpdateManyAndReturnArgs>(args: SelectSubset<T, SucursalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Sucursal.
+     * @param {SucursalUpsertArgs} args - Arguments to update or create a Sucursal.
+     * @example
+     * // Update or create a Sucursal
+     * const sucursal = await prisma.sucursal.upsert({
+     *   create: {
+     *     // ... data to create a Sucursal
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Sucursal we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SucursalUpsertArgs>(args: SelectSubset<T, SucursalUpsertArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Sucursals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SucursalCountArgs} args - Arguments to filter Sucursals to count.
+     * @example
+     * // Count the number of Sucursals
+     * const count = await prisma.sucursal.count({
+     *   where: {
+     *     // ... the filter for the Sucursals we want to count
+     *   }
+     * })
+    **/
+    count<T extends SucursalCountArgs>(
+      args?: Subset<T, SucursalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SucursalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Sucursal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SucursalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SucursalAggregateArgs>(args: Subset<T, SucursalAggregateArgs>): Prisma.PrismaPromise<GetSucursalAggregateType<T>>
+
+    /**
+     * Group by Sucursal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SucursalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SucursalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SucursalGroupByArgs['orderBy'] }
+        : { orderBy?: SucursalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SucursalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSucursalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Sucursal model
+   */
+  readonly fields: SucursalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Sucursal.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SucursalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ventas<T extends Sucursal$ventasArgs<ExtArgs> = {}>(args?: Subset<T, Sucursal$ventasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VentaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    movimientos<T extends Sucursal$movimientosArgs<ExtArgs> = {}>(args?: Subset<T, Sucursal$movimientosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MovimientoInventarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ordenesCompra<T extends Sucursal$ordenesCompraArgs<ExtArgs> = {}>(args?: Subset<T, Sucursal$ordenesCompraArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrdenCompraPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    stockIngredientes<T extends Sucursal$stockIngredientesArgs<ExtArgs> = {}>(args?: Subset<T, Sucursal$stockIngredientesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Sucursal model
+   */
+  interface SucursalFieldRefs {
+    readonly id: FieldRef<"Sucursal", 'String'>
+    readonly nombre: FieldRef<"Sucursal", 'String'>
+    readonly direccion: FieldRef<"Sucursal", 'String'>
+    readonly activa: FieldRef<"Sucursal", 'Boolean'>
+    readonly createdAt: FieldRef<"Sucursal", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Sucursal findUnique
+   */
+  export type SucursalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which Sucursal to fetch.
+     */
+    where: SucursalWhereUniqueInput
+  }
+
+  /**
+   * Sucursal findUniqueOrThrow
+   */
+  export type SucursalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which Sucursal to fetch.
+     */
+    where: SucursalWhereUniqueInput
+  }
+
+  /**
+   * Sucursal findFirst
+   */
+  export type SucursalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which Sucursal to fetch.
+     */
+    where?: SucursalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sucursals to fetch.
+     */
+    orderBy?: SucursalOrderByWithRelationInput | SucursalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sucursals.
+     */
+    cursor?: SucursalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sucursals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sucursals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sucursals.
+     */
+    distinct?: SucursalScalarFieldEnum | SucursalScalarFieldEnum[]
+  }
+
+  /**
+   * Sucursal findFirstOrThrow
+   */
+  export type SucursalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which Sucursal to fetch.
+     */
+    where?: SucursalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sucursals to fetch.
+     */
+    orderBy?: SucursalOrderByWithRelationInput | SucursalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sucursals.
+     */
+    cursor?: SucursalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sucursals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sucursals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sucursals.
+     */
+    distinct?: SucursalScalarFieldEnum | SucursalScalarFieldEnum[]
+  }
+
+  /**
+   * Sucursal findMany
+   */
+  export type SucursalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which Sucursals to fetch.
+     */
+    where?: SucursalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sucursals to fetch.
+     */
+    orderBy?: SucursalOrderByWithRelationInput | SucursalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Sucursals.
+     */
+    cursor?: SucursalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sucursals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sucursals.
+     */
+    skip?: number
+    distinct?: SucursalScalarFieldEnum | SucursalScalarFieldEnum[]
+  }
+
+  /**
+   * Sucursal create
+   */
+  export type SucursalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Sucursal.
+     */
+    data: XOR<SucursalCreateInput, SucursalUncheckedCreateInput>
+  }
+
+  /**
+   * Sucursal createMany
+   */
+  export type SucursalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Sucursals.
+     */
+    data: SucursalCreateManyInput | SucursalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Sucursal createManyAndReturn
+   */
+  export type SucursalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * The data used to create many Sucursals.
+     */
+    data: SucursalCreateManyInput | SucursalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Sucursal update
+   */
+  export type SucursalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Sucursal.
+     */
+    data: XOR<SucursalUpdateInput, SucursalUncheckedUpdateInput>
+    /**
+     * Choose, which Sucursal to update.
+     */
+    where: SucursalWhereUniqueInput
+  }
+
+  /**
+   * Sucursal updateMany
+   */
+  export type SucursalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Sucursals.
+     */
+    data: XOR<SucursalUpdateManyMutationInput, SucursalUncheckedUpdateManyInput>
+    /**
+     * Filter which Sucursals to update
+     */
+    where?: SucursalWhereInput
+    /**
+     * Limit how many Sucursals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Sucursal updateManyAndReturn
+   */
+  export type SucursalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * The data used to update Sucursals.
+     */
+    data: XOR<SucursalUpdateManyMutationInput, SucursalUncheckedUpdateManyInput>
+    /**
+     * Filter which Sucursals to update
+     */
+    where?: SucursalWhereInput
+    /**
+     * Limit how many Sucursals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Sucursal upsert
+   */
+  export type SucursalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Sucursal to update in case it exists.
+     */
+    where: SucursalWhereUniqueInput
+    /**
+     * In case the Sucursal found by the `where` argument doesn't exist, create a new Sucursal with this data.
+     */
+    create: XOR<SucursalCreateInput, SucursalUncheckedCreateInput>
+    /**
+     * In case the Sucursal was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SucursalUpdateInput, SucursalUncheckedUpdateInput>
+  }
+
+  /**
+   * Sucursal delete
+   */
+  export type SucursalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+    /**
+     * Filter which Sucursal to delete.
+     */
+    where: SucursalWhereUniqueInput
+  }
+
+  /**
+   * Sucursal deleteMany
+   */
+  export type SucursalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sucursals to delete
+     */
+    where?: SucursalWhereInput
+    /**
+     * Limit how many Sucursals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Sucursal.ventas
+   */
+  export type Sucursal$ventasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venta
+     */
+    select?: VentaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venta
+     */
+    omit?: VentaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VentaInclude<ExtArgs> | null
+    where?: VentaWhereInput
+    orderBy?: VentaOrderByWithRelationInput | VentaOrderByWithRelationInput[]
+    cursor?: VentaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VentaScalarFieldEnum | VentaScalarFieldEnum[]
+  }
+
+  /**
+   * Sucursal.movimientos
+   */
+  export type Sucursal$movimientosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MovimientoInventario
+     */
+    select?: MovimientoInventarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MovimientoInventario
+     */
+    omit?: MovimientoInventarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MovimientoInventarioInclude<ExtArgs> | null
+    where?: MovimientoInventarioWhereInput
+    orderBy?: MovimientoInventarioOrderByWithRelationInput | MovimientoInventarioOrderByWithRelationInput[]
+    cursor?: MovimientoInventarioWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MovimientoInventarioScalarFieldEnum | MovimientoInventarioScalarFieldEnum[]
+  }
+
+  /**
+   * Sucursal.ordenesCompra
+   */
+  export type Sucursal$ordenesCompraArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrdenCompra
+     */
+    select?: OrdenCompraSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrdenCompra
+     */
+    omit?: OrdenCompraOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrdenCompraInclude<ExtArgs> | null
+    where?: OrdenCompraWhereInput
+    orderBy?: OrdenCompraOrderByWithRelationInput | OrdenCompraOrderByWithRelationInput[]
+    cursor?: OrdenCompraWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrdenCompraScalarFieldEnum | OrdenCompraScalarFieldEnum[]
+  }
+
+  /**
+   * Sucursal.stockIngredientes
+   */
+  export type Sucursal$stockIngredientesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    where?: IngredienteSucursalWhereInput
+    orderBy?: IngredienteSucursalOrderByWithRelationInput | IngredienteSucursalOrderByWithRelationInput[]
+    cursor?: IngredienteSucursalWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IngredienteSucursalScalarFieldEnum | IngredienteSucursalScalarFieldEnum[]
+  }
+
+  /**
+   * Sucursal without action
+   */
+  export type SucursalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sucursal
+     */
+    select?: SucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sucursal
+     */
+    omit?: SucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SucursalInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model IngredienteSucursal
+   */
+
+  export type AggregateIngredienteSucursal = {
+    _count: IngredienteSucursalCountAggregateOutputType | null
+    _avg: IngredienteSucursalAvgAggregateOutputType | null
+    _sum: IngredienteSucursalSumAggregateOutputType | null
+    _min: IngredienteSucursalMinAggregateOutputType | null
+    _max: IngredienteSucursalMaxAggregateOutputType | null
+  }
+
+  export type IngredienteSucursalAvgAggregateOutputType = {
+    stockActual: Decimal | null
+    stockMinimo: Decimal | null
+  }
+
+  export type IngredienteSucursalSumAggregateOutputType = {
+    stockActual: Decimal | null
+    stockMinimo: Decimal | null
+  }
+
+  export type IngredienteSucursalMinAggregateOutputType = {
+    id: string | null
+    ingredienteId: string | null
+    sucursalId: string | null
+    stockActual: Decimal | null
+    stockMinimo: Decimal | null
+  }
+
+  export type IngredienteSucursalMaxAggregateOutputType = {
+    id: string | null
+    ingredienteId: string | null
+    sucursalId: string | null
+    stockActual: Decimal | null
+    stockMinimo: Decimal | null
+  }
+
+  export type IngredienteSucursalCountAggregateOutputType = {
+    id: number
+    ingredienteId: number
+    sucursalId: number
+    stockActual: number
+    stockMinimo: number
+    _all: number
+  }
+
+
+  export type IngredienteSucursalAvgAggregateInputType = {
+    stockActual?: true
+    stockMinimo?: true
+  }
+
+  export type IngredienteSucursalSumAggregateInputType = {
+    stockActual?: true
+    stockMinimo?: true
+  }
+
+  export type IngredienteSucursalMinAggregateInputType = {
+    id?: true
+    ingredienteId?: true
+    sucursalId?: true
+    stockActual?: true
+    stockMinimo?: true
+  }
+
+  export type IngredienteSucursalMaxAggregateInputType = {
+    id?: true
+    ingredienteId?: true
+    sucursalId?: true
+    stockActual?: true
+    stockMinimo?: true
+  }
+
+  export type IngredienteSucursalCountAggregateInputType = {
+    id?: true
+    ingredienteId?: true
+    sucursalId?: true
+    stockActual?: true
+    stockMinimo?: true
+    _all?: true
+  }
+
+  export type IngredienteSucursalAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IngredienteSucursal to aggregate.
+     */
+    where?: IngredienteSucursalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IngredienteSucursals to fetch.
+     */
+    orderBy?: IngredienteSucursalOrderByWithRelationInput | IngredienteSucursalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IngredienteSucursalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IngredienteSucursals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IngredienteSucursals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IngredienteSucursals
+    **/
+    _count?: true | IngredienteSucursalCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IngredienteSucursalAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IngredienteSucursalSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IngredienteSucursalMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IngredienteSucursalMaxAggregateInputType
+  }
+
+  export type GetIngredienteSucursalAggregateType<T extends IngredienteSucursalAggregateArgs> = {
+        [P in keyof T & keyof AggregateIngredienteSucursal]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIngredienteSucursal[P]>
+      : GetScalarType<T[P], AggregateIngredienteSucursal[P]>
+  }
+
+
+
+
+  export type IngredienteSucursalGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IngredienteSucursalWhereInput
+    orderBy?: IngredienteSucursalOrderByWithAggregationInput | IngredienteSucursalOrderByWithAggregationInput[]
+    by: IngredienteSucursalScalarFieldEnum[] | IngredienteSucursalScalarFieldEnum
+    having?: IngredienteSucursalScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IngredienteSucursalCountAggregateInputType | true
+    _avg?: IngredienteSucursalAvgAggregateInputType
+    _sum?: IngredienteSucursalSumAggregateInputType
+    _min?: IngredienteSucursalMinAggregateInputType
+    _max?: IngredienteSucursalMaxAggregateInputType
+  }
+
+  export type IngredienteSucursalGroupByOutputType = {
+    id: string
+    ingredienteId: string
+    sucursalId: string
+    stockActual: Decimal
+    stockMinimo: Decimal
+    _count: IngredienteSucursalCountAggregateOutputType | null
+    _avg: IngredienteSucursalAvgAggregateOutputType | null
+    _sum: IngredienteSucursalSumAggregateOutputType | null
+    _min: IngredienteSucursalMinAggregateOutputType | null
+    _max: IngredienteSucursalMaxAggregateOutputType | null
+  }
+
+  type GetIngredienteSucursalGroupByPayload<T extends IngredienteSucursalGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IngredienteSucursalGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IngredienteSucursalGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IngredienteSucursalGroupByOutputType[P]>
+            : GetScalarType<T[P], IngredienteSucursalGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IngredienteSucursalSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ingredienteId?: boolean
+    sucursalId?: boolean
+    stockActual?: boolean
+    stockMinimo?: boolean
+    ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | SucursalDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ingredienteSucursal"]>
+
+  export type IngredienteSucursalSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ingredienteId?: boolean
+    sucursalId?: boolean
+    stockActual?: boolean
+    stockMinimo?: boolean
+    ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | SucursalDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ingredienteSucursal"]>
+
+  export type IngredienteSucursalSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ingredienteId?: boolean
+    sucursalId?: boolean
+    stockActual?: boolean
+    stockMinimo?: boolean
+    ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | SucursalDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ingredienteSucursal"]>
+
+  export type IngredienteSucursalSelectScalar = {
+    id?: boolean
+    ingredienteId?: boolean
+    sucursalId?: boolean
+    stockActual?: boolean
+    stockMinimo?: boolean
+  }
+
+  export type IngredienteSucursalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ingredienteId" | "sucursalId" | "stockActual" | "stockMinimo", ExtArgs["result"]["ingredienteSucursal"]>
+  export type IngredienteSucursalInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | SucursalDefaultArgs<ExtArgs>
+  }
+  export type IngredienteSucursalIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | SucursalDefaultArgs<ExtArgs>
+  }
+  export type IngredienteSucursalIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ingrediente?: boolean | IngredienteDefaultArgs<ExtArgs>
+    sucursal?: boolean | SucursalDefaultArgs<ExtArgs>
+  }
+
+  export type $IngredienteSucursalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IngredienteSucursal"
+    objects: {
+      ingrediente: Prisma.$IngredientePayload<ExtArgs>
+      sucursal: Prisma.$SucursalPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      ingredienteId: string
+      sucursalId: string
+      stockActual: Prisma.Decimal
+      stockMinimo: Prisma.Decimal
+    }, ExtArgs["result"]["ingredienteSucursal"]>
+    composites: {}
+  }
+
+  type IngredienteSucursalGetPayload<S extends boolean | null | undefined | IngredienteSucursalDefaultArgs> = $Result.GetResult<Prisma.$IngredienteSucursalPayload, S>
+
+  type IngredienteSucursalCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IngredienteSucursalFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IngredienteSucursalCountAggregateInputType | true
+    }
+
+  export interface IngredienteSucursalDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IngredienteSucursal'], meta: { name: 'IngredienteSucursal' } }
+    /**
+     * Find zero or one IngredienteSucursal that matches the filter.
+     * @param {IngredienteSucursalFindUniqueArgs} args - Arguments to find a IngredienteSucursal
+     * @example
+     * // Get one IngredienteSucursal
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IngredienteSucursalFindUniqueArgs>(args: SelectSubset<T, IngredienteSucursalFindUniqueArgs<ExtArgs>>): Prisma__IngredienteSucursalClient<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IngredienteSucursal that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IngredienteSucursalFindUniqueOrThrowArgs} args - Arguments to find a IngredienteSucursal
+     * @example
+     * // Get one IngredienteSucursal
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IngredienteSucursalFindUniqueOrThrowArgs>(args: SelectSubset<T, IngredienteSucursalFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IngredienteSucursalClient<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IngredienteSucursal that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredienteSucursalFindFirstArgs} args - Arguments to find a IngredienteSucursal
+     * @example
+     * // Get one IngredienteSucursal
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IngredienteSucursalFindFirstArgs>(args?: SelectSubset<T, IngredienteSucursalFindFirstArgs<ExtArgs>>): Prisma__IngredienteSucursalClient<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IngredienteSucursal that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredienteSucursalFindFirstOrThrowArgs} args - Arguments to find a IngredienteSucursal
+     * @example
+     * // Get one IngredienteSucursal
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IngredienteSucursalFindFirstOrThrowArgs>(args?: SelectSubset<T, IngredienteSucursalFindFirstOrThrowArgs<ExtArgs>>): Prisma__IngredienteSucursalClient<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IngredienteSucursals that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredienteSucursalFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IngredienteSucursals
+     * const ingredienteSucursals = await prisma.ingredienteSucursal.findMany()
+     * 
+     * // Get first 10 IngredienteSucursals
+     * const ingredienteSucursals = await prisma.ingredienteSucursal.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ingredienteSucursalWithIdOnly = await prisma.ingredienteSucursal.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IngredienteSucursalFindManyArgs>(args?: SelectSubset<T, IngredienteSucursalFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IngredienteSucursal.
+     * @param {IngredienteSucursalCreateArgs} args - Arguments to create a IngredienteSucursal.
+     * @example
+     * // Create one IngredienteSucursal
+     * const IngredienteSucursal = await prisma.ingredienteSucursal.create({
+     *   data: {
+     *     // ... data to create a IngredienteSucursal
+     *   }
+     * })
+     * 
+     */
+    create<T extends IngredienteSucursalCreateArgs>(args: SelectSubset<T, IngredienteSucursalCreateArgs<ExtArgs>>): Prisma__IngredienteSucursalClient<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IngredienteSucursals.
+     * @param {IngredienteSucursalCreateManyArgs} args - Arguments to create many IngredienteSucursals.
+     * @example
+     * // Create many IngredienteSucursals
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IngredienteSucursalCreateManyArgs>(args?: SelectSubset<T, IngredienteSucursalCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IngredienteSucursals and returns the data saved in the database.
+     * @param {IngredienteSucursalCreateManyAndReturnArgs} args - Arguments to create many IngredienteSucursals.
+     * @example
+     * // Create many IngredienteSucursals
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IngredienteSucursals and only return the `id`
+     * const ingredienteSucursalWithIdOnly = await prisma.ingredienteSucursal.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IngredienteSucursalCreateManyAndReturnArgs>(args?: SelectSubset<T, IngredienteSucursalCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IngredienteSucursal.
+     * @param {IngredienteSucursalDeleteArgs} args - Arguments to delete one IngredienteSucursal.
+     * @example
+     * // Delete one IngredienteSucursal
+     * const IngredienteSucursal = await prisma.ingredienteSucursal.delete({
+     *   where: {
+     *     // ... filter to delete one IngredienteSucursal
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IngredienteSucursalDeleteArgs>(args: SelectSubset<T, IngredienteSucursalDeleteArgs<ExtArgs>>): Prisma__IngredienteSucursalClient<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IngredienteSucursal.
+     * @param {IngredienteSucursalUpdateArgs} args - Arguments to update one IngredienteSucursal.
+     * @example
+     * // Update one IngredienteSucursal
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IngredienteSucursalUpdateArgs>(args: SelectSubset<T, IngredienteSucursalUpdateArgs<ExtArgs>>): Prisma__IngredienteSucursalClient<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IngredienteSucursals.
+     * @param {IngredienteSucursalDeleteManyArgs} args - Arguments to filter IngredienteSucursals to delete.
+     * @example
+     * // Delete a few IngredienteSucursals
+     * const { count } = await prisma.ingredienteSucursal.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IngredienteSucursalDeleteManyArgs>(args?: SelectSubset<T, IngredienteSucursalDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IngredienteSucursals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredienteSucursalUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IngredienteSucursals
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IngredienteSucursalUpdateManyArgs>(args: SelectSubset<T, IngredienteSucursalUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IngredienteSucursals and returns the data updated in the database.
+     * @param {IngredienteSucursalUpdateManyAndReturnArgs} args - Arguments to update many IngredienteSucursals.
+     * @example
+     * // Update many IngredienteSucursals
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IngredienteSucursals and only return the `id`
+     * const ingredienteSucursalWithIdOnly = await prisma.ingredienteSucursal.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IngredienteSucursalUpdateManyAndReturnArgs>(args: SelectSubset<T, IngredienteSucursalUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IngredienteSucursal.
+     * @param {IngredienteSucursalUpsertArgs} args - Arguments to update or create a IngredienteSucursal.
+     * @example
+     * // Update or create a IngredienteSucursal
+     * const ingredienteSucursal = await prisma.ingredienteSucursal.upsert({
+     *   create: {
+     *     // ... data to create a IngredienteSucursal
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IngredienteSucursal we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IngredienteSucursalUpsertArgs>(args: SelectSubset<T, IngredienteSucursalUpsertArgs<ExtArgs>>): Prisma__IngredienteSucursalClient<$Result.GetResult<Prisma.$IngredienteSucursalPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IngredienteSucursals.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredienteSucursalCountArgs} args - Arguments to filter IngredienteSucursals to count.
+     * @example
+     * // Count the number of IngredienteSucursals
+     * const count = await prisma.ingredienteSucursal.count({
+     *   where: {
+     *     // ... the filter for the IngredienteSucursals we want to count
+     *   }
+     * })
+    **/
+    count<T extends IngredienteSucursalCountArgs>(
+      args?: Subset<T, IngredienteSucursalCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IngredienteSucursalCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IngredienteSucursal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredienteSucursalAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IngredienteSucursalAggregateArgs>(args: Subset<T, IngredienteSucursalAggregateArgs>): Prisma.PrismaPromise<GetIngredienteSucursalAggregateType<T>>
+
+    /**
+     * Group by IngredienteSucursal.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IngredienteSucursalGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IngredienteSucursalGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IngredienteSucursalGroupByArgs['orderBy'] }
+        : { orderBy?: IngredienteSucursalGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IngredienteSucursalGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIngredienteSucursalGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IngredienteSucursal model
+   */
+  readonly fields: IngredienteSucursalFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IngredienteSucursal.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IngredienteSucursalClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ingrediente<T extends IngredienteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, IngredienteDefaultArgs<ExtArgs>>): Prisma__IngredienteClient<$Result.GetResult<Prisma.$IngredientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sucursal<T extends SucursalDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SucursalDefaultArgs<ExtArgs>>): Prisma__SucursalClient<$Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IngredienteSucursal model
+   */
+  interface IngredienteSucursalFieldRefs {
+    readonly id: FieldRef<"IngredienteSucursal", 'String'>
+    readonly ingredienteId: FieldRef<"IngredienteSucursal", 'String'>
+    readonly sucursalId: FieldRef<"IngredienteSucursal", 'String'>
+    readonly stockActual: FieldRef<"IngredienteSucursal", 'Decimal'>
+    readonly stockMinimo: FieldRef<"IngredienteSucursal", 'Decimal'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IngredienteSucursal findUnique
+   */
+  export type IngredienteSucursalFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which IngredienteSucursal to fetch.
+     */
+    where: IngredienteSucursalWhereUniqueInput
+  }
+
+  /**
+   * IngredienteSucursal findUniqueOrThrow
+   */
+  export type IngredienteSucursalFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which IngredienteSucursal to fetch.
+     */
+    where: IngredienteSucursalWhereUniqueInput
+  }
+
+  /**
+   * IngredienteSucursal findFirst
+   */
+  export type IngredienteSucursalFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which IngredienteSucursal to fetch.
+     */
+    where?: IngredienteSucursalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IngredienteSucursals to fetch.
+     */
+    orderBy?: IngredienteSucursalOrderByWithRelationInput | IngredienteSucursalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IngredienteSucursals.
+     */
+    cursor?: IngredienteSucursalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IngredienteSucursals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IngredienteSucursals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IngredienteSucursals.
+     */
+    distinct?: IngredienteSucursalScalarFieldEnum | IngredienteSucursalScalarFieldEnum[]
+  }
+
+  /**
+   * IngredienteSucursal findFirstOrThrow
+   */
+  export type IngredienteSucursalFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which IngredienteSucursal to fetch.
+     */
+    where?: IngredienteSucursalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IngredienteSucursals to fetch.
+     */
+    orderBy?: IngredienteSucursalOrderByWithRelationInput | IngredienteSucursalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IngredienteSucursals.
+     */
+    cursor?: IngredienteSucursalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IngredienteSucursals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IngredienteSucursals.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IngredienteSucursals.
+     */
+    distinct?: IngredienteSucursalScalarFieldEnum | IngredienteSucursalScalarFieldEnum[]
+  }
+
+  /**
+   * IngredienteSucursal findMany
+   */
+  export type IngredienteSucursalFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    /**
+     * Filter, which IngredienteSucursals to fetch.
+     */
+    where?: IngredienteSucursalWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IngredienteSucursals to fetch.
+     */
+    orderBy?: IngredienteSucursalOrderByWithRelationInput | IngredienteSucursalOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IngredienteSucursals.
+     */
+    cursor?: IngredienteSucursalWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IngredienteSucursals from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IngredienteSucursals.
+     */
+    skip?: number
+    distinct?: IngredienteSucursalScalarFieldEnum | IngredienteSucursalScalarFieldEnum[]
+  }
+
+  /**
+   * IngredienteSucursal create
+   */
+  export type IngredienteSucursalCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    /**
+     * The data needed to create a IngredienteSucursal.
+     */
+    data: XOR<IngredienteSucursalCreateInput, IngredienteSucursalUncheckedCreateInput>
+  }
+
+  /**
+   * IngredienteSucursal createMany
+   */
+  export type IngredienteSucursalCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IngredienteSucursals.
+     */
+    data: IngredienteSucursalCreateManyInput | IngredienteSucursalCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IngredienteSucursal createManyAndReturn
+   */
+  export type IngredienteSucursalCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * The data used to create many IngredienteSucursals.
+     */
+    data: IngredienteSucursalCreateManyInput | IngredienteSucursalCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IngredienteSucursal update
+   */
+  export type IngredienteSucursalUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    /**
+     * The data needed to update a IngredienteSucursal.
+     */
+    data: XOR<IngredienteSucursalUpdateInput, IngredienteSucursalUncheckedUpdateInput>
+    /**
+     * Choose, which IngredienteSucursal to update.
+     */
+    where: IngredienteSucursalWhereUniqueInput
+  }
+
+  /**
+   * IngredienteSucursal updateMany
+   */
+  export type IngredienteSucursalUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IngredienteSucursals.
+     */
+    data: XOR<IngredienteSucursalUpdateManyMutationInput, IngredienteSucursalUncheckedUpdateManyInput>
+    /**
+     * Filter which IngredienteSucursals to update
+     */
+    where?: IngredienteSucursalWhereInput
+    /**
+     * Limit how many IngredienteSucursals to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IngredienteSucursal updateManyAndReturn
+   */
+  export type IngredienteSucursalUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * The data used to update IngredienteSucursals.
+     */
+    data: XOR<IngredienteSucursalUpdateManyMutationInput, IngredienteSucursalUncheckedUpdateManyInput>
+    /**
+     * Filter which IngredienteSucursals to update
+     */
+    where?: IngredienteSucursalWhereInput
+    /**
+     * Limit how many IngredienteSucursals to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * IngredienteSucursal upsert
+   */
+  export type IngredienteSucursalUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    /**
+     * The filter to search for the IngredienteSucursal to update in case it exists.
+     */
+    where: IngredienteSucursalWhereUniqueInput
+    /**
+     * In case the IngredienteSucursal found by the `where` argument doesn't exist, create a new IngredienteSucursal with this data.
+     */
+    create: XOR<IngredienteSucursalCreateInput, IngredienteSucursalUncheckedCreateInput>
+    /**
+     * In case the IngredienteSucursal was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IngredienteSucursalUpdateInput, IngredienteSucursalUncheckedUpdateInput>
+  }
+
+  /**
+   * IngredienteSucursal delete
+   */
+  export type IngredienteSucursalDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+    /**
+     * Filter which IngredienteSucursal to delete.
+     */
+    where: IngredienteSucursalWhereUniqueInput
+  }
+
+  /**
+   * IngredienteSucursal deleteMany
+   */
+  export type IngredienteSucursalDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IngredienteSucursals to delete
+     */
+    where?: IngredienteSucursalWhereInput
+    /**
+     * Limit how many IngredienteSucursals to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IngredienteSucursal without action
+   */
+  export type IngredienteSucursalDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IngredienteSucursal
+     */
+    select?: IngredienteSucursalSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IngredienteSucursal
+     */
+    omit?: IngredienteSucursalOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredienteSucursalInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11820,6 +14508,7 @@ export namespace Prisma {
     tipo: 'tipo',
     cantidad: 'cantidad',
     motivo: 'motivo',
+    sucursalId: 'sucursalId',
     createdAt: 'createdAt'
   };
 
@@ -11830,7 +14519,8 @@ export namespace Prisma {
     id: 'id',
     total: 'total',
     fecha: 'fecha',
-    notas: 'notas'
+    notas: 'notas',
+    sucursalId: 'sucursalId'
   };
 
   export type VentaScalarFieldEnum = (typeof VentaScalarFieldEnum)[keyof typeof VentaScalarFieldEnum]
@@ -11850,6 +14540,7 @@ export namespace Prisma {
   export const OrdenCompraScalarFieldEnum: {
     id: 'id',
     estado: 'estado',
+    sucursalId: 'sucursalId',
     createdAt: 'createdAt'
   };
 
@@ -11865,6 +14556,28 @@ export namespace Prisma {
   };
 
   export type OrdenCompraDetalleScalarFieldEnum = (typeof OrdenCompraDetalleScalarFieldEnum)[keyof typeof OrdenCompraDetalleScalarFieldEnum]
+
+
+  export const SucursalScalarFieldEnum: {
+    id: 'id',
+    nombre: 'nombre',
+    direccion: 'direccion',
+    activa: 'activa',
+    createdAt: 'createdAt'
+  };
+
+  export type SucursalScalarFieldEnum = (typeof SucursalScalarFieldEnum)[keyof typeof SucursalScalarFieldEnum]
+
+
+  export const IngredienteSucursalScalarFieldEnum: {
+    id: 'id',
+    ingredienteId: 'ingredienteId',
+    sucursalId: 'sucursalId',
+    stockActual: 'stockActual',
+    stockMinimo: 'stockMinimo'
+  };
+
+  export type IngredienteSucursalScalarFieldEnum = (typeof IngredienteSucursalScalarFieldEnum)[keyof typeof IngredienteSucursalScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12127,6 +14840,7 @@ export namespace Prisma {
     recetas?: RecetaItemListRelationFilter
     movimientos?: MovimientoInventarioListRelationFilter
     ordenItems?: OrdenCompraDetalleListRelationFilter
+    stockSucursales?: IngredienteSucursalListRelationFilter
   }
 
   export type IngredienteOrderByWithRelationInput = {
@@ -12140,6 +14854,7 @@ export namespace Prisma {
     recetas?: RecetaItemOrderByRelationAggregateInput
     movimientos?: MovimientoInventarioOrderByRelationAggregateInput
     ordenItems?: OrdenCompraDetalleOrderByRelationAggregateInput
+    stockSucursales?: IngredienteSucursalOrderByRelationAggregateInput
   }
 
   export type IngredienteWhereUniqueInput = Prisma.AtLeast<{
@@ -12156,6 +14871,7 @@ export namespace Prisma {
     recetas?: RecetaItemListRelationFilter
     movimientos?: MovimientoInventarioListRelationFilter
     ordenItems?: OrdenCompraDetalleListRelationFilter
+    stockSucursales?: IngredienteSucursalListRelationFilter
   }, "id">
 
   export type IngredienteOrderByWithAggregationInput = {
@@ -12251,8 +14967,10 @@ export namespace Prisma {
     tipo?: StringFilter<"MovimientoInventario"> | string
     cantidad?: DecimalFilter<"MovimientoInventario"> | Decimal | DecimalJsLike | number | string
     motivo?: StringNullableFilter<"MovimientoInventario"> | string | null
+    sucursalId?: StringNullableFilter<"MovimientoInventario"> | string | null
     createdAt?: DateTimeFilter<"MovimientoInventario"> | Date | string
     ingrediente?: XOR<IngredienteScalarRelationFilter, IngredienteWhereInput>
+    sucursal?: XOR<SucursalNullableScalarRelationFilter, SucursalWhereInput> | null
   }
 
   export type MovimientoInventarioOrderByWithRelationInput = {
@@ -12261,8 +14979,10 @@ export namespace Prisma {
     tipo?: SortOrder
     cantidad?: SortOrder
     motivo?: SortOrderInput | SortOrder
+    sucursalId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     ingrediente?: IngredienteOrderByWithRelationInput
+    sucursal?: SucursalOrderByWithRelationInput
   }
 
   export type MovimientoInventarioWhereUniqueInput = Prisma.AtLeast<{
@@ -12274,8 +14994,10 @@ export namespace Prisma {
     tipo?: StringFilter<"MovimientoInventario"> | string
     cantidad?: DecimalFilter<"MovimientoInventario"> | Decimal | DecimalJsLike | number | string
     motivo?: StringNullableFilter<"MovimientoInventario"> | string | null
+    sucursalId?: StringNullableFilter<"MovimientoInventario"> | string | null
     createdAt?: DateTimeFilter<"MovimientoInventario"> | Date | string
     ingrediente?: XOR<IngredienteScalarRelationFilter, IngredienteWhereInput>
+    sucursal?: XOR<SucursalNullableScalarRelationFilter, SucursalWhereInput> | null
   }, "id">
 
   export type MovimientoInventarioOrderByWithAggregationInput = {
@@ -12284,6 +15006,7 @@ export namespace Prisma {
     tipo?: SortOrder
     cantidad?: SortOrder
     motivo?: SortOrderInput | SortOrder
+    sucursalId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: MovimientoInventarioCountOrderByAggregateInput
     _avg?: MovimientoInventarioAvgOrderByAggregateInput
@@ -12301,6 +15024,7 @@ export namespace Prisma {
     tipo?: StringWithAggregatesFilter<"MovimientoInventario"> | string
     cantidad?: DecimalWithAggregatesFilter<"MovimientoInventario"> | Decimal | DecimalJsLike | number | string
     motivo?: StringNullableWithAggregatesFilter<"MovimientoInventario"> | string | null
+    sucursalId?: StringNullableWithAggregatesFilter<"MovimientoInventario"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"MovimientoInventario"> | Date | string
   }
 
@@ -12312,6 +15036,8 @@ export namespace Prisma {
     total?: DecimalFilter<"Venta"> | Decimal | DecimalJsLike | number | string
     fecha?: DateTimeFilter<"Venta"> | Date | string
     notas?: StringNullableFilter<"Venta"> | string | null
+    sucursalId?: StringNullableFilter<"Venta"> | string | null
+    sucursal?: XOR<SucursalNullableScalarRelationFilter, SucursalWhereInput> | null
     detalles?: VentaDetalleListRelationFilter
   }
 
@@ -12320,6 +15046,8 @@ export namespace Prisma {
     total?: SortOrder
     fecha?: SortOrder
     notas?: SortOrderInput | SortOrder
+    sucursalId?: SortOrderInput | SortOrder
+    sucursal?: SucursalOrderByWithRelationInput
     detalles?: VentaDetalleOrderByRelationAggregateInput
   }
 
@@ -12331,6 +15059,8 @@ export namespace Prisma {
     total?: DecimalFilter<"Venta"> | Decimal | DecimalJsLike | number | string
     fecha?: DateTimeFilter<"Venta"> | Date | string
     notas?: StringNullableFilter<"Venta"> | string | null
+    sucursalId?: StringNullableFilter<"Venta"> | string | null
+    sucursal?: XOR<SucursalNullableScalarRelationFilter, SucursalWhereInput> | null
     detalles?: VentaDetalleListRelationFilter
   }, "id">
 
@@ -12339,6 +15069,7 @@ export namespace Prisma {
     total?: SortOrder
     fecha?: SortOrder
     notas?: SortOrderInput | SortOrder
+    sucursalId?: SortOrderInput | SortOrder
     _count?: VentaCountOrderByAggregateInput
     _avg?: VentaAvgOrderByAggregateInput
     _max?: VentaMaxOrderByAggregateInput
@@ -12354,6 +15085,7 @@ export namespace Prisma {
     total?: DecimalWithAggregatesFilter<"Venta"> | Decimal | DecimalJsLike | number | string
     fecha?: DateTimeWithAggregatesFilter<"Venta"> | Date | string
     notas?: StringNullableWithAggregatesFilter<"Venta"> | string | null
+    sucursalId?: StringNullableWithAggregatesFilter<"Venta"> | string | null
   }
 
   export type VentaDetalleWhereInput = {
@@ -12422,14 +15154,18 @@ export namespace Prisma {
     NOT?: OrdenCompraWhereInput | OrdenCompraWhereInput[]
     id?: StringFilter<"OrdenCompra"> | string
     estado?: StringFilter<"OrdenCompra"> | string
+    sucursalId?: StringNullableFilter<"OrdenCompra"> | string | null
     createdAt?: DateTimeFilter<"OrdenCompra"> | Date | string
+    sucursal?: XOR<SucursalNullableScalarRelationFilter, SucursalWhereInput> | null
     detalles?: OrdenCompraDetalleListRelationFilter
   }
 
   export type OrdenCompraOrderByWithRelationInput = {
     id?: SortOrder
     estado?: SortOrder
+    sucursalId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    sucursal?: SucursalOrderByWithRelationInput
     detalles?: OrdenCompraDetalleOrderByRelationAggregateInput
   }
 
@@ -12439,13 +15175,16 @@ export namespace Prisma {
     OR?: OrdenCompraWhereInput[]
     NOT?: OrdenCompraWhereInput | OrdenCompraWhereInput[]
     estado?: StringFilter<"OrdenCompra"> | string
+    sucursalId?: StringNullableFilter<"OrdenCompra"> | string | null
     createdAt?: DateTimeFilter<"OrdenCompra"> | Date | string
+    sucursal?: XOR<SucursalNullableScalarRelationFilter, SucursalWhereInput> | null
     detalles?: OrdenCompraDetalleListRelationFilter
   }, "id">
 
   export type OrdenCompraOrderByWithAggregationInput = {
     id?: SortOrder
     estado?: SortOrder
+    sucursalId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: OrdenCompraCountOrderByAggregateInput
     _max?: OrdenCompraMaxOrderByAggregateInput
@@ -12458,6 +15197,7 @@ export namespace Prisma {
     NOT?: OrdenCompraScalarWhereWithAggregatesInput | OrdenCompraScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"OrdenCompra"> | string
     estado?: StringWithAggregatesFilter<"OrdenCompra"> | string
+    sucursalId?: StringNullableWithAggregatesFilter<"OrdenCompra"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"OrdenCompra"> | Date | string
   }
 
@@ -12519,6 +15259,131 @@ export namespace Prisma {
     ingredienteId?: StringWithAggregatesFilter<"OrdenCompraDetalle"> | string
     cantidadSugerida?: DecimalWithAggregatesFilter<"OrdenCompraDetalle"> | Decimal | DecimalJsLike | number | string
     cantidadFinal?: DecimalNullableWithAggregatesFilter<"OrdenCompraDetalle"> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type SucursalWhereInput = {
+    AND?: SucursalWhereInput | SucursalWhereInput[]
+    OR?: SucursalWhereInput[]
+    NOT?: SucursalWhereInput | SucursalWhereInput[]
+    id?: StringFilter<"Sucursal"> | string
+    nombre?: StringFilter<"Sucursal"> | string
+    direccion?: StringNullableFilter<"Sucursal"> | string | null
+    activa?: BoolFilter<"Sucursal"> | boolean
+    createdAt?: DateTimeFilter<"Sucursal"> | Date | string
+    ventas?: VentaListRelationFilter
+    movimientos?: MovimientoInventarioListRelationFilter
+    ordenesCompra?: OrdenCompraListRelationFilter
+    stockIngredientes?: IngredienteSucursalListRelationFilter
+  }
+
+  export type SucursalOrderByWithRelationInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    direccion?: SortOrderInput | SortOrder
+    activa?: SortOrder
+    createdAt?: SortOrder
+    ventas?: VentaOrderByRelationAggregateInput
+    movimientos?: MovimientoInventarioOrderByRelationAggregateInput
+    ordenesCompra?: OrdenCompraOrderByRelationAggregateInput
+    stockIngredientes?: IngredienteSucursalOrderByRelationAggregateInput
+  }
+
+  export type SucursalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SucursalWhereInput | SucursalWhereInput[]
+    OR?: SucursalWhereInput[]
+    NOT?: SucursalWhereInput | SucursalWhereInput[]
+    nombre?: StringFilter<"Sucursal"> | string
+    direccion?: StringNullableFilter<"Sucursal"> | string | null
+    activa?: BoolFilter<"Sucursal"> | boolean
+    createdAt?: DateTimeFilter<"Sucursal"> | Date | string
+    ventas?: VentaListRelationFilter
+    movimientos?: MovimientoInventarioListRelationFilter
+    ordenesCompra?: OrdenCompraListRelationFilter
+    stockIngredientes?: IngredienteSucursalListRelationFilter
+  }, "id">
+
+  export type SucursalOrderByWithAggregationInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    direccion?: SortOrderInput | SortOrder
+    activa?: SortOrder
+    createdAt?: SortOrder
+    _count?: SucursalCountOrderByAggregateInput
+    _max?: SucursalMaxOrderByAggregateInput
+    _min?: SucursalMinOrderByAggregateInput
+  }
+
+  export type SucursalScalarWhereWithAggregatesInput = {
+    AND?: SucursalScalarWhereWithAggregatesInput | SucursalScalarWhereWithAggregatesInput[]
+    OR?: SucursalScalarWhereWithAggregatesInput[]
+    NOT?: SucursalScalarWhereWithAggregatesInput | SucursalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Sucursal"> | string
+    nombre?: StringWithAggregatesFilter<"Sucursal"> | string
+    direccion?: StringNullableWithAggregatesFilter<"Sucursal"> | string | null
+    activa?: BoolWithAggregatesFilter<"Sucursal"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Sucursal"> | Date | string
+  }
+
+  export type IngredienteSucursalWhereInput = {
+    AND?: IngredienteSucursalWhereInput | IngredienteSucursalWhereInput[]
+    OR?: IngredienteSucursalWhereInput[]
+    NOT?: IngredienteSucursalWhereInput | IngredienteSucursalWhereInput[]
+    id?: StringFilter<"IngredienteSucursal"> | string
+    ingredienteId?: StringFilter<"IngredienteSucursal"> | string
+    sucursalId?: StringFilter<"IngredienteSucursal"> | string
+    stockActual?: DecimalFilter<"IngredienteSucursal"> | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFilter<"IngredienteSucursal"> | Decimal | DecimalJsLike | number | string
+    ingrediente?: XOR<IngredienteScalarRelationFilter, IngredienteWhereInput>
+    sucursal?: XOR<SucursalScalarRelationFilter, SucursalWhereInput>
+  }
+
+  export type IngredienteSucursalOrderByWithRelationInput = {
+    id?: SortOrder
+    ingredienteId?: SortOrder
+    sucursalId?: SortOrder
+    stockActual?: SortOrder
+    stockMinimo?: SortOrder
+    ingrediente?: IngredienteOrderByWithRelationInput
+    sucursal?: SucursalOrderByWithRelationInput
+  }
+
+  export type IngredienteSucursalWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    ingredienteId_sucursalId?: IngredienteSucursalIngredienteIdSucursalIdCompoundUniqueInput
+    AND?: IngredienteSucursalWhereInput | IngredienteSucursalWhereInput[]
+    OR?: IngredienteSucursalWhereInput[]
+    NOT?: IngredienteSucursalWhereInput | IngredienteSucursalWhereInput[]
+    ingredienteId?: StringFilter<"IngredienteSucursal"> | string
+    sucursalId?: StringFilter<"IngredienteSucursal"> | string
+    stockActual?: DecimalFilter<"IngredienteSucursal"> | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFilter<"IngredienteSucursal"> | Decimal | DecimalJsLike | number | string
+    ingrediente?: XOR<IngredienteScalarRelationFilter, IngredienteWhereInput>
+    sucursal?: XOR<SucursalScalarRelationFilter, SucursalWhereInput>
+  }, "id" | "ingredienteId_sucursalId">
+
+  export type IngredienteSucursalOrderByWithAggregationInput = {
+    id?: SortOrder
+    ingredienteId?: SortOrder
+    sucursalId?: SortOrder
+    stockActual?: SortOrder
+    stockMinimo?: SortOrder
+    _count?: IngredienteSucursalCountOrderByAggregateInput
+    _avg?: IngredienteSucursalAvgOrderByAggregateInput
+    _max?: IngredienteSucursalMaxOrderByAggregateInput
+    _min?: IngredienteSucursalMinOrderByAggregateInput
+    _sum?: IngredienteSucursalSumOrderByAggregateInput
+  }
+
+  export type IngredienteSucursalScalarWhereWithAggregatesInput = {
+    AND?: IngredienteSucursalScalarWhereWithAggregatesInput | IngredienteSucursalScalarWhereWithAggregatesInput[]
+    OR?: IngredienteSucursalScalarWhereWithAggregatesInput[]
+    NOT?: IngredienteSucursalScalarWhereWithAggregatesInput | IngredienteSucursalScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IngredienteSucursal"> | string
+    ingredienteId?: StringWithAggregatesFilter<"IngredienteSucursal"> | string
+    sucursalId?: StringWithAggregatesFilter<"IngredienteSucursal"> | string
+    stockActual?: DecimalWithAggregatesFilter<"IngredienteSucursal"> | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalWithAggregatesFilter<"IngredienteSucursal"> | Decimal | DecimalJsLike | number | string
   }
 
   export type CategoriaCreateInput = {
@@ -12662,6 +15527,7 @@ export namespace Prisma {
     recetas?: RecetaItemCreateNestedManyWithoutIngredienteInput
     movimientos?: MovimientoInventarioCreateNestedManyWithoutIngredienteInput
     ordenItems?: OrdenCompraDetalleCreateNestedManyWithoutIngredienteInput
+    stockSucursales?: IngredienteSucursalCreateNestedManyWithoutIngredienteInput
   }
 
   export type IngredienteUncheckedCreateInput = {
@@ -12675,6 +15541,7 @@ export namespace Prisma {
     recetas?: RecetaItemUncheckedCreateNestedManyWithoutIngredienteInput
     movimientos?: MovimientoInventarioUncheckedCreateNestedManyWithoutIngredienteInput
     ordenItems?: OrdenCompraDetalleUncheckedCreateNestedManyWithoutIngredienteInput
+    stockSucursales?: IngredienteSucursalUncheckedCreateNestedManyWithoutIngredienteInput
   }
 
   export type IngredienteUpdateInput = {
@@ -12688,6 +15555,7 @@ export namespace Prisma {
     recetas?: RecetaItemUpdateManyWithoutIngredienteNestedInput
     movimientos?: MovimientoInventarioUpdateManyWithoutIngredienteNestedInput
     ordenItems?: OrdenCompraDetalleUpdateManyWithoutIngredienteNestedInput
+    stockSucursales?: IngredienteSucursalUpdateManyWithoutIngredienteNestedInput
   }
 
   export type IngredienteUncheckedUpdateInput = {
@@ -12701,6 +15569,7 @@ export namespace Prisma {
     recetas?: RecetaItemUncheckedUpdateManyWithoutIngredienteNestedInput
     movimientos?: MovimientoInventarioUncheckedUpdateManyWithoutIngredienteNestedInput
     ordenItems?: OrdenCompraDetalleUncheckedUpdateManyWithoutIngredienteNestedInput
+    stockSucursales?: IngredienteSucursalUncheckedUpdateManyWithoutIngredienteNestedInput
   }
 
   export type IngredienteCreateManyInput = {
@@ -12787,6 +15656,7 @@ export namespace Prisma {
     motivo?: string | null
     createdAt?: Date | string
     ingrediente: IngredienteCreateNestedOneWithoutMovimientosInput
+    sucursal?: SucursalCreateNestedOneWithoutMovimientosInput
   }
 
   export type MovimientoInventarioUncheckedCreateInput = {
@@ -12795,6 +15665,7 @@ export namespace Prisma {
     tipo: string
     cantidad: Decimal | DecimalJsLike | number | string
     motivo?: string | null
+    sucursalId?: string | null
     createdAt?: Date | string
   }
 
@@ -12805,6 +15676,7 @@ export namespace Prisma {
     motivo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingrediente?: IngredienteUpdateOneRequiredWithoutMovimientosNestedInput
+    sucursal?: SucursalUpdateOneWithoutMovimientosNestedInput
   }
 
   export type MovimientoInventarioUncheckedUpdateInput = {
@@ -12813,6 +15685,7 @@ export namespace Prisma {
     tipo?: StringFieldUpdateOperationsInput | string
     cantidad?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motivo?: NullableStringFieldUpdateOperationsInput | string | null
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12822,6 +15695,7 @@ export namespace Prisma {
     tipo: string
     cantidad: Decimal | DecimalJsLike | number | string
     motivo?: string | null
+    sucursalId?: string | null
     createdAt?: Date | string
   }
 
@@ -12839,6 +15713,7 @@ export namespace Prisma {
     tipo?: StringFieldUpdateOperationsInput | string
     cantidad?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motivo?: NullableStringFieldUpdateOperationsInput | string | null
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12847,6 +15722,7 @@ export namespace Prisma {
     total: Decimal | DecimalJsLike | number | string
     fecha?: Date | string
     notas?: string | null
+    sucursal?: SucursalCreateNestedOneWithoutVentasInput
     detalles?: VentaDetalleCreateNestedManyWithoutVentaInput
   }
 
@@ -12855,6 +15731,7 @@ export namespace Prisma {
     total: Decimal | DecimalJsLike | number | string
     fecha?: Date | string
     notas?: string | null
+    sucursalId?: string | null
     detalles?: VentaDetalleUncheckedCreateNestedManyWithoutVentaInput
   }
 
@@ -12863,6 +15740,7 @@ export namespace Prisma {
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     notas?: NullableStringFieldUpdateOperationsInput | string | null
+    sucursal?: SucursalUpdateOneWithoutVentasNestedInput
     detalles?: VentaDetalleUpdateManyWithoutVentaNestedInput
   }
 
@@ -12871,6 +15749,7 @@ export namespace Prisma {
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     notas?: NullableStringFieldUpdateOperationsInput | string | null
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
     detalles?: VentaDetalleUncheckedUpdateManyWithoutVentaNestedInput
   }
 
@@ -12879,6 +15758,7 @@ export namespace Prisma {
     total: Decimal | DecimalJsLike | number | string
     fecha?: Date | string
     notas?: string | null
+    sucursalId?: string | null
   }
 
   export type VentaUpdateManyMutationInput = {
@@ -12893,6 +15773,7 @@ export namespace Prisma {
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     notas?: NullableStringFieldUpdateOperationsInput | string | null
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VentaDetalleCreateInput = {
@@ -12953,12 +15834,14 @@ export namespace Prisma {
     id?: string
     estado?: string
     createdAt?: Date | string
+    sucursal?: SucursalCreateNestedOneWithoutOrdenesCompraInput
     detalles?: OrdenCompraDetalleCreateNestedManyWithoutOrdenInput
   }
 
   export type OrdenCompraUncheckedCreateInput = {
     id?: string
     estado?: string
+    sucursalId?: string | null
     createdAt?: Date | string
     detalles?: OrdenCompraDetalleUncheckedCreateNestedManyWithoutOrdenInput
   }
@@ -12967,12 +15850,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     estado?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sucursal?: SucursalUpdateOneWithoutOrdenesCompraNestedInput
     detalles?: OrdenCompraDetalleUpdateManyWithoutOrdenNestedInput
   }
 
   export type OrdenCompraUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     estado?: StringFieldUpdateOperationsInput | string
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     detalles?: OrdenCompraDetalleUncheckedUpdateManyWithoutOrdenNestedInput
   }
@@ -12980,6 +15865,7 @@ export namespace Prisma {
   export type OrdenCompraCreateManyInput = {
     id?: string
     estado?: string
+    sucursalId?: string | null
     createdAt?: Date | string
   }
 
@@ -12992,6 +15878,7 @@ export namespace Prisma {
   export type OrdenCompraUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     estado?: StringFieldUpdateOperationsInput | string
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13047,6 +15934,132 @@ export namespace Prisma {
     ingredienteId?: StringFieldUpdateOperationsInput | string
     cantidadSugerida?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     cantidadFinal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type SucursalCreateInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    ventas?: VentaCreateNestedManyWithoutSucursalInput
+    movimientos?: MovimientoInventarioCreateNestedManyWithoutSucursalInput
+    ordenesCompra?: OrdenCompraCreateNestedManyWithoutSucursalInput
+    stockIngredientes?: IngredienteSucursalCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalUncheckedCreateInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    ventas?: VentaUncheckedCreateNestedManyWithoutSucursalInput
+    movimientos?: MovimientoInventarioUncheckedCreateNestedManyWithoutSucursalInput
+    ordenesCompra?: OrdenCompraUncheckedCreateNestedManyWithoutSucursalInput
+    stockIngredientes?: IngredienteSucursalUncheckedCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ventas?: VentaUpdateManyWithoutSucursalNestedInput
+    movimientos?: MovimientoInventarioUpdateManyWithoutSucursalNestedInput
+    ordenesCompra?: OrdenCompraUpdateManyWithoutSucursalNestedInput
+    stockIngredientes?: IngredienteSucursalUpdateManyWithoutSucursalNestedInput
+  }
+
+  export type SucursalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ventas?: VentaUncheckedUpdateManyWithoutSucursalNestedInput
+    movimientos?: MovimientoInventarioUncheckedUpdateManyWithoutSucursalNestedInput
+    ordenesCompra?: OrdenCompraUncheckedUpdateManyWithoutSucursalNestedInput
+    stockIngredientes?: IngredienteSucursalUncheckedUpdateManyWithoutSucursalNestedInput
+  }
+
+  export type SucursalCreateManyInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+  }
+
+  export type SucursalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SucursalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IngredienteSucursalCreateInput = {
+    id?: string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+    ingrediente: IngredienteCreateNestedOneWithoutStockSucursalesInput
+    sucursal: SucursalCreateNestedOneWithoutStockIngredientesInput
+  }
+
+  export type IngredienteSucursalUncheckedCreateInput = {
+    id?: string
+    ingredienteId: string
+    sucursalId: string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type IngredienteSucursalUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ingrediente?: IngredienteUpdateOneRequiredWithoutStockSucursalesNestedInput
+    sucursal?: SucursalUpdateOneRequiredWithoutStockIngredientesNestedInput
+  }
+
+  export type IngredienteSucursalUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ingredienteId?: StringFieldUpdateOperationsInput | string
+    sucursalId?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type IngredienteSucursalCreateManyInput = {
+    id?: string
+    ingredienteId: string
+    sucursalId: string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type IngredienteSucursalUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type IngredienteSucursalUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ingredienteId?: StringFieldUpdateOperationsInput | string
+    sucursalId?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -13298,11 +16311,21 @@ export namespace Prisma {
     none?: OrdenCompraDetalleWhereInput
   }
 
+  export type IngredienteSucursalListRelationFilter = {
+    every?: IngredienteSucursalWhereInput
+    some?: IngredienteSucursalWhereInput
+    none?: IngredienteSucursalWhereInput
+  }
+
   export type MovimientoInventarioOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type OrdenCompraDetalleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IngredienteSucursalOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13402,12 +16425,18 @@ export namespace Prisma {
     cantidad?: SortOrder
   }
 
+  export type SucursalNullableScalarRelationFilter = {
+    is?: SucursalWhereInput | null
+    isNot?: SucursalWhereInput | null
+  }
+
   export type MovimientoInventarioCountOrderByAggregateInput = {
     id?: SortOrder
     ingredienteId?: SortOrder
     tipo?: SortOrder
     cantidad?: SortOrder
     motivo?: SortOrder
+    sucursalId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -13421,6 +16450,7 @@ export namespace Prisma {
     tipo?: SortOrder
     cantidad?: SortOrder
     motivo?: SortOrder
+    sucursalId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -13430,6 +16460,7 @@ export namespace Prisma {
     tipo?: SortOrder
     cantidad?: SortOrder
     motivo?: SortOrder
+    sucursalId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -13442,6 +16473,7 @@ export namespace Prisma {
     total?: SortOrder
     fecha?: SortOrder
     notas?: SortOrder
+    sucursalId?: SortOrder
   }
 
   export type VentaAvgOrderByAggregateInput = {
@@ -13453,6 +16485,7 @@ export namespace Prisma {
     total?: SortOrder
     fecha?: SortOrder
     notas?: SortOrder
+    sucursalId?: SortOrder
   }
 
   export type VentaMinOrderByAggregateInput = {
@@ -13460,6 +16493,7 @@ export namespace Prisma {
     total?: SortOrder
     fecha?: SortOrder
     notas?: SortOrder
+    sucursalId?: SortOrder
   }
 
   export type VentaSumOrderByAggregateInput = {
@@ -13535,18 +16569,21 @@ export namespace Prisma {
   export type OrdenCompraCountOrderByAggregateInput = {
     id?: SortOrder
     estado?: SortOrder
+    sucursalId?: SortOrder
     createdAt?: SortOrder
   }
 
   export type OrdenCompraMaxOrderByAggregateInput = {
     id?: SortOrder
     estado?: SortOrder
+    sucursalId?: SortOrder
     createdAt?: SortOrder
   }
 
   export type OrdenCompraMinOrderByAggregateInput = {
     id?: SortOrder
     estado?: SortOrder
+    sucursalId?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -13614,6 +16651,94 @@ export namespace Prisma {
     _sum?: NestedDecimalNullableFilter<$PrismaModel>
     _min?: NestedDecimalNullableFilter<$PrismaModel>
     _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type VentaListRelationFilter = {
+    every?: VentaWhereInput
+    some?: VentaWhereInput
+    none?: VentaWhereInput
+  }
+
+  export type OrdenCompraListRelationFilter = {
+    every?: OrdenCompraWhereInput
+    some?: OrdenCompraWhereInput
+    none?: OrdenCompraWhereInput
+  }
+
+  export type VentaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OrdenCompraOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SucursalCountOrderByAggregateInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    direccion?: SortOrder
+    activa?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SucursalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    direccion?: SortOrder
+    activa?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SucursalMinOrderByAggregateInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    direccion?: SortOrder
+    activa?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type SucursalScalarRelationFilter = {
+    is?: SucursalWhereInput
+    isNot?: SucursalWhereInput
+  }
+
+  export type IngredienteSucursalIngredienteIdSucursalIdCompoundUniqueInput = {
+    ingredienteId: string
+    sucursalId: string
+  }
+
+  export type IngredienteSucursalCountOrderByAggregateInput = {
+    id?: SortOrder
+    ingredienteId?: SortOrder
+    sucursalId?: SortOrder
+    stockActual?: SortOrder
+    stockMinimo?: SortOrder
+  }
+
+  export type IngredienteSucursalAvgOrderByAggregateInput = {
+    stockActual?: SortOrder
+    stockMinimo?: SortOrder
+  }
+
+  export type IngredienteSucursalMaxOrderByAggregateInput = {
+    id?: SortOrder
+    ingredienteId?: SortOrder
+    sucursalId?: SortOrder
+    stockActual?: SortOrder
+    stockMinimo?: SortOrder
+  }
+
+  export type IngredienteSucursalMinOrderByAggregateInput = {
+    id?: SortOrder
+    ingredienteId?: SortOrder
+    sucursalId?: SortOrder
+    stockActual?: SortOrder
+    stockMinimo?: SortOrder
+  }
+
+  export type IngredienteSucursalSumOrderByAggregateInput = {
+    stockActual?: SortOrder
+    stockMinimo?: SortOrder
   }
 
   export type PlatoCreateNestedManyWithoutCategoriaInput = {
@@ -13801,6 +16926,13 @@ export namespace Prisma {
     connect?: OrdenCompraDetalleWhereUniqueInput | OrdenCompraDetalleWhereUniqueInput[]
   }
 
+  export type IngredienteSucursalCreateNestedManyWithoutIngredienteInput = {
+    create?: XOR<IngredienteSucursalCreateWithoutIngredienteInput, IngredienteSucursalUncheckedCreateWithoutIngredienteInput> | IngredienteSucursalCreateWithoutIngredienteInput[] | IngredienteSucursalUncheckedCreateWithoutIngredienteInput[]
+    connectOrCreate?: IngredienteSucursalCreateOrConnectWithoutIngredienteInput | IngredienteSucursalCreateOrConnectWithoutIngredienteInput[]
+    createMany?: IngredienteSucursalCreateManyIngredienteInputEnvelope
+    connect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+  }
+
   export type RecetaItemUncheckedCreateNestedManyWithoutIngredienteInput = {
     create?: XOR<RecetaItemCreateWithoutIngredienteInput, RecetaItemUncheckedCreateWithoutIngredienteInput> | RecetaItemCreateWithoutIngredienteInput[] | RecetaItemUncheckedCreateWithoutIngredienteInput[]
     connectOrCreate?: RecetaItemCreateOrConnectWithoutIngredienteInput | RecetaItemCreateOrConnectWithoutIngredienteInput[]
@@ -13820,6 +16952,13 @@ export namespace Prisma {
     connectOrCreate?: OrdenCompraDetalleCreateOrConnectWithoutIngredienteInput | OrdenCompraDetalleCreateOrConnectWithoutIngredienteInput[]
     createMany?: OrdenCompraDetalleCreateManyIngredienteInputEnvelope
     connect?: OrdenCompraDetalleWhereUniqueInput | OrdenCompraDetalleWhereUniqueInput[]
+  }
+
+  export type IngredienteSucursalUncheckedCreateNestedManyWithoutIngredienteInput = {
+    create?: XOR<IngredienteSucursalCreateWithoutIngredienteInput, IngredienteSucursalUncheckedCreateWithoutIngredienteInput> | IngredienteSucursalCreateWithoutIngredienteInput[] | IngredienteSucursalUncheckedCreateWithoutIngredienteInput[]
+    connectOrCreate?: IngredienteSucursalCreateOrConnectWithoutIngredienteInput | IngredienteSucursalCreateOrConnectWithoutIngredienteInput[]
+    createMany?: IngredienteSucursalCreateManyIngredienteInputEnvelope
+    connect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
   }
 
   export type EnumUnidadMedidaFieldUpdateOperationsInput = {
@@ -13868,6 +17007,20 @@ export namespace Prisma {
     deleteMany?: OrdenCompraDetalleScalarWhereInput | OrdenCompraDetalleScalarWhereInput[]
   }
 
+  export type IngredienteSucursalUpdateManyWithoutIngredienteNestedInput = {
+    create?: XOR<IngredienteSucursalCreateWithoutIngredienteInput, IngredienteSucursalUncheckedCreateWithoutIngredienteInput> | IngredienteSucursalCreateWithoutIngredienteInput[] | IngredienteSucursalUncheckedCreateWithoutIngredienteInput[]
+    connectOrCreate?: IngredienteSucursalCreateOrConnectWithoutIngredienteInput | IngredienteSucursalCreateOrConnectWithoutIngredienteInput[]
+    upsert?: IngredienteSucursalUpsertWithWhereUniqueWithoutIngredienteInput | IngredienteSucursalUpsertWithWhereUniqueWithoutIngredienteInput[]
+    createMany?: IngredienteSucursalCreateManyIngredienteInputEnvelope
+    set?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    disconnect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    delete?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    connect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    update?: IngredienteSucursalUpdateWithWhereUniqueWithoutIngredienteInput | IngredienteSucursalUpdateWithWhereUniqueWithoutIngredienteInput[]
+    updateMany?: IngredienteSucursalUpdateManyWithWhereWithoutIngredienteInput | IngredienteSucursalUpdateManyWithWhereWithoutIngredienteInput[]
+    deleteMany?: IngredienteSucursalScalarWhereInput | IngredienteSucursalScalarWhereInput[]
+  }
+
   export type RecetaItemUncheckedUpdateManyWithoutIngredienteNestedInput = {
     create?: XOR<RecetaItemCreateWithoutIngredienteInput, RecetaItemUncheckedCreateWithoutIngredienteInput> | RecetaItemCreateWithoutIngredienteInput[] | RecetaItemUncheckedCreateWithoutIngredienteInput[]
     connectOrCreate?: RecetaItemCreateOrConnectWithoutIngredienteInput | RecetaItemCreateOrConnectWithoutIngredienteInput[]
@@ -13910,6 +17063,20 @@ export namespace Prisma {
     deleteMany?: OrdenCompraDetalleScalarWhereInput | OrdenCompraDetalleScalarWhereInput[]
   }
 
+  export type IngredienteSucursalUncheckedUpdateManyWithoutIngredienteNestedInput = {
+    create?: XOR<IngredienteSucursalCreateWithoutIngredienteInput, IngredienteSucursalUncheckedCreateWithoutIngredienteInput> | IngredienteSucursalCreateWithoutIngredienteInput[] | IngredienteSucursalUncheckedCreateWithoutIngredienteInput[]
+    connectOrCreate?: IngredienteSucursalCreateOrConnectWithoutIngredienteInput | IngredienteSucursalCreateOrConnectWithoutIngredienteInput[]
+    upsert?: IngredienteSucursalUpsertWithWhereUniqueWithoutIngredienteInput | IngredienteSucursalUpsertWithWhereUniqueWithoutIngredienteInput[]
+    createMany?: IngredienteSucursalCreateManyIngredienteInputEnvelope
+    set?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    disconnect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    delete?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    connect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    update?: IngredienteSucursalUpdateWithWhereUniqueWithoutIngredienteInput | IngredienteSucursalUpdateWithWhereUniqueWithoutIngredienteInput[]
+    updateMany?: IngredienteSucursalUpdateManyWithWhereWithoutIngredienteInput | IngredienteSucursalUpdateManyWithWhereWithoutIngredienteInput[]
+    deleteMany?: IngredienteSucursalScalarWhereInput | IngredienteSucursalScalarWhereInput[]
+  }
+
   export type PlatoCreateNestedOneWithoutRecetaInput = {
     create?: XOR<PlatoCreateWithoutRecetaInput, PlatoUncheckedCreateWithoutRecetaInput>
     connectOrCreate?: PlatoCreateOrConnectWithoutRecetaInput
@@ -13944,12 +17111,34 @@ export namespace Prisma {
     connect?: IngredienteWhereUniqueInput
   }
 
+  export type SucursalCreateNestedOneWithoutMovimientosInput = {
+    create?: XOR<SucursalCreateWithoutMovimientosInput, SucursalUncheckedCreateWithoutMovimientosInput>
+    connectOrCreate?: SucursalCreateOrConnectWithoutMovimientosInput
+    connect?: SucursalWhereUniqueInput
+  }
+
   export type IngredienteUpdateOneRequiredWithoutMovimientosNestedInput = {
     create?: XOR<IngredienteCreateWithoutMovimientosInput, IngredienteUncheckedCreateWithoutMovimientosInput>
     connectOrCreate?: IngredienteCreateOrConnectWithoutMovimientosInput
     upsert?: IngredienteUpsertWithoutMovimientosInput
     connect?: IngredienteWhereUniqueInput
     update?: XOR<XOR<IngredienteUpdateToOneWithWhereWithoutMovimientosInput, IngredienteUpdateWithoutMovimientosInput>, IngredienteUncheckedUpdateWithoutMovimientosInput>
+  }
+
+  export type SucursalUpdateOneWithoutMovimientosNestedInput = {
+    create?: XOR<SucursalCreateWithoutMovimientosInput, SucursalUncheckedCreateWithoutMovimientosInput>
+    connectOrCreate?: SucursalCreateOrConnectWithoutMovimientosInput
+    upsert?: SucursalUpsertWithoutMovimientosInput
+    disconnect?: SucursalWhereInput | boolean
+    delete?: SucursalWhereInput | boolean
+    connect?: SucursalWhereUniqueInput
+    update?: XOR<XOR<SucursalUpdateToOneWithWhereWithoutMovimientosInput, SucursalUpdateWithoutMovimientosInput>, SucursalUncheckedUpdateWithoutMovimientosInput>
+  }
+
+  export type SucursalCreateNestedOneWithoutVentasInput = {
+    create?: XOR<SucursalCreateWithoutVentasInput, SucursalUncheckedCreateWithoutVentasInput>
+    connectOrCreate?: SucursalCreateOrConnectWithoutVentasInput
+    connect?: SucursalWhereUniqueInput
   }
 
   export type VentaDetalleCreateNestedManyWithoutVentaInput = {
@@ -13964,6 +17153,16 @@ export namespace Prisma {
     connectOrCreate?: VentaDetalleCreateOrConnectWithoutVentaInput | VentaDetalleCreateOrConnectWithoutVentaInput[]
     createMany?: VentaDetalleCreateManyVentaInputEnvelope
     connect?: VentaDetalleWhereUniqueInput | VentaDetalleWhereUniqueInput[]
+  }
+
+  export type SucursalUpdateOneWithoutVentasNestedInput = {
+    create?: XOR<SucursalCreateWithoutVentasInput, SucursalUncheckedCreateWithoutVentasInput>
+    connectOrCreate?: SucursalCreateOrConnectWithoutVentasInput
+    upsert?: SucursalUpsertWithoutVentasInput
+    disconnect?: SucursalWhereInput | boolean
+    delete?: SucursalWhereInput | boolean
+    connect?: SucursalWhereUniqueInput
+    update?: XOR<XOR<SucursalUpdateToOneWithWhereWithoutVentasInput, SucursalUpdateWithoutVentasInput>, SucursalUncheckedUpdateWithoutVentasInput>
   }
 
   export type VentaDetalleUpdateManyWithoutVentaNestedInput = {
@@ -14030,6 +17229,12 @@ export namespace Prisma {
     update?: XOR<XOR<PlatoUpdateToOneWithWhereWithoutVentasInput, PlatoUpdateWithoutVentasInput>, PlatoUncheckedUpdateWithoutVentasInput>
   }
 
+  export type SucursalCreateNestedOneWithoutOrdenesCompraInput = {
+    create?: XOR<SucursalCreateWithoutOrdenesCompraInput, SucursalUncheckedCreateWithoutOrdenesCompraInput>
+    connectOrCreate?: SucursalCreateOrConnectWithoutOrdenesCompraInput
+    connect?: SucursalWhereUniqueInput
+  }
+
   export type OrdenCompraDetalleCreateNestedManyWithoutOrdenInput = {
     create?: XOR<OrdenCompraDetalleCreateWithoutOrdenInput, OrdenCompraDetalleUncheckedCreateWithoutOrdenInput> | OrdenCompraDetalleCreateWithoutOrdenInput[] | OrdenCompraDetalleUncheckedCreateWithoutOrdenInput[]
     connectOrCreate?: OrdenCompraDetalleCreateOrConnectWithoutOrdenInput | OrdenCompraDetalleCreateOrConnectWithoutOrdenInput[]
@@ -14042,6 +17247,16 @@ export namespace Prisma {
     connectOrCreate?: OrdenCompraDetalleCreateOrConnectWithoutOrdenInput | OrdenCompraDetalleCreateOrConnectWithoutOrdenInput[]
     createMany?: OrdenCompraDetalleCreateManyOrdenInputEnvelope
     connect?: OrdenCompraDetalleWhereUniqueInput | OrdenCompraDetalleWhereUniqueInput[]
+  }
+
+  export type SucursalUpdateOneWithoutOrdenesCompraNestedInput = {
+    create?: XOR<SucursalCreateWithoutOrdenesCompraInput, SucursalUncheckedCreateWithoutOrdenesCompraInput>
+    connectOrCreate?: SucursalCreateOrConnectWithoutOrdenesCompraInput
+    upsert?: SucursalUpsertWithoutOrdenesCompraInput
+    disconnect?: SucursalWhereInput | boolean
+    delete?: SucursalWhereInput | boolean
+    connect?: SucursalWhereUniqueInput
+    update?: XOR<XOR<SucursalUpdateToOneWithWhereWithoutOrdenesCompraInput, SucursalUpdateWithoutOrdenesCompraInput>, SucursalUncheckedUpdateWithoutOrdenesCompraInput>
   }
 
   export type OrdenCompraDetalleUpdateManyWithoutOrdenNestedInput = {
@@ -14106,6 +17321,202 @@ export namespace Prisma {
     upsert?: IngredienteUpsertWithoutOrdenItemsInput
     connect?: IngredienteWhereUniqueInput
     update?: XOR<XOR<IngredienteUpdateToOneWithWhereWithoutOrdenItemsInput, IngredienteUpdateWithoutOrdenItemsInput>, IngredienteUncheckedUpdateWithoutOrdenItemsInput>
+  }
+
+  export type VentaCreateNestedManyWithoutSucursalInput = {
+    create?: XOR<VentaCreateWithoutSucursalInput, VentaUncheckedCreateWithoutSucursalInput> | VentaCreateWithoutSucursalInput[] | VentaUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: VentaCreateOrConnectWithoutSucursalInput | VentaCreateOrConnectWithoutSucursalInput[]
+    createMany?: VentaCreateManySucursalInputEnvelope
+    connect?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+  }
+
+  export type MovimientoInventarioCreateNestedManyWithoutSucursalInput = {
+    create?: XOR<MovimientoInventarioCreateWithoutSucursalInput, MovimientoInventarioUncheckedCreateWithoutSucursalInput> | MovimientoInventarioCreateWithoutSucursalInput[] | MovimientoInventarioUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: MovimientoInventarioCreateOrConnectWithoutSucursalInput | MovimientoInventarioCreateOrConnectWithoutSucursalInput[]
+    createMany?: MovimientoInventarioCreateManySucursalInputEnvelope
+    connect?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+  }
+
+  export type OrdenCompraCreateNestedManyWithoutSucursalInput = {
+    create?: XOR<OrdenCompraCreateWithoutSucursalInput, OrdenCompraUncheckedCreateWithoutSucursalInput> | OrdenCompraCreateWithoutSucursalInput[] | OrdenCompraUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: OrdenCompraCreateOrConnectWithoutSucursalInput | OrdenCompraCreateOrConnectWithoutSucursalInput[]
+    createMany?: OrdenCompraCreateManySucursalInputEnvelope
+    connect?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+  }
+
+  export type IngredienteSucursalCreateNestedManyWithoutSucursalInput = {
+    create?: XOR<IngredienteSucursalCreateWithoutSucursalInput, IngredienteSucursalUncheckedCreateWithoutSucursalInput> | IngredienteSucursalCreateWithoutSucursalInput[] | IngredienteSucursalUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: IngredienteSucursalCreateOrConnectWithoutSucursalInput | IngredienteSucursalCreateOrConnectWithoutSucursalInput[]
+    createMany?: IngredienteSucursalCreateManySucursalInputEnvelope
+    connect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+  }
+
+  export type VentaUncheckedCreateNestedManyWithoutSucursalInput = {
+    create?: XOR<VentaCreateWithoutSucursalInput, VentaUncheckedCreateWithoutSucursalInput> | VentaCreateWithoutSucursalInput[] | VentaUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: VentaCreateOrConnectWithoutSucursalInput | VentaCreateOrConnectWithoutSucursalInput[]
+    createMany?: VentaCreateManySucursalInputEnvelope
+    connect?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+  }
+
+  export type MovimientoInventarioUncheckedCreateNestedManyWithoutSucursalInput = {
+    create?: XOR<MovimientoInventarioCreateWithoutSucursalInput, MovimientoInventarioUncheckedCreateWithoutSucursalInput> | MovimientoInventarioCreateWithoutSucursalInput[] | MovimientoInventarioUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: MovimientoInventarioCreateOrConnectWithoutSucursalInput | MovimientoInventarioCreateOrConnectWithoutSucursalInput[]
+    createMany?: MovimientoInventarioCreateManySucursalInputEnvelope
+    connect?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+  }
+
+  export type OrdenCompraUncheckedCreateNestedManyWithoutSucursalInput = {
+    create?: XOR<OrdenCompraCreateWithoutSucursalInput, OrdenCompraUncheckedCreateWithoutSucursalInput> | OrdenCompraCreateWithoutSucursalInput[] | OrdenCompraUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: OrdenCompraCreateOrConnectWithoutSucursalInput | OrdenCompraCreateOrConnectWithoutSucursalInput[]
+    createMany?: OrdenCompraCreateManySucursalInputEnvelope
+    connect?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+  }
+
+  export type IngredienteSucursalUncheckedCreateNestedManyWithoutSucursalInput = {
+    create?: XOR<IngredienteSucursalCreateWithoutSucursalInput, IngredienteSucursalUncheckedCreateWithoutSucursalInput> | IngredienteSucursalCreateWithoutSucursalInput[] | IngredienteSucursalUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: IngredienteSucursalCreateOrConnectWithoutSucursalInput | IngredienteSucursalCreateOrConnectWithoutSucursalInput[]
+    createMany?: IngredienteSucursalCreateManySucursalInputEnvelope
+    connect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+  }
+
+  export type VentaUpdateManyWithoutSucursalNestedInput = {
+    create?: XOR<VentaCreateWithoutSucursalInput, VentaUncheckedCreateWithoutSucursalInput> | VentaCreateWithoutSucursalInput[] | VentaUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: VentaCreateOrConnectWithoutSucursalInput | VentaCreateOrConnectWithoutSucursalInput[]
+    upsert?: VentaUpsertWithWhereUniqueWithoutSucursalInput | VentaUpsertWithWhereUniqueWithoutSucursalInput[]
+    createMany?: VentaCreateManySucursalInputEnvelope
+    set?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+    disconnect?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+    delete?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+    connect?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+    update?: VentaUpdateWithWhereUniqueWithoutSucursalInput | VentaUpdateWithWhereUniqueWithoutSucursalInput[]
+    updateMany?: VentaUpdateManyWithWhereWithoutSucursalInput | VentaUpdateManyWithWhereWithoutSucursalInput[]
+    deleteMany?: VentaScalarWhereInput | VentaScalarWhereInput[]
+  }
+
+  export type MovimientoInventarioUpdateManyWithoutSucursalNestedInput = {
+    create?: XOR<MovimientoInventarioCreateWithoutSucursalInput, MovimientoInventarioUncheckedCreateWithoutSucursalInput> | MovimientoInventarioCreateWithoutSucursalInput[] | MovimientoInventarioUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: MovimientoInventarioCreateOrConnectWithoutSucursalInput | MovimientoInventarioCreateOrConnectWithoutSucursalInput[]
+    upsert?: MovimientoInventarioUpsertWithWhereUniqueWithoutSucursalInput | MovimientoInventarioUpsertWithWhereUniqueWithoutSucursalInput[]
+    createMany?: MovimientoInventarioCreateManySucursalInputEnvelope
+    set?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+    disconnect?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+    delete?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+    connect?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+    update?: MovimientoInventarioUpdateWithWhereUniqueWithoutSucursalInput | MovimientoInventarioUpdateWithWhereUniqueWithoutSucursalInput[]
+    updateMany?: MovimientoInventarioUpdateManyWithWhereWithoutSucursalInput | MovimientoInventarioUpdateManyWithWhereWithoutSucursalInput[]
+    deleteMany?: MovimientoInventarioScalarWhereInput | MovimientoInventarioScalarWhereInput[]
+  }
+
+  export type OrdenCompraUpdateManyWithoutSucursalNestedInput = {
+    create?: XOR<OrdenCompraCreateWithoutSucursalInput, OrdenCompraUncheckedCreateWithoutSucursalInput> | OrdenCompraCreateWithoutSucursalInput[] | OrdenCompraUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: OrdenCompraCreateOrConnectWithoutSucursalInput | OrdenCompraCreateOrConnectWithoutSucursalInput[]
+    upsert?: OrdenCompraUpsertWithWhereUniqueWithoutSucursalInput | OrdenCompraUpsertWithWhereUniqueWithoutSucursalInput[]
+    createMany?: OrdenCompraCreateManySucursalInputEnvelope
+    set?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+    disconnect?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+    delete?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+    connect?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+    update?: OrdenCompraUpdateWithWhereUniqueWithoutSucursalInput | OrdenCompraUpdateWithWhereUniqueWithoutSucursalInput[]
+    updateMany?: OrdenCompraUpdateManyWithWhereWithoutSucursalInput | OrdenCompraUpdateManyWithWhereWithoutSucursalInput[]
+    deleteMany?: OrdenCompraScalarWhereInput | OrdenCompraScalarWhereInput[]
+  }
+
+  export type IngredienteSucursalUpdateManyWithoutSucursalNestedInput = {
+    create?: XOR<IngredienteSucursalCreateWithoutSucursalInput, IngredienteSucursalUncheckedCreateWithoutSucursalInput> | IngredienteSucursalCreateWithoutSucursalInput[] | IngredienteSucursalUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: IngredienteSucursalCreateOrConnectWithoutSucursalInput | IngredienteSucursalCreateOrConnectWithoutSucursalInput[]
+    upsert?: IngredienteSucursalUpsertWithWhereUniqueWithoutSucursalInput | IngredienteSucursalUpsertWithWhereUniqueWithoutSucursalInput[]
+    createMany?: IngredienteSucursalCreateManySucursalInputEnvelope
+    set?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    disconnect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    delete?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    connect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    update?: IngredienteSucursalUpdateWithWhereUniqueWithoutSucursalInput | IngredienteSucursalUpdateWithWhereUniqueWithoutSucursalInput[]
+    updateMany?: IngredienteSucursalUpdateManyWithWhereWithoutSucursalInput | IngredienteSucursalUpdateManyWithWhereWithoutSucursalInput[]
+    deleteMany?: IngredienteSucursalScalarWhereInput | IngredienteSucursalScalarWhereInput[]
+  }
+
+  export type VentaUncheckedUpdateManyWithoutSucursalNestedInput = {
+    create?: XOR<VentaCreateWithoutSucursalInput, VentaUncheckedCreateWithoutSucursalInput> | VentaCreateWithoutSucursalInput[] | VentaUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: VentaCreateOrConnectWithoutSucursalInput | VentaCreateOrConnectWithoutSucursalInput[]
+    upsert?: VentaUpsertWithWhereUniqueWithoutSucursalInput | VentaUpsertWithWhereUniqueWithoutSucursalInput[]
+    createMany?: VentaCreateManySucursalInputEnvelope
+    set?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+    disconnect?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+    delete?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+    connect?: VentaWhereUniqueInput | VentaWhereUniqueInput[]
+    update?: VentaUpdateWithWhereUniqueWithoutSucursalInput | VentaUpdateWithWhereUniqueWithoutSucursalInput[]
+    updateMany?: VentaUpdateManyWithWhereWithoutSucursalInput | VentaUpdateManyWithWhereWithoutSucursalInput[]
+    deleteMany?: VentaScalarWhereInput | VentaScalarWhereInput[]
+  }
+
+  export type MovimientoInventarioUncheckedUpdateManyWithoutSucursalNestedInput = {
+    create?: XOR<MovimientoInventarioCreateWithoutSucursalInput, MovimientoInventarioUncheckedCreateWithoutSucursalInput> | MovimientoInventarioCreateWithoutSucursalInput[] | MovimientoInventarioUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: MovimientoInventarioCreateOrConnectWithoutSucursalInput | MovimientoInventarioCreateOrConnectWithoutSucursalInput[]
+    upsert?: MovimientoInventarioUpsertWithWhereUniqueWithoutSucursalInput | MovimientoInventarioUpsertWithWhereUniqueWithoutSucursalInput[]
+    createMany?: MovimientoInventarioCreateManySucursalInputEnvelope
+    set?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+    disconnect?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+    delete?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+    connect?: MovimientoInventarioWhereUniqueInput | MovimientoInventarioWhereUniqueInput[]
+    update?: MovimientoInventarioUpdateWithWhereUniqueWithoutSucursalInput | MovimientoInventarioUpdateWithWhereUniqueWithoutSucursalInput[]
+    updateMany?: MovimientoInventarioUpdateManyWithWhereWithoutSucursalInput | MovimientoInventarioUpdateManyWithWhereWithoutSucursalInput[]
+    deleteMany?: MovimientoInventarioScalarWhereInput | MovimientoInventarioScalarWhereInput[]
+  }
+
+  export type OrdenCompraUncheckedUpdateManyWithoutSucursalNestedInput = {
+    create?: XOR<OrdenCompraCreateWithoutSucursalInput, OrdenCompraUncheckedCreateWithoutSucursalInput> | OrdenCompraCreateWithoutSucursalInput[] | OrdenCompraUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: OrdenCompraCreateOrConnectWithoutSucursalInput | OrdenCompraCreateOrConnectWithoutSucursalInput[]
+    upsert?: OrdenCompraUpsertWithWhereUniqueWithoutSucursalInput | OrdenCompraUpsertWithWhereUniqueWithoutSucursalInput[]
+    createMany?: OrdenCompraCreateManySucursalInputEnvelope
+    set?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+    disconnect?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+    delete?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+    connect?: OrdenCompraWhereUniqueInput | OrdenCompraWhereUniqueInput[]
+    update?: OrdenCompraUpdateWithWhereUniqueWithoutSucursalInput | OrdenCompraUpdateWithWhereUniqueWithoutSucursalInput[]
+    updateMany?: OrdenCompraUpdateManyWithWhereWithoutSucursalInput | OrdenCompraUpdateManyWithWhereWithoutSucursalInput[]
+    deleteMany?: OrdenCompraScalarWhereInput | OrdenCompraScalarWhereInput[]
+  }
+
+  export type IngredienteSucursalUncheckedUpdateManyWithoutSucursalNestedInput = {
+    create?: XOR<IngredienteSucursalCreateWithoutSucursalInput, IngredienteSucursalUncheckedCreateWithoutSucursalInput> | IngredienteSucursalCreateWithoutSucursalInput[] | IngredienteSucursalUncheckedCreateWithoutSucursalInput[]
+    connectOrCreate?: IngredienteSucursalCreateOrConnectWithoutSucursalInput | IngredienteSucursalCreateOrConnectWithoutSucursalInput[]
+    upsert?: IngredienteSucursalUpsertWithWhereUniqueWithoutSucursalInput | IngredienteSucursalUpsertWithWhereUniqueWithoutSucursalInput[]
+    createMany?: IngredienteSucursalCreateManySucursalInputEnvelope
+    set?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    disconnect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    delete?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    connect?: IngredienteSucursalWhereUniqueInput | IngredienteSucursalWhereUniqueInput[]
+    update?: IngredienteSucursalUpdateWithWhereUniqueWithoutSucursalInput | IngredienteSucursalUpdateWithWhereUniqueWithoutSucursalInput[]
+    updateMany?: IngredienteSucursalUpdateManyWithWhereWithoutSucursalInput | IngredienteSucursalUpdateManyWithWhereWithoutSucursalInput[]
+    deleteMany?: IngredienteSucursalScalarWhereInput | IngredienteSucursalScalarWhereInput[]
+  }
+
+  export type IngredienteCreateNestedOneWithoutStockSucursalesInput = {
+    create?: XOR<IngredienteCreateWithoutStockSucursalesInput, IngredienteUncheckedCreateWithoutStockSucursalesInput>
+    connectOrCreate?: IngredienteCreateOrConnectWithoutStockSucursalesInput
+    connect?: IngredienteWhereUniqueInput
+  }
+
+  export type SucursalCreateNestedOneWithoutStockIngredientesInput = {
+    create?: XOR<SucursalCreateWithoutStockIngredientesInput, SucursalUncheckedCreateWithoutStockIngredientesInput>
+    connectOrCreate?: SucursalCreateOrConnectWithoutStockIngredientesInput
+    connect?: SucursalWhereUniqueInput
+  }
+
+  export type IngredienteUpdateOneRequiredWithoutStockSucursalesNestedInput = {
+    create?: XOR<IngredienteCreateWithoutStockSucursalesInput, IngredienteUncheckedCreateWithoutStockSucursalesInput>
+    connectOrCreate?: IngredienteCreateOrConnectWithoutStockSucursalesInput
+    upsert?: IngredienteUpsertWithoutStockSucursalesInput
+    connect?: IngredienteWhereUniqueInput
+    update?: XOR<XOR<IngredienteUpdateToOneWithWhereWithoutStockSucursalesInput, IngredienteUpdateWithoutStockSucursalesInput>, IngredienteUncheckedUpdateWithoutStockSucursalesInput>
+  }
+
+  export type SucursalUpdateOneRequiredWithoutStockIngredientesNestedInput = {
+    create?: XOR<SucursalCreateWithoutStockIngredientesInput, SucursalUncheckedCreateWithoutStockIngredientesInput>
+    connectOrCreate?: SucursalCreateOrConnectWithoutStockIngredientesInput
+    upsert?: SucursalUpsertWithoutStockIngredientesInput
+    connect?: SucursalWhereUniqueInput
+    update?: XOR<XOR<SucursalUpdateToOneWithWhereWithoutStockIngredientesInput, SucursalUpdateWithoutStockIngredientesInput>, SucursalUncheckedUpdateWithoutStockIngredientesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -14559,6 +17970,7 @@ export namespace Prisma {
     cantidad: Decimal | DecimalJsLike | number | string
     motivo?: string | null
     createdAt?: Date | string
+    sucursal?: SucursalCreateNestedOneWithoutMovimientosInput
   }
 
   export type MovimientoInventarioUncheckedCreateWithoutIngredienteInput = {
@@ -14566,6 +17978,7 @@ export namespace Prisma {
     tipo: string
     cantidad: Decimal | DecimalJsLike | number | string
     motivo?: string | null
+    sucursalId?: string | null
     createdAt?: Date | string
   }
 
@@ -14600,6 +18013,30 @@ export namespace Prisma {
 
   export type OrdenCompraDetalleCreateManyIngredienteInputEnvelope = {
     data: OrdenCompraDetalleCreateManyIngredienteInput | OrdenCompraDetalleCreateManyIngredienteInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type IngredienteSucursalCreateWithoutIngredienteInput = {
+    id?: string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+    sucursal: SucursalCreateNestedOneWithoutStockIngredientesInput
+  }
+
+  export type IngredienteSucursalUncheckedCreateWithoutIngredienteInput = {
+    id?: string
+    sucursalId: string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type IngredienteSucursalCreateOrConnectWithoutIngredienteInput = {
+    where: IngredienteSucursalWhereUniqueInput
+    create: XOR<IngredienteSucursalCreateWithoutIngredienteInput, IngredienteSucursalUncheckedCreateWithoutIngredienteInput>
+  }
+
+  export type IngredienteSucursalCreateManyIngredienteInputEnvelope = {
+    data: IngredienteSucursalCreateManyIngredienteInput | IngredienteSucursalCreateManyIngredienteInput[]
     skipDuplicates?: boolean
   }
 
@@ -14644,6 +18081,7 @@ export namespace Prisma {
     tipo?: StringFilter<"MovimientoInventario"> | string
     cantidad?: DecimalFilter<"MovimientoInventario"> | Decimal | DecimalJsLike | number | string
     motivo?: StringNullableFilter<"MovimientoInventario"> | string | null
+    sucursalId?: StringNullableFilter<"MovimientoInventario"> | string | null
     createdAt?: DateTimeFilter<"MovimientoInventario"> | Date | string
   }
 
@@ -14672,6 +18110,33 @@ export namespace Prisma {
     ingredienteId?: StringFilter<"OrdenCompraDetalle"> | string
     cantidadSugerida?: DecimalFilter<"OrdenCompraDetalle"> | Decimal | DecimalJsLike | number | string
     cantidadFinal?: DecimalNullableFilter<"OrdenCompraDetalle"> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type IngredienteSucursalUpsertWithWhereUniqueWithoutIngredienteInput = {
+    where: IngredienteSucursalWhereUniqueInput
+    update: XOR<IngredienteSucursalUpdateWithoutIngredienteInput, IngredienteSucursalUncheckedUpdateWithoutIngredienteInput>
+    create: XOR<IngredienteSucursalCreateWithoutIngredienteInput, IngredienteSucursalUncheckedCreateWithoutIngredienteInput>
+  }
+
+  export type IngredienteSucursalUpdateWithWhereUniqueWithoutIngredienteInput = {
+    where: IngredienteSucursalWhereUniqueInput
+    data: XOR<IngredienteSucursalUpdateWithoutIngredienteInput, IngredienteSucursalUncheckedUpdateWithoutIngredienteInput>
+  }
+
+  export type IngredienteSucursalUpdateManyWithWhereWithoutIngredienteInput = {
+    where: IngredienteSucursalScalarWhereInput
+    data: XOR<IngredienteSucursalUpdateManyMutationInput, IngredienteSucursalUncheckedUpdateManyWithoutIngredienteInput>
+  }
+
+  export type IngredienteSucursalScalarWhereInput = {
+    AND?: IngredienteSucursalScalarWhereInput | IngredienteSucursalScalarWhereInput[]
+    OR?: IngredienteSucursalScalarWhereInput[]
+    NOT?: IngredienteSucursalScalarWhereInput | IngredienteSucursalScalarWhereInput[]
+    id?: StringFilter<"IngredienteSucursal"> | string
+    ingredienteId?: StringFilter<"IngredienteSucursal"> | string
+    sucursalId?: StringFilter<"IngredienteSucursal"> | string
+    stockActual?: DecimalFilter<"IngredienteSucursal"> | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFilter<"IngredienteSucursal"> | Decimal | DecimalJsLike | number | string
   }
 
   export type PlatoCreateWithoutRecetaInput = {
@@ -14713,6 +18178,7 @@ export namespace Prisma {
     createdAt?: Date | string
     movimientos?: MovimientoInventarioCreateNestedManyWithoutIngredienteInput
     ordenItems?: OrdenCompraDetalleCreateNestedManyWithoutIngredienteInput
+    stockSucursales?: IngredienteSucursalCreateNestedManyWithoutIngredienteInput
   }
 
   export type IngredienteUncheckedCreateWithoutRecetasInput = {
@@ -14725,6 +18191,7 @@ export namespace Prisma {
     createdAt?: Date | string
     movimientos?: MovimientoInventarioUncheckedCreateNestedManyWithoutIngredienteInput
     ordenItems?: OrdenCompraDetalleUncheckedCreateNestedManyWithoutIngredienteInput
+    stockSucursales?: IngredienteSucursalUncheckedCreateNestedManyWithoutIngredienteInput
   }
 
   export type IngredienteCreateOrConnectWithoutRecetasInput = {
@@ -14788,6 +18255,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movimientos?: MovimientoInventarioUpdateManyWithoutIngredienteNestedInput
     ordenItems?: OrdenCompraDetalleUpdateManyWithoutIngredienteNestedInput
+    stockSucursales?: IngredienteSucursalUpdateManyWithoutIngredienteNestedInput
   }
 
   export type IngredienteUncheckedUpdateWithoutRecetasInput = {
@@ -14800,6 +18268,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     movimientos?: MovimientoInventarioUncheckedUpdateManyWithoutIngredienteNestedInput
     ordenItems?: OrdenCompraDetalleUncheckedUpdateManyWithoutIngredienteNestedInput
+    stockSucursales?: IngredienteSucursalUncheckedUpdateManyWithoutIngredienteNestedInput
   }
 
   export type IngredienteCreateWithoutMovimientosInput = {
@@ -14812,6 +18281,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recetas?: RecetaItemCreateNestedManyWithoutIngredienteInput
     ordenItems?: OrdenCompraDetalleCreateNestedManyWithoutIngredienteInput
+    stockSucursales?: IngredienteSucursalCreateNestedManyWithoutIngredienteInput
   }
 
   export type IngredienteUncheckedCreateWithoutMovimientosInput = {
@@ -14824,11 +18294,39 @@ export namespace Prisma {
     createdAt?: Date | string
     recetas?: RecetaItemUncheckedCreateNestedManyWithoutIngredienteInput
     ordenItems?: OrdenCompraDetalleUncheckedCreateNestedManyWithoutIngredienteInput
+    stockSucursales?: IngredienteSucursalUncheckedCreateNestedManyWithoutIngredienteInput
   }
 
   export type IngredienteCreateOrConnectWithoutMovimientosInput = {
     where: IngredienteWhereUniqueInput
     create: XOR<IngredienteCreateWithoutMovimientosInput, IngredienteUncheckedCreateWithoutMovimientosInput>
+  }
+
+  export type SucursalCreateWithoutMovimientosInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    ventas?: VentaCreateNestedManyWithoutSucursalInput
+    ordenesCompra?: OrdenCompraCreateNestedManyWithoutSucursalInput
+    stockIngredientes?: IngredienteSucursalCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalUncheckedCreateWithoutMovimientosInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    ventas?: VentaUncheckedCreateNestedManyWithoutSucursalInput
+    ordenesCompra?: OrdenCompraUncheckedCreateNestedManyWithoutSucursalInput
+    stockIngredientes?: IngredienteSucursalUncheckedCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalCreateOrConnectWithoutMovimientosInput = {
+    where: SucursalWhereUniqueInput
+    create: XOR<SucursalCreateWithoutMovimientosInput, SucursalUncheckedCreateWithoutMovimientosInput>
   }
 
   export type IngredienteUpsertWithoutMovimientosInput = {
@@ -14852,6 +18350,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recetas?: RecetaItemUpdateManyWithoutIngredienteNestedInput
     ordenItems?: OrdenCompraDetalleUpdateManyWithoutIngredienteNestedInput
+    stockSucursales?: IngredienteSucursalUpdateManyWithoutIngredienteNestedInput
   }
 
   export type IngredienteUncheckedUpdateWithoutMovimientosInput = {
@@ -14864,6 +18363,67 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recetas?: RecetaItemUncheckedUpdateManyWithoutIngredienteNestedInput
     ordenItems?: OrdenCompraDetalleUncheckedUpdateManyWithoutIngredienteNestedInput
+    stockSucursales?: IngredienteSucursalUncheckedUpdateManyWithoutIngredienteNestedInput
+  }
+
+  export type SucursalUpsertWithoutMovimientosInput = {
+    update: XOR<SucursalUpdateWithoutMovimientosInput, SucursalUncheckedUpdateWithoutMovimientosInput>
+    create: XOR<SucursalCreateWithoutMovimientosInput, SucursalUncheckedCreateWithoutMovimientosInput>
+    where?: SucursalWhereInput
+  }
+
+  export type SucursalUpdateToOneWithWhereWithoutMovimientosInput = {
+    where?: SucursalWhereInput
+    data: XOR<SucursalUpdateWithoutMovimientosInput, SucursalUncheckedUpdateWithoutMovimientosInput>
+  }
+
+  export type SucursalUpdateWithoutMovimientosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ventas?: VentaUpdateManyWithoutSucursalNestedInput
+    ordenesCompra?: OrdenCompraUpdateManyWithoutSucursalNestedInput
+    stockIngredientes?: IngredienteSucursalUpdateManyWithoutSucursalNestedInput
+  }
+
+  export type SucursalUncheckedUpdateWithoutMovimientosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ventas?: VentaUncheckedUpdateManyWithoutSucursalNestedInput
+    ordenesCompra?: OrdenCompraUncheckedUpdateManyWithoutSucursalNestedInput
+    stockIngredientes?: IngredienteSucursalUncheckedUpdateManyWithoutSucursalNestedInput
+  }
+
+  export type SucursalCreateWithoutVentasInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    movimientos?: MovimientoInventarioCreateNestedManyWithoutSucursalInput
+    ordenesCompra?: OrdenCompraCreateNestedManyWithoutSucursalInput
+    stockIngredientes?: IngredienteSucursalCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalUncheckedCreateWithoutVentasInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    movimientos?: MovimientoInventarioUncheckedCreateNestedManyWithoutSucursalInput
+    ordenesCompra?: OrdenCompraUncheckedCreateNestedManyWithoutSucursalInput
+    stockIngredientes?: IngredienteSucursalUncheckedCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalCreateOrConnectWithoutVentasInput = {
+    where: SucursalWhereUniqueInput
+    create: XOR<SucursalCreateWithoutVentasInput, SucursalUncheckedCreateWithoutVentasInput>
   }
 
   export type VentaDetalleCreateWithoutVentaInput = {
@@ -14890,6 +18450,39 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SucursalUpsertWithoutVentasInput = {
+    update: XOR<SucursalUpdateWithoutVentasInput, SucursalUncheckedUpdateWithoutVentasInput>
+    create: XOR<SucursalCreateWithoutVentasInput, SucursalUncheckedCreateWithoutVentasInput>
+    where?: SucursalWhereInput
+  }
+
+  export type SucursalUpdateToOneWithWhereWithoutVentasInput = {
+    where?: SucursalWhereInput
+    data: XOR<SucursalUpdateWithoutVentasInput, SucursalUncheckedUpdateWithoutVentasInput>
+  }
+
+  export type SucursalUpdateWithoutVentasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    movimientos?: MovimientoInventarioUpdateManyWithoutSucursalNestedInput
+    ordenesCompra?: OrdenCompraUpdateManyWithoutSucursalNestedInput
+    stockIngredientes?: IngredienteSucursalUpdateManyWithoutSucursalNestedInput
+  }
+
+  export type SucursalUncheckedUpdateWithoutVentasInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    movimientos?: MovimientoInventarioUncheckedUpdateManyWithoutSucursalNestedInput
+    ordenesCompra?: OrdenCompraUncheckedUpdateManyWithoutSucursalNestedInput
+    stockIngredientes?: IngredienteSucursalUncheckedUpdateManyWithoutSucursalNestedInput
+  }
+
   export type VentaDetalleUpsertWithWhereUniqueWithoutVentaInput = {
     where: VentaDetalleWhereUniqueInput
     update: XOR<VentaDetalleUpdateWithoutVentaInput, VentaDetalleUncheckedUpdateWithoutVentaInput>
@@ -14911,6 +18504,7 @@ export namespace Prisma {
     total: Decimal | DecimalJsLike | number | string
     fecha?: Date | string
     notas?: string | null
+    sucursal?: SucursalCreateNestedOneWithoutVentasInput
   }
 
   export type VentaUncheckedCreateWithoutDetallesInput = {
@@ -14918,6 +18512,7 @@ export namespace Prisma {
     total: Decimal | DecimalJsLike | number | string
     fecha?: Date | string
     notas?: string | null
+    sucursalId?: string | null
   }
 
   export type VentaCreateOrConnectWithoutDetallesInput = {
@@ -14970,6 +18565,7 @@ export namespace Prisma {
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     notas?: NullableStringFieldUpdateOperationsInput | string | null
+    sucursal?: SucursalUpdateOneWithoutVentasNestedInput
   }
 
   export type VentaUncheckedUpdateWithoutDetallesInput = {
@@ -14977,6 +18573,7 @@ export namespace Prisma {
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     notas?: NullableStringFieldUpdateOperationsInput | string | null
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PlatoUpsertWithoutVentasInput = {
@@ -15014,6 +18611,33 @@ export namespace Prisma {
     receta?: RecetaItemUncheckedUpdateManyWithoutPlatoNestedInput
   }
 
+  export type SucursalCreateWithoutOrdenesCompraInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    ventas?: VentaCreateNestedManyWithoutSucursalInput
+    movimientos?: MovimientoInventarioCreateNestedManyWithoutSucursalInput
+    stockIngredientes?: IngredienteSucursalCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalUncheckedCreateWithoutOrdenesCompraInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    ventas?: VentaUncheckedCreateNestedManyWithoutSucursalInput
+    movimientos?: MovimientoInventarioUncheckedCreateNestedManyWithoutSucursalInput
+    stockIngredientes?: IngredienteSucursalUncheckedCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalCreateOrConnectWithoutOrdenesCompraInput = {
+    where: SucursalWhereUniqueInput
+    create: XOR<SucursalCreateWithoutOrdenesCompraInput, SucursalUncheckedCreateWithoutOrdenesCompraInput>
+  }
+
   export type OrdenCompraDetalleCreateWithoutOrdenInput = {
     id?: string
     cantidadSugerida: Decimal | DecimalJsLike | number | string
@@ -15038,6 +18662,39 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SucursalUpsertWithoutOrdenesCompraInput = {
+    update: XOR<SucursalUpdateWithoutOrdenesCompraInput, SucursalUncheckedUpdateWithoutOrdenesCompraInput>
+    create: XOR<SucursalCreateWithoutOrdenesCompraInput, SucursalUncheckedCreateWithoutOrdenesCompraInput>
+    where?: SucursalWhereInput
+  }
+
+  export type SucursalUpdateToOneWithWhereWithoutOrdenesCompraInput = {
+    where?: SucursalWhereInput
+    data: XOR<SucursalUpdateWithoutOrdenesCompraInput, SucursalUncheckedUpdateWithoutOrdenesCompraInput>
+  }
+
+  export type SucursalUpdateWithoutOrdenesCompraInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ventas?: VentaUpdateManyWithoutSucursalNestedInput
+    movimientos?: MovimientoInventarioUpdateManyWithoutSucursalNestedInput
+    stockIngredientes?: IngredienteSucursalUpdateManyWithoutSucursalNestedInput
+  }
+
+  export type SucursalUncheckedUpdateWithoutOrdenesCompraInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ventas?: VentaUncheckedUpdateManyWithoutSucursalNestedInput
+    movimientos?: MovimientoInventarioUncheckedUpdateManyWithoutSucursalNestedInput
+    stockIngredientes?: IngredienteSucursalUncheckedUpdateManyWithoutSucursalNestedInput
+  }
+
   export type OrdenCompraDetalleUpsertWithWhereUniqueWithoutOrdenInput = {
     where: OrdenCompraDetalleWhereUniqueInput
     update: XOR<OrdenCompraDetalleUpdateWithoutOrdenInput, OrdenCompraDetalleUncheckedUpdateWithoutOrdenInput>
@@ -15058,11 +18715,13 @@ export namespace Prisma {
     id?: string
     estado?: string
     createdAt?: Date | string
+    sucursal?: SucursalCreateNestedOneWithoutOrdenesCompraInput
   }
 
   export type OrdenCompraUncheckedCreateWithoutDetallesInput = {
     id?: string
     estado?: string
+    sucursalId?: string | null
     createdAt?: Date | string
   }
 
@@ -15081,6 +18740,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recetas?: RecetaItemCreateNestedManyWithoutIngredienteInput
     movimientos?: MovimientoInventarioCreateNestedManyWithoutIngredienteInput
+    stockSucursales?: IngredienteSucursalCreateNestedManyWithoutIngredienteInput
   }
 
   export type IngredienteUncheckedCreateWithoutOrdenItemsInput = {
@@ -15093,6 +18753,7 @@ export namespace Prisma {
     createdAt?: Date | string
     recetas?: RecetaItemUncheckedCreateNestedManyWithoutIngredienteInput
     movimientos?: MovimientoInventarioUncheckedCreateNestedManyWithoutIngredienteInput
+    stockSucursales?: IngredienteSucursalUncheckedCreateNestedManyWithoutIngredienteInput
   }
 
   export type IngredienteCreateOrConnectWithoutOrdenItemsInput = {
@@ -15115,11 +18776,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     estado?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sucursal?: SucursalUpdateOneWithoutOrdenesCompraNestedInput
   }
 
   export type OrdenCompraUncheckedUpdateWithoutDetallesInput = {
     id?: StringFieldUpdateOperationsInput | string
     estado?: StringFieldUpdateOperationsInput | string
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15144,6 +18807,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recetas?: RecetaItemUpdateManyWithoutIngredienteNestedInput
     movimientos?: MovimientoInventarioUpdateManyWithoutIngredienteNestedInput
+    stockSucursales?: IngredienteSucursalUpdateManyWithoutIngredienteNestedInput
   }
 
   export type IngredienteUncheckedUpdateWithoutOrdenItemsInput = {
@@ -15156,6 +18820,322 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     recetas?: RecetaItemUncheckedUpdateManyWithoutIngredienteNestedInput
     movimientos?: MovimientoInventarioUncheckedUpdateManyWithoutIngredienteNestedInput
+    stockSucursales?: IngredienteSucursalUncheckedUpdateManyWithoutIngredienteNestedInput
+  }
+
+  export type VentaCreateWithoutSucursalInput = {
+    id?: string
+    total: Decimal | DecimalJsLike | number | string
+    fecha?: Date | string
+    notas?: string | null
+    detalles?: VentaDetalleCreateNestedManyWithoutVentaInput
+  }
+
+  export type VentaUncheckedCreateWithoutSucursalInput = {
+    id?: string
+    total: Decimal | DecimalJsLike | number | string
+    fecha?: Date | string
+    notas?: string | null
+    detalles?: VentaDetalleUncheckedCreateNestedManyWithoutVentaInput
+  }
+
+  export type VentaCreateOrConnectWithoutSucursalInput = {
+    where: VentaWhereUniqueInput
+    create: XOR<VentaCreateWithoutSucursalInput, VentaUncheckedCreateWithoutSucursalInput>
+  }
+
+  export type VentaCreateManySucursalInputEnvelope = {
+    data: VentaCreateManySucursalInput | VentaCreateManySucursalInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MovimientoInventarioCreateWithoutSucursalInput = {
+    id?: string
+    tipo: string
+    cantidad: Decimal | DecimalJsLike | number | string
+    motivo?: string | null
+    createdAt?: Date | string
+    ingrediente: IngredienteCreateNestedOneWithoutMovimientosInput
+  }
+
+  export type MovimientoInventarioUncheckedCreateWithoutSucursalInput = {
+    id?: string
+    ingredienteId: string
+    tipo: string
+    cantidad: Decimal | DecimalJsLike | number | string
+    motivo?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MovimientoInventarioCreateOrConnectWithoutSucursalInput = {
+    where: MovimientoInventarioWhereUniqueInput
+    create: XOR<MovimientoInventarioCreateWithoutSucursalInput, MovimientoInventarioUncheckedCreateWithoutSucursalInput>
+  }
+
+  export type MovimientoInventarioCreateManySucursalInputEnvelope = {
+    data: MovimientoInventarioCreateManySucursalInput | MovimientoInventarioCreateManySucursalInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrdenCompraCreateWithoutSucursalInput = {
+    id?: string
+    estado?: string
+    createdAt?: Date | string
+    detalles?: OrdenCompraDetalleCreateNestedManyWithoutOrdenInput
+  }
+
+  export type OrdenCompraUncheckedCreateWithoutSucursalInput = {
+    id?: string
+    estado?: string
+    createdAt?: Date | string
+    detalles?: OrdenCompraDetalleUncheckedCreateNestedManyWithoutOrdenInput
+  }
+
+  export type OrdenCompraCreateOrConnectWithoutSucursalInput = {
+    where: OrdenCompraWhereUniqueInput
+    create: XOR<OrdenCompraCreateWithoutSucursalInput, OrdenCompraUncheckedCreateWithoutSucursalInput>
+  }
+
+  export type OrdenCompraCreateManySucursalInputEnvelope = {
+    data: OrdenCompraCreateManySucursalInput | OrdenCompraCreateManySucursalInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type IngredienteSucursalCreateWithoutSucursalInput = {
+    id?: string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+    ingrediente: IngredienteCreateNestedOneWithoutStockSucursalesInput
+  }
+
+  export type IngredienteSucursalUncheckedCreateWithoutSucursalInput = {
+    id?: string
+    ingredienteId: string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type IngredienteSucursalCreateOrConnectWithoutSucursalInput = {
+    where: IngredienteSucursalWhereUniqueInput
+    create: XOR<IngredienteSucursalCreateWithoutSucursalInput, IngredienteSucursalUncheckedCreateWithoutSucursalInput>
+  }
+
+  export type IngredienteSucursalCreateManySucursalInputEnvelope = {
+    data: IngredienteSucursalCreateManySucursalInput | IngredienteSucursalCreateManySucursalInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VentaUpsertWithWhereUniqueWithoutSucursalInput = {
+    where: VentaWhereUniqueInput
+    update: XOR<VentaUpdateWithoutSucursalInput, VentaUncheckedUpdateWithoutSucursalInput>
+    create: XOR<VentaCreateWithoutSucursalInput, VentaUncheckedCreateWithoutSucursalInput>
+  }
+
+  export type VentaUpdateWithWhereUniqueWithoutSucursalInput = {
+    where: VentaWhereUniqueInput
+    data: XOR<VentaUpdateWithoutSucursalInput, VentaUncheckedUpdateWithoutSucursalInput>
+  }
+
+  export type VentaUpdateManyWithWhereWithoutSucursalInput = {
+    where: VentaScalarWhereInput
+    data: XOR<VentaUpdateManyMutationInput, VentaUncheckedUpdateManyWithoutSucursalInput>
+  }
+
+  export type VentaScalarWhereInput = {
+    AND?: VentaScalarWhereInput | VentaScalarWhereInput[]
+    OR?: VentaScalarWhereInput[]
+    NOT?: VentaScalarWhereInput | VentaScalarWhereInput[]
+    id?: StringFilter<"Venta"> | string
+    total?: DecimalFilter<"Venta"> | Decimal | DecimalJsLike | number | string
+    fecha?: DateTimeFilter<"Venta"> | Date | string
+    notas?: StringNullableFilter<"Venta"> | string | null
+    sucursalId?: StringNullableFilter<"Venta"> | string | null
+  }
+
+  export type MovimientoInventarioUpsertWithWhereUniqueWithoutSucursalInput = {
+    where: MovimientoInventarioWhereUniqueInput
+    update: XOR<MovimientoInventarioUpdateWithoutSucursalInput, MovimientoInventarioUncheckedUpdateWithoutSucursalInput>
+    create: XOR<MovimientoInventarioCreateWithoutSucursalInput, MovimientoInventarioUncheckedCreateWithoutSucursalInput>
+  }
+
+  export type MovimientoInventarioUpdateWithWhereUniqueWithoutSucursalInput = {
+    where: MovimientoInventarioWhereUniqueInput
+    data: XOR<MovimientoInventarioUpdateWithoutSucursalInput, MovimientoInventarioUncheckedUpdateWithoutSucursalInput>
+  }
+
+  export type MovimientoInventarioUpdateManyWithWhereWithoutSucursalInput = {
+    where: MovimientoInventarioScalarWhereInput
+    data: XOR<MovimientoInventarioUpdateManyMutationInput, MovimientoInventarioUncheckedUpdateManyWithoutSucursalInput>
+  }
+
+  export type OrdenCompraUpsertWithWhereUniqueWithoutSucursalInput = {
+    where: OrdenCompraWhereUniqueInput
+    update: XOR<OrdenCompraUpdateWithoutSucursalInput, OrdenCompraUncheckedUpdateWithoutSucursalInput>
+    create: XOR<OrdenCompraCreateWithoutSucursalInput, OrdenCompraUncheckedCreateWithoutSucursalInput>
+  }
+
+  export type OrdenCompraUpdateWithWhereUniqueWithoutSucursalInput = {
+    where: OrdenCompraWhereUniqueInput
+    data: XOR<OrdenCompraUpdateWithoutSucursalInput, OrdenCompraUncheckedUpdateWithoutSucursalInput>
+  }
+
+  export type OrdenCompraUpdateManyWithWhereWithoutSucursalInput = {
+    where: OrdenCompraScalarWhereInput
+    data: XOR<OrdenCompraUpdateManyMutationInput, OrdenCompraUncheckedUpdateManyWithoutSucursalInput>
+  }
+
+  export type OrdenCompraScalarWhereInput = {
+    AND?: OrdenCompraScalarWhereInput | OrdenCompraScalarWhereInput[]
+    OR?: OrdenCompraScalarWhereInput[]
+    NOT?: OrdenCompraScalarWhereInput | OrdenCompraScalarWhereInput[]
+    id?: StringFilter<"OrdenCompra"> | string
+    estado?: StringFilter<"OrdenCompra"> | string
+    sucursalId?: StringNullableFilter<"OrdenCompra"> | string | null
+    createdAt?: DateTimeFilter<"OrdenCompra"> | Date | string
+  }
+
+  export type IngredienteSucursalUpsertWithWhereUniqueWithoutSucursalInput = {
+    where: IngredienteSucursalWhereUniqueInput
+    update: XOR<IngredienteSucursalUpdateWithoutSucursalInput, IngredienteSucursalUncheckedUpdateWithoutSucursalInput>
+    create: XOR<IngredienteSucursalCreateWithoutSucursalInput, IngredienteSucursalUncheckedCreateWithoutSucursalInput>
+  }
+
+  export type IngredienteSucursalUpdateWithWhereUniqueWithoutSucursalInput = {
+    where: IngredienteSucursalWhereUniqueInput
+    data: XOR<IngredienteSucursalUpdateWithoutSucursalInput, IngredienteSucursalUncheckedUpdateWithoutSucursalInput>
+  }
+
+  export type IngredienteSucursalUpdateManyWithWhereWithoutSucursalInput = {
+    where: IngredienteSucursalScalarWhereInput
+    data: XOR<IngredienteSucursalUpdateManyMutationInput, IngredienteSucursalUncheckedUpdateManyWithoutSucursalInput>
+  }
+
+  export type IngredienteCreateWithoutStockSucursalesInput = {
+    id?: string
+    nombre: string
+    unidad: $Enums.UnidadMedida
+    costoUnitario: Decimal | DecimalJsLike | number | string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    recetas?: RecetaItemCreateNestedManyWithoutIngredienteInput
+    movimientos?: MovimientoInventarioCreateNestedManyWithoutIngredienteInput
+    ordenItems?: OrdenCompraDetalleCreateNestedManyWithoutIngredienteInput
+  }
+
+  export type IngredienteUncheckedCreateWithoutStockSucursalesInput = {
+    id?: string
+    nombre: string
+    unidad: $Enums.UnidadMedida
+    costoUnitario: Decimal | DecimalJsLike | number | string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    recetas?: RecetaItemUncheckedCreateNestedManyWithoutIngredienteInput
+    movimientos?: MovimientoInventarioUncheckedCreateNestedManyWithoutIngredienteInput
+    ordenItems?: OrdenCompraDetalleUncheckedCreateNestedManyWithoutIngredienteInput
+  }
+
+  export type IngredienteCreateOrConnectWithoutStockSucursalesInput = {
+    where: IngredienteWhereUniqueInput
+    create: XOR<IngredienteCreateWithoutStockSucursalesInput, IngredienteUncheckedCreateWithoutStockSucursalesInput>
+  }
+
+  export type SucursalCreateWithoutStockIngredientesInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    ventas?: VentaCreateNestedManyWithoutSucursalInput
+    movimientos?: MovimientoInventarioCreateNestedManyWithoutSucursalInput
+    ordenesCompra?: OrdenCompraCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalUncheckedCreateWithoutStockIngredientesInput = {
+    id?: string
+    nombre: string
+    direccion?: string | null
+    activa?: boolean
+    createdAt?: Date | string
+    ventas?: VentaUncheckedCreateNestedManyWithoutSucursalInput
+    movimientos?: MovimientoInventarioUncheckedCreateNestedManyWithoutSucursalInput
+    ordenesCompra?: OrdenCompraUncheckedCreateNestedManyWithoutSucursalInput
+  }
+
+  export type SucursalCreateOrConnectWithoutStockIngredientesInput = {
+    where: SucursalWhereUniqueInput
+    create: XOR<SucursalCreateWithoutStockIngredientesInput, SucursalUncheckedCreateWithoutStockIngredientesInput>
+  }
+
+  export type IngredienteUpsertWithoutStockSucursalesInput = {
+    update: XOR<IngredienteUpdateWithoutStockSucursalesInput, IngredienteUncheckedUpdateWithoutStockSucursalesInput>
+    create: XOR<IngredienteCreateWithoutStockSucursalesInput, IngredienteUncheckedCreateWithoutStockSucursalesInput>
+    where?: IngredienteWhereInput
+  }
+
+  export type IngredienteUpdateToOneWithWhereWithoutStockSucursalesInput = {
+    where?: IngredienteWhereInput
+    data: XOR<IngredienteUpdateWithoutStockSucursalesInput, IngredienteUncheckedUpdateWithoutStockSucursalesInput>
+  }
+
+  export type IngredienteUpdateWithoutStockSucursalesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    unidad?: EnumUnidadMedidaFieldUpdateOperationsInput | $Enums.UnidadMedida
+    costoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recetas?: RecetaItemUpdateManyWithoutIngredienteNestedInput
+    movimientos?: MovimientoInventarioUpdateManyWithoutIngredienteNestedInput
+    ordenItems?: OrdenCompraDetalleUpdateManyWithoutIngredienteNestedInput
+  }
+
+  export type IngredienteUncheckedUpdateWithoutStockSucursalesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    unidad?: EnumUnidadMedidaFieldUpdateOperationsInput | $Enums.UnidadMedida
+    costoUnitario?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recetas?: RecetaItemUncheckedUpdateManyWithoutIngredienteNestedInput
+    movimientos?: MovimientoInventarioUncheckedUpdateManyWithoutIngredienteNestedInput
+    ordenItems?: OrdenCompraDetalleUncheckedUpdateManyWithoutIngredienteNestedInput
+  }
+
+  export type SucursalUpsertWithoutStockIngredientesInput = {
+    update: XOR<SucursalUpdateWithoutStockIngredientesInput, SucursalUncheckedUpdateWithoutStockIngredientesInput>
+    create: XOR<SucursalCreateWithoutStockIngredientesInput, SucursalUncheckedCreateWithoutStockIngredientesInput>
+    where?: SucursalWhereInput
+  }
+
+  export type SucursalUpdateToOneWithWhereWithoutStockIngredientesInput = {
+    where?: SucursalWhereInput
+    data: XOR<SucursalUpdateWithoutStockIngredientesInput, SucursalUncheckedUpdateWithoutStockIngredientesInput>
+  }
+
+  export type SucursalUpdateWithoutStockIngredientesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ventas?: VentaUpdateManyWithoutSucursalNestedInput
+    movimientos?: MovimientoInventarioUpdateManyWithoutSucursalNestedInput
+    ordenesCompra?: OrdenCompraUpdateManyWithoutSucursalNestedInput
+  }
+
+  export type SucursalUncheckedUpdateWithoutStockIngredientesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nombre?: StringFieldUpdateOperationsInput | string
+    direccion?: NullableStringFieldUpdateOperationsInput | string | null
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ventas?: VentaUncheckedUpdateManyWithoutSucursalNestedInput
+    movimientos?: MovimientoInventarioUncheckedUpdateManyWithoutSucursalNestedInput
+    ordenesCompra?: OrdenCompraUncheckedUpdateManyWithoutSucursalNestedInput
   }
 
   export type PlatoCreateManyCategoriaInput = {
@@ -15265,6 +19245,7 @@ export namespace Prisma {
     tipo: string
     cantidad: Decimal | DecimalJsLike | number | string
     motivo?: string | null
+    sucursalId?: string | null
     createdAt?: Date | string
   }
 
@@ -15273,6 +19254,13 @@ export namespace Prisma {
     ordenId: string
     cantidadSugerida: Decimal | DecimalJsLike | number | string
     cantidadFinal?: Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type IngredienteSucursalCreateManyIngredienteInput = {
+    id?: string
+    sucursalId: string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
   }
 
   export type RecetaItemUpdateWithoutIngredienteInput = {
@@ -15299,6 +19287,7 @@ export namespace Prisma {
     cantidad?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motivo?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sucursal?: SucursalUpdateOneWithoutMovimientosNestedInput
   }
 
   export type MovimientoInventarioUncheckedUpdateWithoutIngredienteInput = {
@@ -15306,6 +19295,7 @@ export namespace Prisma {
     tipo?: StringFieldUpdateOperationsInput | string
     cantidad?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motivo?: NullableStringFieldUpdateOperationsInput | string | null
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15314,6 +19304,7 @@ export namespace Prisma {
     tipo?: StringFieldUpdateOperationsInput | string
     cantidad?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     motivo?: NullableStringFieldUpdateOperationsInput | string | null
+    sucursalId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15336,6 +19327,27 @@ export namespace Prisma {
     ordenId?: StringFieldUpdateOperationsInput | string
     cantidadSugerida?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     cantidadFinal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type IngredienteSucursalUpdateWithoutIngredienteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sucursal?: SucursalUpdateOneRequiredWithoutStockIngredientesNestedInput
+  }
+
+  export type IngredienteSucursalUncheckedUpdateWithoutIngredienteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sucursalId?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type IngredienteSucursalUncheckedUpdateManyWithoutIngredienteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sucursalId?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
   export type VentaDetalleCreateManyVentaInput = {
@@ -15392,6 +19404,126 @@ export namespace Prisma {
     ingredienteId?: StringFieldUpdateOperationsInput | string
     cantidadSugerida?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     cantidadFinal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type VentaCreateManySucursalInput = {
+    id?: string
+    total: Decimal | DecimalJsLike | number | string
+    fecha?: Date | string
+    notas?: string | null
+  }
+
+  export type MovimientoInventarioCreateManySucursalInput = {
+    id?: string
+    ingredienteId: string
+    tipo: string
+    cantidad: Decimal | DecimalJsLike | number | string
+    motivo?: string | null
+    createdAt?: Date | string
+  }
+
+  export type OrdenCompraCreateManySucursalInput = {
+    id?: string
+    estado?: string
+    createdAt?: Date | string
+  }
+
+  export type IngredienteSucursalCreateManySucursalInput = {
+    id?: string
+    ingredienteId: string
+    stockActual?: Decimal | DecimalJsLike | number | string
+    stockMinimo?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type VentaUpdateWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    notas?: NullableStringFieldUpdateOperationsInput | string | null
+    detalles?: VentaDetalleUpdateManyWithoutVentaNestedInput
+  }
+
+  export type VentaUncheckedUpdateWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    notas?: NullableStringFieldUpdateOperationsInput | string | null
+    detalles?: VentaDetalleUncheckedUpdateManyWithoutVentaNestedInput
+  }
+
+  export type VentaUncheckedUpdateManyWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    notas?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MovimientoInventarioUpdateWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tipo?: StringFieldUpdateOperationsInput | string
+    cantidad?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    motivo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ingrediente?: IngredienteUpdateOneRequiredWithoutMovimientosNestedInput
+  }
+
+  export type MovimientoInventarioUncheckedUpdateWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ingredienteId?: StringFieldUpdateOperationsInput | string
+    tipo?: StringFieldUpdateOperationsInput | string
+    cantidad?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    motivo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MovimientoInventarioUncheckedUpdateManyWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ingredienteId?: StringFieldUpdateOperationsInput | string
+    tipo?: StringFieldUpdateOperationsInput | string
+    cantidad?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    motivo?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrdenCompraUpdateWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    detalles?: OrdenCompraDetalleUpdateManyWithoutOrdenNestedInput
+  }
+
+  export type OrdenCompraUncheckedUpdateWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    detalles?: OrdenCompraDetalleUncheckedUpdateManyWithoutOrdenNestedInput
+  }
+
+  export type OrdenCompraUncheckedUpdateManyWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IngredienteSucursalUpdateWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ingrediente?: IngredienteUpdateOneRequiredWithoutStockSucursalesNestedInput
+  }
+
+  export type IngredienteSucursalUncheckedUpdateWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ingredienteId?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type IngredienteSucursalUncheckedUpdateManyWithoutSucursalInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    ingredienteId?: StringFieldUpdateOperationsInput | string
+    stockActual?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    stockMinimo?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
 

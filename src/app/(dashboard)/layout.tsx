@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Topbar } from "@/components/layout/Topbar";
+import { getSucursalActiva } from "@/app/actions/sucursal";
+import { SucursalSelector } from "@/components/layout/SucursalSelector";
 
 export default async function DashboardLayout({
   children,
@@ -10,6 +12,7 @@ export default async function DashboardLayout({
 }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  const sucursalActivaId = await getSucursalActiva();
 
   if (!user) redirect("/login");
 
@@ -19,7 +22,7 @@ export default async function DashboardLayout({
     <div className="flex h-screen overflow-hidden bg-background">
       <Sidebar rol={rol} />
       <div className="flex flex-1 flex-col overflow-hidden">
-        <Topbar />
+        <Topbar sucursalActivaId={sucursalActivaId} />
         <main className="flex-1 overflow-y-auto p-6">
           {children}
         </main>

@@ -64,7 +64,7 @@ export function PerfilDropdown({ nombre, email, rol }: Props) {
                 {iniciales}
               </AvatarFallback>
             </Avatar>
-            <div className="flex flex-col items-start text-left hidden sm:flex">
+            <div className="flex flex-col items-start text-left sm:flex">
               <span className="text-sm font-medium leading-none">{nombre}</span>
               <span className="text-xs text-muted-foreground mt-0.5">{getRolLabel(rol)}</span>
             </div>
