@@ -9,19 +9,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useSucursales } from "@/hooks/useSucursales";
 import { cambiarSucursal } from "@/app/actions/sucursal";
+import { useSucursalActiva } from "@/context/SucursalContext";
 
-type Props = {
-  sucursalActivaId: string | null;
-};
-
-export function SucursalSelector({ sucursalActivaId }: Props) {
+export function SucursalSelector() {
   const { data: sucursales = [] } = useSucursales();
+  const { sucursalId, setSucursalId } = useSucursalActiva();
   const [isPending, startTransition] = useTransition();
 
   const activas = sucursales.filter(s => s.activa);
-  const actual = activas.find(s => s.id === sucursalActivaId) ?? activas[0];
+  const actual = activas.find(s => s.id === sucursalId) ?? activas[0];
 
   if (activas.length === 0) return null;
+
+  function handleCambiar(id: string) {
+    setSucursalId(id); // actualiza contexto inmediatamente → re-render de hooks
+    startTransition(() => cambiarSucursal(id)); // actualiza cookie httpOnly en servidor
+  }
 
   return (
     <DropdownMenu>
@@ -40,7 +43,7 @@ export function SucursalSelector({ sucursalActivaId }: Props) {
         {activas.map(s => (
           <DropdownMenuItem
             key={s.id}
-            onClick={() => startTransition(() => cambiarSucursal(s.id))}
+            onClick={() => handleCambiar(s.id)}
             className="gap-2"
           >
             <Building2 size={14} className="text-muted-foreground" />

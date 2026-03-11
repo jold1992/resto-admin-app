@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getSucursalActivaClient } from "@/lib/getSucursalActivaClient";
+import { useSucursalActiva } from "@/context/SucursalContext";
 import { toast } from "sonner";
 
 export type VentaDetalle = {
@@ -24,7 +25,7 @@ export type VentaInput = {
 };
 
 export function useVentas(desde?: string, hasta?: string) {
-  const sucursalId = getSucursalActivaClient();
+  const { sucursalId } = useSucursalActiva();
   return useQuery({
     queryKey: ["ventas", desde, hasta, sucursalId],
     queryFn: async (): Promise<Venta[]> => {

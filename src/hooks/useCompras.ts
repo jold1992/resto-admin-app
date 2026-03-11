@@ -1,3 +1,4 @@
+import { useSucursalActiva } from "@/context/SucursalContext";
 import { getSucursalActivaClient } from "@/lib/getSucursalActivaClient";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -30,22 +31,39 @@ export type OrdenCompraInput = {
 };
 
 export function useSugerenciasCompra() {
+    const { sucursalId } = useSucursalActiva();
     return useQuery({
-        queryKey: ["compras", "sugerencias"],
-        queryFn: async (): Promise<{ sugerencias: Sugerencia[]; totalEstimado: number }> => {
-            const res = await fetch("/api/compras/sugerencias");
+        queryKey: ["sugerencias", sucursalId],
+        queryFn: async () => {
+            const params = new URLSearchParams();
+            if (sucursalId) params.set("sucursalId", sucursalId);
+            const res = await fetch(`/api/compras/sugerencias?${params}`);
             if (!res.ok) throw new Error("Error al cargar sugerencias");
             return res.json();
         },
     });
 }
 
+export function useCompras() {
+    const { sucursalId } = useSucursalActiva();
+    return useQuery({
+        queryKey: ["compras", sucursalId],
+        queryFn: async () => {
+            const params = new URLSearchParams();
+            if (sucursalId) params.set("sucursalId", sucursalId);
+            const res = await fetch(`/api/compras?${params}`);
+            if (!res.ok) throw new Error("Error al cargar compras");
+            return res.json();
+        },
+    });
+}
+
 export function useOrdenesCompra() {
-    const sucursalId = getSucursalActivaClient();
+    const { sucursalId } = useSucursalActiva();
     return useQuery({
         queryKey: ["compras", "ordenes", sucursalId],
         queryFn: async (): Promise<OrdenCompra[]> => {
-            const res = await fetch("/api/compras");
+            const res = await fetch(`/api/compras?sucursalId=${sucursalId}`);
             if (!res.ok) throw new Error("Error al cargar órdenes");
             return res.json();
         },

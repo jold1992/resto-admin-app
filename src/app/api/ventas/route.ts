@@ -16,8 +16,12 @@ export async function GET(req: Request) {
   const desde = searchParams.get("desde");
   const hasta = searchParams.get("hasta");
 
+  const sucursalId = searchParams.get("sucursalId");
+  const sucursalFilter = sucursalId ? { sucursalId } : {};
+
   const ventas = await prisma.venta.findMany({
     where: {
+      ...sucursalFilter,
       ...(desde || hasta ? {
         fecha: {
           ...(desde ? { gte: new Date(desde) } : {}),

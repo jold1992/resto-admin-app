@@ -1,3 +1,4 @@
+import { useSucursalActiva } from "@/context/SucursalContext";
 import { getSucursalActivaClient } from "@/lib/getSucursalActivaClient";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -19,13 +20,14 @@ export type MovimientoInput = {
   motivo: string;
 };
 
-export function useMovimientos(ingredienteId?: string) {
-  const sucursalId = getSucursalActivaClient();
+export function useMovimientos() {
+  const { sucursalId } = useSucursalActiva();
   return useQuery({
-    queryKey: ["movimientos", ingredienteId, sucursalId],
-    queryFn: async (): Promise<Movimiento[]> => {
-      const params = ingredienteId ? `?ingredienteId=${ingredienteId}` : "";
-      const res = await fetch(`/api/movimientos${params}`);
+    queryKey: ["movimientos", sucursalId],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (sucursalId) params.set("sucursalId", sucursalId);
+      const res = await fetch(`/api/movimientos?${params}`);
       if (!res.ok) throw new Error("Error al cargar movimientos");
       return res.json();
     },

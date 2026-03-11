@@ -7,18 +7,25 @@ const schema = z.object({
   tipo: z.enum(["ENTRADA", "SALIDA", "AJUSTE"]),
   cantidad: z.number().positive(),
   motivo: z.string().min(1, "Requerido"),
+  sucursalId: z.string().min(1, "Requerido"),
 });
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const ingredienteId = searchParams.get("ingredienteId");
+  const sucursalId = searchParams.get("sucursalId");
+  const sucursalFilter = sucursalId ? { sucursalId } : {};
 
   const movimientos = await prisma.movimientoInventario.findMany({
-    where: { ...(ingredienteId ? { ingredienteId } : {}) },
+    where: {
+      ...sucursalFilter,
+      ...(ingredienteId ? { ingredienteId } : {}),
+    },
     include: { ingrediente: true },
     orderBy: { createdAt: "desc" },
     take: 100,
   });
+
   return NextResponse.json(movimientos);
 }
 
@@ -28,21 +35,20 @@ export async function POST(req: Request) {
   if (!parsed.success)
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
 
-  const { ingredienteId, tipo, cantidad, motivo } = parsed.data;
+  const { ingredienteId, tipo, cantidad, motivo, sucursalId } = parsed.data;
+  const incremento = tipo === "SALIDA" ? -cantidad : cantidad;
 
   const resultado = await prisma.$transaction(async (tx) => {
-    // Ajustar stock según tipo
-    const incremento = tipo === "SALIDA"
-      ? -cantidad
-      : cantidad; // ENTRADA y AJUSTE suman
-
-    await tx.ingrediente.update({
-      where: { id: ingredienteId },
+    // Actualizar stock en IngredienteSucursal (no en Ingrediente)
+    await tx.ingredienteSucursal.update({
+      where: {
+        ingredienteId_sucursalId: { ingredienteId, sucursalId },
+      },
       data: { stockActual: { increment: incremento } },
     });
 
     return tx.movimientoInventario.create({
-      data: { ingredienteId, tipo, cantidad, motivo },
+      data: { ingredienteId, tipo, cantidad, motivo, sucursalId },
       include: { ingrediente: true },
     });
   });

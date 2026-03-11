@@ -47,25 +47,29 @@ export default function ProyeccionesPage() {
 
     const proyecciones = data?.proyecciones ?? [];
     const materiaPrima = data?.materiaPrima ?? [];
-    const conDeficit = materiaPrima.filter(m => m.deficit > 0);
+    const conDeficit = materiaPrima.filter((m: typeof materiaPrima[number]) => m.deficit > 0);
 
     // Datos para la gráfica del plato seleccionado
-    const platoData = proyecciones.find(p => p.platoId === platoSeleccionado) ?? proyecciones[0];
+    const platoData = proyecciones.find((p: typeof proyecciones[number]) => p.platoId === platoSeleccionado) ?? proyecciones[0];
 
     const chartData = platoData ? [
-        ...platoData.historial.slice(-14).map(h => ({
+        ...platoData.historial.slice(-14).map((h: typeof platoData.historial[number]) => ({
             fecha: h.fecha,
             real: h.cantidad,
             proyectado: null as number | null,
         })),
-        ...platoData.proyeccion.map(p => ({
+        ...platoData.proyeccion.map((p: typeof platoData.proyeccion[number]) => ({
             fecha: p.fecha,
             real: null as number | null,
             proyectado: p.cantidad,
         })),
     ] : [];
 
+
     const hoy = new Date().toISOString().split("T")[0];
+
+    console.log("chartData:", JSON.stringify(chartData.slice(0, 4)));
+    console.log("proyeccion[0]:", platoData?.proyeccion?.[0]);
 
     return (
         <div className="flex flex-col gap-6">
@@ -132,7 +136,7 @@ export default function ProyeccionesPage() {
                                     {conDeficit.length} ingrediente{conDeficit.length > 1 ? "s" : ""} con déficit proyectado para los próximos {dias} días
                                 </p>
                                 <div className="flex flex-wrap gap-1.5 mt-1.5">
-                                    {conDeficit.map(m => (
+                                    {conDeficit.map((m: typeof conDeficit[0]) => (
                                         <Badge key={m.nombre} className="bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300 border-0 text-xs font-normal">
                                             {m.nombre} (déficit: {m.deficit.toFixed(2)} {getUnidadAbrev(m.unidad as UnidadMedida)})
                                         </Badge>
@@ -149,8 +153,8 @@ export default function ProyeccionesPage() {
                                 <CardTitle className="text-base">Platos</CardTitle>
                             </CardHeader>
                             <CardContent className="flex flex-col gap-1 p-3">
-                                {proyecciones.map((p, i) => {
-                                    const totalProyectado = p.proyeccion.reduce((acc, d) => acc + d.cantidad, 0);
+                                {proyecciones.map((p: typeof proyecciones[0], i: typeof proyecciones[number]) => {
+                                    const totalProyectado = p.proyeccion.reduce((acc: typeof proyecciones[number]["proyeccion"][number]["cantidad"], d: typeof proyecciones[number]["proyeccion"][number]) => acc + d.cantidad, 0);
                                     const isSelected = (platoSeleccionado ?? proyecciones[0]?.platoId) === p.platoId;
                                     return (
                                         <button
@@ -195,7 +199,7 @@ export default function ProyeccionesPage() {
                                                 dataKey="fecha"
                                                 tickFormatter={d => {
                                                     try {
-                                                        const str = String(d);
+                                                        const str = String(d).split("T")[0];
                                                         if (!str || str === "auto") return "";
                                                         return format(parseISO(str), "dd MMM", { locale: es });
                                                     } catch {
@@ -209,14 +213,17 @@ export default function ProyeccionesPage() {
                                             <Tooltip
                                                 labelFormatter={d => {
                                                     try {
-                                                        return format(parseISO(String(d)), "dd MMM yyyy", { locale: es });
+                                                        return format(parseISO(String(d).split("T")[0]), "dd MMM yyyy", { locale: es });
                                                     } catch {
                                                         return String(d);
                                                     }
                                                 }}
-                                                formatter={(val, name) => [val ?? "—", name === "real" ? "Real" : "Proyectado"]}
+                                                formatter={(val, name) => [
+                                                    val != null ? val : "—",
+                                                    name === "real" ? "Real" : "Proyectado"
+                                                ]}
                                             />
-                                            <Legend formatter={v => v === "real" ? "Ventas reales" : "Proyección"} />
+                                            <Legend formatter={(v: string) => v === "real" ? "Ventas reales" : "Proyección"} />
                                             <ReferenceLine x={hoy} stroke="#94a3b8" strokeDasharray="4 4" label={{ value: "Hoy", fontSize: 10, fill: "#94a3b8" }} />
                                             <Line
                                                 type="monotone"
@@ -255,7 +262,7 @@ export default function ProyeccionesPage() {
                         </CardHeader>
                         <CardContent>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                                {materiaPrima.map((m, index) => {
+                                {materiaPrima.map((m: typeof materiaPrima[0], index: number) => {
                                     const abrev = getUnidadAbrev(m.unidad as UnidadMedida);
                                     const porcentaje = Math.min((m.stockActual / (m.cantidadNecesaria || 1)) * 100, 100);
                                     const suficiente = m.deficit === 0;

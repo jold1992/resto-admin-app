@@ -1,3 +1,4 @@
+import { useSucursalActiva } from "@/context/SucursalContext";
 import { useQuery } from "@tanstack/react-query";
 
 export type ProyeccionPlato = {
@@ -24,14 +25,18 @@ export type ProyeccionData = {
   diasProyectados: number;
 };
 
-export function useProyecciones(dias: number = 7, ventana: number = 30) {
+export function useProyecciones(dias: number, ventana: number) {
+  const { sucursalId } = useSucursalActiva();
   return useQuery({
-    queryKey: ["proyecciones", dias, ventana],
-    queryFn: async (): Promise<ProyeccionData> => {
-      const res = await fetch(`/api/proyecciones?dias=${dias}&ventana=${ventana}`);
+    queryKey: ["proyecciones", dias, ventana, sucursalId],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      params.set("dias", String(dias));
+      params.set("ventana", String(ventana));
+      if (sucursalId) params.set("sucursalId", sucursalId);
+      const res = await fetch(`/api/proyecciones?${params}`);
       if (!res.ok) throw new Error("Error al cargar proyecciones");
       return res.json();
     },
-    staleTime: 5 * 60 * 1000, // cache 5 minutos
   });
 }

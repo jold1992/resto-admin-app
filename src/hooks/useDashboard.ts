@@ -1,3 +1,5 @@
+import { getSucursalActivaClient } from "@/lib/getSucursalActivaClient";
+import { useSucursalActiva } from "@/context/SucursalContext";
 import { useQuery } from "@tanstack/react-query";
 
 export type DashboardData = {
@@ -10,10 +12,13 @@ export type DashboardData = {
 };
 
 export function useDashboard() {
+  const { sucursalId } = useSucursalActiva();
   return useQuery({
-    queryKey: ["dashboard"],
+    queryKey: ["dashboard", sucursalId],
     queryFn: async (): Promise<DashboardData> => {
-      const res = await fetch("/api/dashboard");
+      const params = new URLSearchParams();
+      if (sucursalId) params.set("sucursalId", sucursalId); // ← solo si existe
+      const res = await fetch(`/api/dashboard?${params}`);
       if (!res.ok) throw new Error("Error al cargar dashboard");
       return res.json();
     },

@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import type { UnidadMedida } from "@/lib/unidades";
+import { useSucursalActiva } from "@/context/SucursalContext";
 
 export type Ingrediente = {
   id: string;
@@ -13,14 +14,18 @@ export type Ingrediente = {
 
 type IngredienteInput = Omit<Ingrediente, "id">;
 
-async function fetchIngredientes(): Promise<Ingrediente[]> {
-  const res = await fetch("/api/ingredientes");
-  if (!res.ok) throw new Error("Error al cargar ingredientes");
-  return res.json();
-}
-
 export function useIngredientes() {
-  return useQuery({ queryKey: ["ingredientes"], queryFn: fetchIngredientes });
+  const { sucursalId } = useSucursalActiva();
+  return useQuery({
+    queryKey: ["ingredientes", sucursalId],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (sucursalId) params.set("sucursalId", sucursalId);
+      const res = await fetch(`/api/ingredientes?${params}`);
+      if (!res.ok) throw new Error("Error al cargar ingredientes");
+      return res.json();
+    },
+  });
 }
 
 export function useCrearIngrediente() {
